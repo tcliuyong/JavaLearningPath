@@ -8,7 +8,7 @@
     <modules>
         <module>ScalaTools</module>
         <module>JavaTools</module>
-        <module>JavaThreads</module>
+        <module>JavaVirtualMachine</module>
     </modules>
     <packaging>pom</packaging>
 
