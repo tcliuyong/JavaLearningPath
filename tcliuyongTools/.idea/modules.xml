@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/JavaTools/JavaTools.iml" filepath="$PROJECT_DIR$/JavaTools/JavaTools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ScalaTools/ScalaTools.iml" filepath="$PROJECT_DIR$/ScalaTools/ScalaTools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tcliuyongTools.iml" filepath="$PROJECT_DIR$/tcliuyongTools.iml" />
+    </modules>
+  </component>
+</project>
