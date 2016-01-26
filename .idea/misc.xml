@@ -45,6 +45,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/tcliuyongTools/pom.xml" />
+        <option value="$PROJECT_DIR$/tcliuyongTools/JavaThreads/pom.xml" />
       </list>
     </option>
   </component>
