@@ -8,7 +8,6 @@
     <modules>
         <module>ScalaTools</module>
         <module>JavaTools</module>
-        <module>JavaVirtualMachine</module>
     </modules>
     <packaging>pom</packaging>
 
