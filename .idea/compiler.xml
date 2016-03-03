@@ -26,7 +26,6 @@
         <module name="FuzzyJava" />
         <module name="JavaThreads" />
         <module name="JavaTools" />
-        <module name="Scala" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
