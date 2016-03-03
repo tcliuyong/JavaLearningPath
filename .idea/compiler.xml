@@ -23,11 +23,18 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="FuzzyJava" />
         <module name="JavaThreads" />
         <module name="JavaTools" />
         <module name="Scala" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.7" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="FuzzyJava" target="1.5" />
+      <module name="JavaThreads" target="1.5" />
+      <module name="JavaTools" target="1.5" />
+      <module name="Scala" target="1.5" />
+      <module name="UtilTools" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
