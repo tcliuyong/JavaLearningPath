@@ -3,10 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FuzzyJava/FuzzyJava.iml" filepath="$PROJECT_DIR$/FuzzyJava/FuzzyJava.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tcliuyongTools/JavaThreads/JavaThreads.iml" filepath="$PROJECT_DIR$/tcliuyongTools/JavaThreads/JavaThreads.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tcliuyongTools/JavaTools/JavaTools.iml" filepath="$PROJECT_DIR$/tcliuyongTools/JavaTools/JavaTools.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tcliuyongTools/UtilTools.iml" filepath="$PROJECT_DIR$/tcliuyongTools/UtilTools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaThreads/JavaThreads.iml" filepath="$PROJECT_DIR$/JavaThreads/JavaThreads.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/learningpath.iml" filepath="$PROJECT_DIR$/.idea/learningpath.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scalaPath/scalaPath.iml" filepath="$PROJECT_DIR$/scalaPath/scalaPath.iml" />
     </modules>
   </component>
 </project>
