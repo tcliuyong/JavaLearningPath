@@ -1,7 +1,6 @@
-package scalaPath.functions
+package scalaPath.forandfunctions.functions
 
 import java.io.File
-import java.nio.file.Files
 
 /**
  * Created by liuyong on 2016/3/4.
@@ -31,9 +30,17 @@ object define {
       println(file)
   }
 
+  def fac(n : Int):Int = if(n <= 0) 1 else n * fac(n - 1)
+
+  def combine(content:String,left:String = "[" ,right:String = "]" ) =
+    left + content + right
   def main (args: Array[String]):Unit = {
     //doWhile()
+    var x = 1
     println(looper(1000,10000000))
     listFile()
+    val add = (x : Int) => x + 200
+    println(add(100))
+    println(combine(" I Love you "))
   }
 }

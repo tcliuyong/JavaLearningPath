@@ -15,6 +15,7 @@ object TupleArrayMap {
   val array = Array(1,2,3,4,5)
   for(i <- 0 until array.length){
     println(array(i))
+
   }
   //Map
   val map  = Map("scala" -> 27,"java"->5)
