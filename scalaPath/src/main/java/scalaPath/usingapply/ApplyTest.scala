@@ -15,12 +15,6 @@ class ApplyTest {
       new ApplyTest
     }
   }
-object ApplyOperation{
-  def main(args: Array[String]) {
-    val array = Array(1,2,3,4)
-    val a = ApplyTest()
-    a.havaATry
-  }
-}
+
 
 }
