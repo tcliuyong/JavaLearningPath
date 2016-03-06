@@ -13,11 +13,13 @@ class Person1(val name : String, var age : Int){
   def sleep = "8"
   override def toString = "I am a Person1" //重写toString 方法
 }
+
 class Worker( name : String, age : Int, val salary : Long) extends Person1(name, age){
   println("This is The subClass of Person, Primary constructor of Worker")
   override val school = "Spark"
   override  def toString = "I am a Worker!" + super.sleep
 }
+
 object OverrideOperations{
   def main(args: Array[String]) {
     val w = new Worker("Spark", 5, 10000)
