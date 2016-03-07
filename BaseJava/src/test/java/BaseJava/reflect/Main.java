@@ -1,4 +1,4 @@
-package BaseJava.reflect.ReflectMain;
+package BaseJava.reflect;
 
 import BaseJava.reflect.ReflectFunction.AttrFromClass;
 import BaseJava.reflect.ReflectFunction.MethodFromClassDemo;
