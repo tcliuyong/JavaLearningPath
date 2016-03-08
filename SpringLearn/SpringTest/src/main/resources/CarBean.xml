@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/jdbc
+    http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+<bean id="car" class="com.spring.bean.Car" >
+    <property name="carName" value="baoma" />
+    <property name="price" value="100" />
+    </bean>
+<bean id="boss" class="com.spring.bean.Boss" >
+    <!--按照类型注入-->
+    <constructor-arg type = "java.lang.String">
+        <value><![CDATA[//&&&&../]]></value>
+    </constructor-arg>
+    <constructor-arg type = "java.lang.Integer">
+        <value>100</value>
+    </constructor-arg>
+    <constructor-arg type = "com.spring.bean.Car" ref="car"/>
+    <!--按照索引注入-->
+    <!--<constructor-arg index="0" value="sdfsdf"/>-->
+    <!--<constructor-arg index="1" value="100"/>-->
+    <!-- 这两种方法是可以一起使用的 -->
+    </bean>
+</beans>

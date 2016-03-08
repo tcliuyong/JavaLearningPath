@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/lang
+            http://www.springframework.org/schema/lang/spring-lang-2.5.xsd">
+    <!--使用脚本可以进行接口的实现-->
+    <!--<lang:groovy id = "interestCalculator" script-source="SimpleInterestCalculator.groovy">-->
+        <!--<lang:property name="rate" value="0.05"/>-->
+    <!--</lang:groovy>-->
+    <bean id = "rateCalculator"
+          class="com.apress.springrecipes.interest.FixedRateCalculator">
+        <property name="rate" value="0.04"/>
+    </bean>
+    <lang:groovy id = "interestCalculator" script-source="SimpleInterestCalculator.groovy" refresh-check-delay="5000">
+        <lang:property name="rateCalculator" ref="rateCalculator"/>
+    </lang:groovy>
+<!--<lang:bsh id="interestCalculator" script-source="SimpleInterestCalculator.bsh" script-interfaces="com.apress.springrecipes.interest.InterestCalculator">-->
+<!--<lang:property name="rate" value="0.05"/>-->
+<!--</lang:bsh>-->
+
+</beans>

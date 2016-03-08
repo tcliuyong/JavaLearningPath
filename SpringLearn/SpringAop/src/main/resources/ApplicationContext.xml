@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:ap="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+       default-autowire="autodetect">
+
+    <!--声明自动为spring容器中那些配置@aspectJ切面的bean创建代理，织入切面。当然，spring-->
+
+    <!--在内部依旧采用AnnotationAwareAspectJAutoProxyCreator进行自动代理的创建工作，但具体实现的细节已经被<aop:aspectj-autoproxy-->
+        <!--/>隐藏起来了-->
+    <aop:aspectj-autoproxy/>
+    <bean id = "arithmeticCalculator" class="com.calculator.cinterface.impl.ArithmeticCalculatorImpl"/>
+    <bean id = "unitCalculatorImpl" class="com.calculator.cinterface.impl.UnitCalculatorImpl"/>
+    <bean id="aspect" class="com.spring.dao.AspectJLogger" />
+    <bean id="employee" class="com.spring.bean.CommonEmployee">
+        <property name="name" value="good"></property>
+    </bean>
+    <bean class="com.calculator.calculatorly.CalculatorLoggingAspect"/>
+</beans>
