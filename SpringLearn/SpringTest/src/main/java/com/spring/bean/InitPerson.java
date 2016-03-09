@@ -1,28 +1,18 @@
 package com.spring.bean;
 
+import org.springframework.beans.factory.InitializingBean;
+
 import java.util.Date;
 
 /**
  * Created by liuyong on 2016/3/9.
  */
-public class Person {
-    private String name;
-    private int age;
-    private Date birthday;
-
-    public void init(){
-        this.name = "tcliuyong";
-        this.age = 12;
-        this.birthday = new Date();
-    }
-    public void clearup(){
-        this.name = "";
-        this.birthday = null;
-        this.age = 0;
-    }
-    public Person(){//使用BeanWrapper的时候最好加上
-
-    }
+/**
+ * 初始化这个方法 不用再配置文件中加入 init-method方法
+ * 如果实现了InitializingBean 接口 则它的所有必须的属性被BeanFactory设置后,会自动的执行afterPropertiesSet方法
+ * 推荐前一种实现方式
+ */
+public class InitPerson implements InitializingBean{
     public String getName() {
         return name;
     }
@@ -46,13 +36,23 @@ public class Person {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
+
+    private String name;
+    private int age;
+    private Date birthday;
+
+    public void afterPropertiesSet() throws Exception {
+        this.name = "tcliuyong";
+        this.age = 12;
+        this.birthday = new Date();
+    }
+
     @Override
     public String toString() {
-        return "Person{" +
+        return "InitPerson{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
                 ", birthday=" + birthday +
                 '}';
     }
-
 }
