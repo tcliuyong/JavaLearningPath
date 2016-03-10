@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd
     http://www.springframework.org/schema/beans
@@ -22,33 +24,23 @@
      <!--mybatis文件配置，扫描所有mapper文件-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <!--<property name="mapperLocations" value="classpath*:com/spring/**/*.xml"></property>-->
-        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath*:com/mapdic/share/**/*.xml"></property>
+        <!--<property name="configLocation" value="classpath:mybatis-config.bak.xml"/>-->
     </bean>
 
 
      <!--spring与mybatis整合配置，扫描所有dao-->
-    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.mapdic.share.dao"-->
-    <!--p:sqlSessionFactoryBeanName="sqlSessionFactory"/>-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.mapdic.share.dao"
+    p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
 
-    <bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.mapdic.share.dao.UserDao"></property>
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-    </bean>
-
-    <!--<bean id="deptDao" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
-        <!--<property name="mapperInterface" value="com.spring.dao.DeptDao"></property>-->
+    <!--  接口映射器 扫描指定的Dao -->
+    <!--<bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+        <!--<property name="mapperInterface" value="com.mapdic.share.dao.UserDao"></property>-->
         <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>-->
     <!--</bean>-->
-    <!--<bean id="userUpdate" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
-        <!--<property name="mapperInterface" value="com.spring.dao.UserUpdate"></property>-->
-        <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>-->
-    <!--</bean>-->
-
     <!--事务管理器-->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>
-
     </bean>
     <!--使用上面申明的事务管理器-->
     <tx:annotation-driven transaction-manager="txManager"/>

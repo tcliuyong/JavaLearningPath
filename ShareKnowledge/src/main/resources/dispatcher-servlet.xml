@@ -15,7 +15,7 @@
     <!--<bean id="helloControl" class="com.asm.HelloWord"></bean>-->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
-            <value>/WEB-INF/views/</value>
+            <value>/WEB-INF/jsp/</value>
         </property>
         <!--指定前后缀-->
         <property name="suffix">
@@ -26,6 +26,6 @@
     <!-- 完成请求和注解POJO的映射 -->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
     <context:annotation-config/>
-    <!--<context:component-scan base-package="com.spring.controller"/>-->
+    <context:component-scan base-package="com.mapdic.share.controller"/>
     <!--<bean name="/message.do" class="com.spring.controller.MessageController"></bean>-->
 </beans>
