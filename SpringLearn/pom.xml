@@ -12,6 +12,7 @@
         <module>SpringAop</module>
         <module>SpringShell</module>
         <module>SpringRESTful</module>
+        <module>SpringJDBC</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
