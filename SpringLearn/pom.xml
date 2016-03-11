@@ -13,6 +13,9 @@
         <module>SpringShell</module>
         <module>SpringRESTful</module>
         <module>SpringJDBC</module>
+        <module>SpringRabbitMQ</module>
+        <module>SpringJMS</module>
+        <module>SpringCache</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
