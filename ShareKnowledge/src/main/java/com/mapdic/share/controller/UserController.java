@@ -22,7 +22,6 @@ public class UserController {
     private UserServiceImpl userServiceImpl;
     @RequestMapping(value = "/getAllUser", method = RequestMethod.GET)
     public ModelAndView getAllUser(HttpServletRequest request, PrintWriter out){
-
         List<User> users = userServiceImpl.getAllUser();
         System.out.println(request.getParameter("username"));
         String s = request.getParameter("username");
