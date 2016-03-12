@@ -17,6 +17,9 @@
         <module>SpringJMS</module>
         <module>SpringAsynchronousMethods</module>
         <module>SpringSchedule</module>
+        <module>SpringValidatingInput</module>
+        <module>SpringTransactions</module>
+        <module>SpringWebMVC</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
