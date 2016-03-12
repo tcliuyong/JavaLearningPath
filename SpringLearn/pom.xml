@@ -15,8 +15,8 @@
         <module>SpringJDBC</module>
         <module>SpringRabbitMQ</module>
         <module>SpringJMS</module>
-        <module>SpringCache</module>
         <module>SpringAsynchronousMethods</module>
+        <module>SpringSchedule</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -70,7 +70,6 @@
                 <artifactId>spring-aspects</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-beans</artifactId>
