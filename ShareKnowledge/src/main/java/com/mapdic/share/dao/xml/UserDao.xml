@@ -13,8 +13,12 @@
         <result column="mail" property="mail"/>
         <result column="level" property="level"/>
     </resultMap>
-
+    <sql id="columns">
+        id,username,passwd,ic,phone,qq,mail,level
+    </sql>
     <select id="getAllUser" resultMap="UserMap">
-        select * FROM USER
+        select
+        <include refid="columns"/>
+        FROM USER
     </select>
 </mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--必须与接口同名-->
+<mapper namespace="">
+    <resultMap id="" type="">
+        <result property="id" column="id"/>
+        <result column="username" property="userName"/>
+    </resultMap>
+
+    <select id="" resultMap="">
+
+    </select>
+    <update id="updateAlbumDir" >
+        UPDATE dir_table set
+        dir_name = #{dirName},
+        dir_author = #{dirAuthor},
+        album_author = #{albumAuthor},
+        info = #{info},
+        create_time = #{createTime},
+        cover_url = #{coverUrl},
+        is_able = #{isAble, jdbcType=TINYINT}
+        where id = #{id}
+    </update>
+
+        <insert id="addAlbumDir" useGeneratedKeys="true" keyProperty="id" >
+            INSERT INTO dir_table(dir_name,dir_author,album_author,info,create_time,cover_url,is_able)
+            VALUES (
+            #{dirName}, #{dirAuthor}, #{albumAuthor}, #{info}, #{createTime}, #{coverUrl},#{isAble, jdbcType=TINYINT}
+            )
+        </insert>
+
+            <select id="getAlbumDirCountByAlbumCondition" resultType="int">
+                SELECT COUNT(*) FROM (
+                SELECT count(d.id) FROM dir_table d,dir_ref_album dra,album a
+                WHERE d.id=dra.dir_id and dra.album_id =a.id
+                <if test="condition.categoryIds != null and condition.categoryIds.size() != 0">
+                    and a.id in
+                    (SELECT acr.album_id from album_category_relationship acr
+                    where acr.category_id IN
+                    <foreach collection="condition.categoryIds" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                    GROUP BY acr.album_id HAVING count(*) >= ${condition.categoryIds.size()})
+                </if>
+                AND a.is_able = 1
+                and d.is_able = 1
+                <if test="condition.albumSource != null">
+                    AND a.album_source = #{condition.albumSource, jdbcType=TINYINT}
+                </if>
+                <if test="condition.albumType != null">
+                    AND a.album_type = #{condition.albumType, jdbcType=TINYINT}
+                </if>
+                <if test="condition.keyword != null">
+                    AND a.album_name LIKE "%"#{condition.keyword}"%"
+                </if>
+                <if test="condition.startTime != null">
+                    AND a.create_time <![CDATA[>=]]> #{condition.startTime}
+                </if>
+                <if test="condition.endTime != null">
+                    AND a.create_time <![CDATA[<=]]> #{condition.endTime}
+                </if>
+                <if test="condition.userId != null">
+                    AND a.user_id = #{condition.userId}
+                </if>
+                GROUP BY d.id ) tb
+            </select>
+</mapper>

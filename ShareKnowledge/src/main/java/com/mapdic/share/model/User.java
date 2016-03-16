@@ -1,9 +1,11 @@
 package com.mapdic.share.model;
 
+import java.io.Serializable;
+
 /**
  * Created by liuyong on 2016/3/9.
  */
-public class User {
+public class User implements Serializable {
     private int id;
     private String userName;
     private String passWd;
