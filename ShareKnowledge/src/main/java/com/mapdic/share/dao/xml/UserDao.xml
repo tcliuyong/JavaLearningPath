@@ -17,8 +17,14 @@
         id,username,passwd,ic,phone,qq,mail,level
     </sql>
     <select id="getAllUser" resultMap="UserMap">
-        select
+        SELECT
         <include refid="columns"/>
         FROM USER
+    </select>
+    <select id="login" resultMap="UserMap">
+        SELECT
+        <include refid="columns"/>
+        FROM USAGE
+        WHERE username=#{username} AND passwd = #{passwd}
     </select>
 </mapper>

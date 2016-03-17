@@ -1,8 +1,11 @@
 package com.mapdic.share.controller;
 
+import com.google.common.base.Preconditions;
+import com.mapdic.share.common.DoCookie;
 import com.mapdic.share.model.User;
 import com.mapdic.share.serviceimpl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -28,5 +32,16 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("getAllUser");
         modelAndView.addObject("username",s);
         return modelAndView;
+    }
+    @ResponseBody
+    @RequestMapping(value ="/login", method = RequestMethod.POST)
+    public User userLogin(User user, HttpServletResponse response){
+        Preconditions.checkArgument(user == null, "用户为空");
+        User usr = userServiceImpl.login(user);
+        if (user != null){
+            DoCookie.addCookie(response, usr);
+            return usr;
+        }
+        return null;
     }
 }

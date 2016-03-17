@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface UserDao {
      List<User> getAllUser();
+     User login(User user);
 }

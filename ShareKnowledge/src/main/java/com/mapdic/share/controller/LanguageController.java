@@ -3,6 +3,7 @@ package com.mapdic.share.controller;
 import com.mapdic.share.model.Language;
 import com.mapdic.share.serviceimpl.LanguageServiceImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,9 +24,8 @@ public class LanguageController {
     private LanguageServiceImpl languageService;
 
     @RequestMapping(value = "/getLanguages")
-    public @ResponseBody Language getAllUser(HttpServletRequest request){
-        System.out.println("test");
-        return languageService.getLanguages().get(0);
+    public @ResponseBody List<Language> getAllUser(@RequestBody Language language){
+        return languageService.getLanguages();
     }
 
 

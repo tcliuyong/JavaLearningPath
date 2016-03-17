@@ -18,4 +18,10 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUser() {
         return userDao.getAllUser();
     }
+
+    public User login(User user) {
+        User usr = userDao.login(user);
+        return usr;
+    }
+
 }

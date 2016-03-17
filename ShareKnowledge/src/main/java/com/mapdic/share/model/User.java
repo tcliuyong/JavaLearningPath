@@ -14,11 +14,10 @@ public class User implements Serializable {
     private String qq;
     private String mail;
     private int level;
-
+    private static final long serialVersionUID = 8033462647933739998L;
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
