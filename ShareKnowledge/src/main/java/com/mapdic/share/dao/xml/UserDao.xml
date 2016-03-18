@@ -24,7 +24,7 @@
     <select id="login" resultMap="UserMap">
         SELECT
         <include refid="columns"/>
-        FROM USAGE
-        WHERE username=#{username} AND passwd = #{passwd}
+        FROM USER
+        WHERE username=#{userName} AND passwd = #{passWd}
     </select>
 </mapper>
