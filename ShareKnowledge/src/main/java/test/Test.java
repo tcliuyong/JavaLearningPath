@@ -30,6 +30,9 @@ public class Test {
             System.out.println(u.getUserName());
         }
         System.out.println(languageServiceImpl.getLanguages().get(1).getName());
-
+        User user = new User();
+        user.setUserName("tcliuyong");
+        user.setPassWd("ly125512240");
+        userService.login(user).getIC();
     }
 }
