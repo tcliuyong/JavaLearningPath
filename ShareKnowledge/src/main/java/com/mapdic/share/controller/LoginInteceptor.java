@@ -16,14 +16,16 @@ public class LoginInteceptor implements HandlerInterceptor {
     @Resource
     UserServiceImpl userService;
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        System.out.println("test");
-        Cookie[] cookie = httpServletRequest.getCookies();
-        for (int i = 0; i < cookie.length; i++) {
-            Cookie cook = cookie[i];
-            if (cook.getName().equalsIgnoreCase("username")) { //获取键
-                return false;    //获取值
-            }
-        }
+
+//        Cookie[] cookies = httpServletRequest.getCookies();
+//        for (int i = 0; i < cookies.length; i++) {
+//            if (cookies[i].getName().equalsIgnoreCase("username")) { //获取键
+//                System.out.println();
+//                return false;//流程中断 进行相应
+//            }
+//        }
+//        httpServletResponse.sendRedirect("/login.jsp");
+//        return true;//如果是true就进行下一个流程
         return true;
     }
 

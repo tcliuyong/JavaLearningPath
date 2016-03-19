@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 public class DoCookie {
     public static void addCookie(HttpServletResponse response, User user){
         Cookie cookie = new Cookie("username",user.getUserName());
+        cookie.setPath("/");
+        cookie.setMaxAge(2000);
         response.addCookie(cookie);
-
     }
 }

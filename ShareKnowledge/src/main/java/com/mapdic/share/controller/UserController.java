@@ -25,18 +25,18 @@ public class UserController {
     @Resource
     private UserServiceImpl userServiceImpl;
     @RequestMapping(value = "/getAllUser", method = RequestMethod.GET)
-    public ModelAndView getAllUser(HttpServletRequest request, PrintWriter out){
+    public ModelAndView getAllUser(HttpServletRequest request, PrintWriter out, HttpServletResponse response){
         List<User> users = userServiceImpl.getAllUser();
         System.out.println(request.getParameter("username"));
         String s = request.getParameter("username");
         ModelAndView modelAndView = new ModelAndView("getAllUser");
         modelAndView.addObject("username",s);
+        DoCookie.addCookie(response, users.get(0));
         return modelAndView;
     }
     @ResponseBody
     @RequestMapping(value ="/login", method = RequestMethod.POST)
-    public User userLogin(@RequestBody User user, HttpServletResponse response){
-        System.out.println(user.getUserName());
+    public User userLogin(User user, HttpServletResponse response){
         Preconditions.checkArgument(user != null, "用户为空");
         User usr = userServiceImpl.login(user);
         if (user != null){
