@@ -5,6 +5,7 @@ import com.mapdic.share.model.User;
 import com.mapdic.share.service.UserService;
 import com.mapdic.share.serviceimpl.LanguageServiceImpl;
 import com.mapdic.share.serviceimpl.UserServiceImpl;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:ApplicationContext.xml")
-public class Test {
+public class UserTest {
     @Resource
     UserServiceImpl userService;
     @Resource
@@ -29,10 +30,34 @@ public class Test {
         for(User u : users){
             System.out.println(u.getUserName());
         }
-        System.out.println(languageServiceImpl.getLanguages().get(1).getName());
         User user = new User();
         user.setUserName("tcliuyong");
         user.setPassWd("ly125512240");
-        userService.login(user).getIC();
+        System.out.println(userService.login(user).getIC());
+    }
+    @Test
+    public void addUser(){
+        User user = new User();
+        user.setUserName("liuyong");
+        user.setPassWd("1");
+//        user.setIC("23090219999");
+//        user.setPhone("18345040200");
+//        user.setMail("tcliuyong@163.com");
+        userService.addUser(user);
+    }
+    @Test
+    public void updateUser(){
+        User user = new User();
+        user.setId(4);
+        user.setUserName("liuyong");
+        user.setPassWd("1");
+//        user.setIC("23090219999");
+//        user.setPhone("18345040200");
+        user.setMail("tcliuyong@sina1.com");
+        userService.updateUser(user);
+    }
+    @Test
+    public void deleteUser(){
+        userService.deleteUser(4);
     }
 }

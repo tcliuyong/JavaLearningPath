@@ -1,6 +1,7 @@
 package com.mapdic.share.dao;
 
 import com.mapdic.share.model.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.jws.soap.SOAPBinding;
@@ -13,4 +14,7 @@ import java.util.List;
 public interface UserDao {
      List<User> getAllUser();
      User login(User user);
+     void addUser(User user);
+     void updateUser(User user);
+     void deleteUser(int id);
 }

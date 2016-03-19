@@ -27,4 +27,37 @@
         FROM USER
         WHERE username=#{userName} AND passwd = #{passWd}
     </select>
+    <insert id="addUser" parameterType="com.mapdic.share.model.User">
+        INSERT INTO USER
+        (username,passwd,ic,phone,qq,mail)
+        VALUES
+        (#{userName},#{passWd},#{IC},#{phone},#{qq},#{mail})
+    </insert>
+    <update id="updateUser" parameterType="com.mapdic.share.model.User" >
+        UPDATE USER
+        <set>
+            <if test="userName != null">
+                username = #{userName},
+            </if>
+            <if test="passWd != null">
+                passwd = #{passWd},
+            </if>
+            <if test="IC != null">
+                ic = #{IC},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="qq != null">
+                qq = #{qq},
+            </if>
+            <if test="mail != null">
+                mail = #{mail},
+            </if>
+        </set>
+        <where>id = #{id}</where>
+    </update>
+    <delete id="deleteUser" >
+        DELETE FROM USER WHERE id = #{id}
+    </delete>
 </mapper>

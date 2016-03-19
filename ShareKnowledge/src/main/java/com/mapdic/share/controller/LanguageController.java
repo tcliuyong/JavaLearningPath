@@ -27,6 +27,4 @@ public class LanguageController {
     public @ResponseBody List<Language> getAllUser(@RequestBody Language language){
         return languageService.getLanguages();
     }
-
-
 }
