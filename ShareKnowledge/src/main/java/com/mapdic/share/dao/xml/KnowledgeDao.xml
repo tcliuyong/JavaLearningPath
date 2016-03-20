@@ -29,6 +29,7 @@
         k_id,tag,content,category,userid,system,filepath,ischeck,isforbidden,date
     </sql>
     <update id="updateKnowledge" parameterType="com.mapdic.share.model.Knowledge">
+        UPDATE knowledge
         <set>
             <if test="tag != null">
                 tag = #{tag},
@@ -57,9 +58,8 @@
         </set>
         <where>k_id = #{k_id}</where>
     </update>
-
         <insert id="addKnowledge" parameterType="com.mapdic.share.model.Knowledge">
-            INSERT INTO knowledge
+            INSERT INTO KNOWLEDGE
             (
               tag,content,category,userid,system,filepath,ischeck,isforbidden,date
             )
@@ -68,4 +68,10 @@
               #{tag}, #{content}, #{category}, #{user.id}, #{system}, #{filePath},#{isCheck, jdbcType=TINYINT},#{isForbidden, jdbcType=TINYINT},#{date}
             )
         </insert>
+    <select id="getKnowledgeByUser" parameterType="java.lang.Integer" resultMap="KnowledgeMap">
+        SELECT
+        <include refid="columns"/>
+        FROM KNOWLEDGE
+        WHERE userid = #{userId}
+    </select>
 </mapper>

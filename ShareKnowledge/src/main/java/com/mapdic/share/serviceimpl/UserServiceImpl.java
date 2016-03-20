@@ -3,6 +3,7 @@ package com.mapdic.share.serviceimpl;
 import com.mapdic.share.dao.UserDao;
 import com.mapdic.share.model.User;
 import com.mapdic.share.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,6 +35,15 @@ public class UserServiceImpl implements UserService {
 
     public void deleteUser(int id) {
         userDao.deleteUser(id);
+    }
+
+    @Override
+    public User getUserById(Integer id) {
+        User user = userDao.getUserById(id);
+        if(user != null){
+            return user;
+        }
+        return null;
     }
 
 }

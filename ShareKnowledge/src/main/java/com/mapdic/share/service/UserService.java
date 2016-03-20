@@ -1,6 +1,7 @@
 package com.mapdic.share.service;
 
 import com.mapdic.share.model.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface UserService {
      void addUser(User user);
      void updateUser(User user);
      void deleteUser(int id);
+     User getUserById(@Param("id") Integer id);
 }

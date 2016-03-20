@@ -1,5 +1,6 @@
 package test;
 
+import com.mapdic.share.dao.KnowledgeDao;
 import com.mapdic.share.dao.UserDao;
 import com.mapdic.share.model.User;
 import com.mapdic.share.service.UserService;
@@ -20,6 +21,8 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:ApplicationContext.xml")
 public class UserTest {
+    @Resource
+    UserDao userDao;
     @Resource
     UserServiceImpl userService;
     @Resource
@@ -60,4 +63,14 @@ public class UserTest {
     public void deleteUser(){
         userService.deleteUser(4);
     }
+    @Test
+    public void getUserById(){
+        User user =userDao.getUserById(200);
+        System.out.println();
+        if(user == null)
+            System.out.println("Fail");
+        else
+            System.out.println(user.toString());
+    }
+
 }
