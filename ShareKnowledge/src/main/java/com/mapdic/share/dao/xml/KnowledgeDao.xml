@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--必须与接口同名-->
+<mapper namespace="com.mapdic.share.dao.KnowledgeDao">
+    <resultMap id="KnowledgeMap" type="com.mapdic.share.model.Knowledge">
+        <result property="k_id" column="k_id"/>
+        <result column="tag" property="tag"/>
+        <result column="content" property="content"/>
+        <result column="category" property="category"/>
+        <result column="system" property="system"/>
+        <result column="filepath" property="filePath"/>
+        <result column="ischeck" property="isCheck"/>
+        <result column="isforbidden" property="isForbidden"/>
+        <result column="date" property="date"/>
+        <association property="user" javaType="com.mapdic.share.model.User">
+                <id column="userid" property="id"/>
+                <result column="username" property="userName"/>
+                <result column="passwd" property="passWd"/>
+                <result column="ic" property="IC"/>
+                <result column="phone" property="phone"/>
+                <result column="qq" property="qq"/>
+                <result column="mail" property="mail"/>
+                <result column="level" property="level"/>
+        </association>
+    </resultMap>
+
+    <sql id="columns">
+        k_id,tag,content,category,userid,system,filepath,ischeck,isforbidden,date
+    </sql>
+    <update id="updateKnowledge" parameterType="com.mapdic.share.model.Knowledge">
+        <set>
+            <if test="tag != null">
+                tag = #{tag},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="category != null">
+                category = #{category},
+            </if>
+            <if test="system != null">
+                system = #{system},
+             </if>
+            <if test="filePath != null">
+                filepath = #{filePath},
+            </if>
+            <if test="isCheck != null">
+                ischeck = #{isCheck, jdbcType=TINYINT},
+            </if>
+            <if test="isForbidden != null">
+                isforbidden = #{isForbidden, jdbcType=TINYINT},
+            </if>
+            <if test="date != null">
+                date = #{date},
+            </if>
+        </set>
+        <where>k_id = #{k_id}</where>
+    </update>
+
+        <insert id="addKnowledge" parameterType="com.mapdic.share.model.Knowledge">
+            INSERT INTO knowledge
+            (
+              tag,content,category,userid,system,filepath,ischeck,isforbidden,date
+            )
+            VALUES
+            (
+              #{tag}, #{content}, #{category}, #{user.id}, #{system}, #{filePath},#{isCheck, jdbcType=TINYINT},#{isForbidden, jdbcType=TINYINT},#{date}
+            )
+        </insert>
+</mapper>
