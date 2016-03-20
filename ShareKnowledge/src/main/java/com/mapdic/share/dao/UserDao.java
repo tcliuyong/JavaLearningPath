@@ -16,5 +16,5 @@ public interface UserDao {
      User login(User user);
      void addUser(User user);
      void updateUser(User user);
-     void deleteUser(int id);
+     void deleteUser(@Param("id") Integer id);
 }

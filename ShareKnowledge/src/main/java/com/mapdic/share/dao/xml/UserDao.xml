@@ -57,7 +57,7 @@
         </set>
         <where>id = #{id}</where>
     </update>
-    <delete id="deleteUser" >
+    <delete id="deleteUser" parameterType="java.lang.Integer">
         DELETE FROM USER WHERE id = #{id}
     </delete>
 </mapper>
