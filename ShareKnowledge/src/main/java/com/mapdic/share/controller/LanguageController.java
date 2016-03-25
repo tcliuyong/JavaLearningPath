@@ -22,9 +22,9 @@ import java.util.Map;
 public class LanguageController {
     @Resource
     private LanguageServiceImpl languageService;
-
+    @ResponseBody
     @RequestMapping(value = "/getLanguages")
-    public @ResponseBody List<Language> getAllUser(@RequestBody Language language){
+    public List<Language> getLanguages(){
         return languageService.getLanguages();
     }
 }

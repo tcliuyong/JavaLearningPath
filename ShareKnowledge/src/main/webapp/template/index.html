@@ -1,0 +1,8 @@
+<select name="language" id = "language" class="btn cp">
+
+    {#foreach $T as record}
+    <option value={$T.record.id}>
+        <td>{$T.record.name}</td>
+    </option>
+    {#/for}
+</select>
