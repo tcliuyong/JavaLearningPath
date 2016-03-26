@@ -37,12 +37,11 @@
     </bean>
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/login.do"/>
+            <mvc:mapping path="/test.do"/>
             <!--<mvc:exclude-mapping path="/upload.do"/> 排除的目录-->
             <!--注：不支持<mvc:mapping path="*.do" />-->
             <bean class="com.mapdic.share.controller.LoginInteceptor"></bean>
         </mvc:interceptor>
-
     </mvc:interceptors>
     <!-- 完成请求和注解POJO的映射 -->
     <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>-->
@@ -50,6 +49,6 @@
     <mvc:annotation-driven/>
     <context:annotation-config/>
     <context:component-scan base-package="com.mapdic.share.controller"/>
-
     <!--<bean name="/message.do" class="com.spring.controller.MessageController"></bean>-->
+
 </beans>

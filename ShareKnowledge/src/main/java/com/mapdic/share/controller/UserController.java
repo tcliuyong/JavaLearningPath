@@ -36,10 +36,11 @@ public class UserController {
     }
     @ResponseBody
     @RequestMapping(value ="/login", method = RequestMethod.POST)
-    public User userLogin(User user, HttpServletResponse response){
+    public User userLogin(@RequestBody User user, HttpServletResponse response){
         Preconditions.checkArgument(user != null, "用户为空");
         User usr = userServiceImpl.login(user);
-        if (user != null){
+        System.out.println(user.getUserName());
+        if (usr != null){
             DoCookie.addCookie(response, usr);
             return usr;
         }

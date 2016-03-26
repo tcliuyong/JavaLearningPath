@@ -15,10 +15,6 @@ public class User implements Serializable {
     private String mail;
     private int level;
     private static final long serialVersionUID = 8033462647933739998L;
-
-    public User() {
-    }
-
     public int getId() {
         return id;
     }
