@@ -1,13 +1,20 @@
 package com.mapdic.share.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.springframework.context.annotation.Bean;
+
 import java.io.Serializable;
 
 /**
  * Created by liuyong on 2016/3/9.
  */
 public class User implements Serializable {
+    public interface WithoutPasswordView {};
     private int id;
     private String userName;
+    @JsonView(WithoutPasswordView.class)
     private String passWd;
     private String IC;
     private String phone;

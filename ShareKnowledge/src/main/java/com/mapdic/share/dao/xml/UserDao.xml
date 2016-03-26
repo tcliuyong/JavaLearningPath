@@ -14,7 +14,7 @@
         <result column="level" property="level"/>
     </resultMap>
     <sql id="columns">
-        id,username,passwd,ic,phone,qq,mail,level
+        id,username,qq,mail,level
     </sql>
     <select id="getAllUser" resultMap="UserMap">
         SELECT

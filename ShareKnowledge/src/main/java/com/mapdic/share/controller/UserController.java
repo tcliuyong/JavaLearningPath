@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.mapdic.share.common.DoCookie;
 import com.mapdic.share.model.User;
 import com.mapdic.share.serviceimpl.UserServiceImpl;
+import org.codehaus.jackson.map.annotate.JsonView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,10 +37,12 @@ public class UserController {
     }
     @ResponseBody
     @RequestMapping(value ="/login", method = RequestMethod.POST)
-    public User userLogin(@RequestBody User user, HttpServletResponse response){
+    @JsonView(User.WithoutPasswordView.class)
+    public User userLogin(@RequestBody User user, HttpServletResponse response, HttpServletRequest request){
         Preconditions.checkArgument(user != null, "用户为空");
+        System.out.println(user.getPassWd());
         User usr = userServiceImpl.login(user);
-        System.out.println(user.getUserName());
+//        JSONObject jsonObject = new JSONObject();
         if (usr != null){
             DoCookie.addCookie(response, usr);
             return usr;

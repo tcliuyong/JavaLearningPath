@@ -31,11 +31,11 @@ jQuery(document).ready(function($){
 		$.ajax({
 			type: "POST",
 			url: "/login.do",
+			contentType: 'application/json;charse=UTF-8',
 			data: user ,
 			datatype: 'json',
-			contentType: "application/json",
 			success: function (usr) {
-				alert(usr);
+				alert("BX");
 				//$form_modal.removeClass("is-visible");
 				//$('.personal').html("Test");
 			},
