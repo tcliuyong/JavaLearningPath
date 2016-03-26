@@ -18,13 +18,17 @@ public class KnowledgeServiceImpl implements KnowledgeService {
     @Resource
     UserDao userDao;
     @Override
-    public void addKnowledge(Knowledge knowledge) {
-        knowledgeDao.addKnowledge(knowledge);
+    public boolean addKnowledge(Knowledge knowledge) {
+        if(knowledgeDao.addKnowledge(knowledge) == 1)
+            return true;
+        return false;
     }
 
     @Override
-    public void updateKnowledge(Knowledge knowledge) {
-        knowledgeDao.updateKnowledge(knowledge);
+    public boolean updateKnowledge(Knowledge knowledge) {
+        if(knowledgeDao.updateKnowledge(knowledge) == 1)
+            return true;
+        return false;
     }
 
     @Override

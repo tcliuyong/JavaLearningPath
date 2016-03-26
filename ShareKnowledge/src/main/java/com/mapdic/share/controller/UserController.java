@@ -2,6 +2,7 @@ package com.mapdic.share.controller;
 
 import com.google.common.base.Preconditions;
 import com.mapdic.share.common.DoCookie;
+import com.mapdic.share.controller.dto.UserDTO;
 import com.mapdic.share.model.User;
 import com.mapdic.share.serviceimpl.UserServiceImpl;
 import org.codehaus.jackson.map.annotate.JsonView;
@@ -37,15 +38,23 @@ public class UserController {
     }
     @ResponseBody
     @RequestMapping(value ="/login")
-    public User userLogin(@RequestBody User user,HttpServletResponse response,HttpServletRequest request){
+    public UserDTO userLogin(@RequestBody User user, HttpServletResponse response){
         Preconditions.checkArgument(user != null, "用户为空");
-        System.out.println(user.getPassWd());
         User usr = userServiceImpl.login(user);
         if (usr != null){
             DoCookie.addCookie(response, usr);
-            return usr;
+            return new UserDTO(usr.getId(), user.getUserName(), usr.getMail(),user.getLevel());
         }
         return null;
+    }
+    @ResponseBody
+    @RequestMapping(value ="/addUser")
+    public String addUser(@RequestBody User user){
+        Preconditions.checkArgument(user != null, "用户为空");
+        if(userServiceImpl.addUser(user))
+            return "OK";
+        return "FAIL";
+
     }
 
 }

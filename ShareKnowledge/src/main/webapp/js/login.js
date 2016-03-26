@@ -6,43 +6,71 @@ jQuery(document).ready(function($){
 		$tab_login = $form_modal_tab.children('li').eq(0).children('a'),
 		$tab_signup = $form_modal_tab.children('li').eq(1).children('a'),
 		$main_nav = $('.main_nav'),
-		$full_width2=$('.full-width2');
+		$login=$('#login');
+		$me = $('#personal');
+		$register = $('#register');
 
 	//弹出层
 	$main_nav.on('click', function(event){
 
 		if( $(event.target).is($main_nav) ) {
 			// on mobile open the submenu
-			$(this).children('ul').toggleClass('is-visible');
+			$form_modal.addClass('is-visible');
 		} else {
-			// on mobile close submenu
-			$main_nav.children('ul').removeClass('is-visible');
 			//show modal layer
-			$form_modal.addClass('is-visible');	
+			$form_modal.addClass('is-visible');
 			//show the selected form
 			( $(event.target).is('.cd-signup') ) ? signup_selected() : login_selected();
 		}
 
 	});
 	//登入函数
-	$full_width2.on('click',function(event){
-		var jsonStr = {"userName": $(":input#signin-username").val(), "passWd": $(":input#signin-password").val()};
-		var user = JSON.stringify(jsonStr);
-		$.ajax({
-			type: "POST",
-			url: "/login.do",
-			contentType: 'application/json;charset=UTF-8',
-			data: user ,
-			datatype: 'json',
-			success: function (usr) {
-				//alert(usr['userName']);
-				$form_modal.removeClass("is-visible");
-				//document.getElementById("personal").innerHTML("TEst");
-			},
-			error: function () {
-			}
-		});
+	$login.on('click',function(event){
+		if( $(event.target).is($login) ) {
+			var jsonStr = {"userName": $(":input#signin-username").val(), "passWd": $(":input#signin-password").val()};
+			var user = JSON.stringify(jsonStr);
+			$.ajax({
+				type: "POST",
+				url: "/login.do",
+				contentType: 'application/json;charset=UTF-8',
+				data: user,
+				datatype: 'json',
+				success: function (usr) {
+					$form_modal.removeClass("is-visible");
+					$me.html(usr['userName'])
+				},
+				error: function () {
+				}
+			});
+		}
 	});
+//注册函数
+	$register.on('click',function(event){
+		if( $(event.target).is($register) ) {
+			var jsonStr = {"userName": $(":input#signup-username").val(),
+				"passWd": $(":input#signup-password").val(),
+				"mail":$(":input#signup-email").val};
+			var user = JSON.stringify(jsonStr);
+			$.ajax({
+				type: "POST",
+				url: "/addUser.do",
+				data: user,
+				contentType: 'application/json;charset=UTF-8',
+				datatype: 'text',
+				success: function (data) {
+					if(data == "OK"){
+						$form_modal.removeClass("is-visible");
+						alert("注册成功");
+					}else {
+						alert("注册失败");
+					}
+				},
+				error: function () {
+				}
+			});
+		}
+	});
+
 
 	$('.cd-user-modal').on('click', function(event){
 		if( $(event.target).is($form_modal) || $(event.target).is('.cd-close-form') ) {
@@ -78,7 +106,6 @@ jQuery(document).ready(function($){
 });
 
 
-//credits http://css-tricks.com/snippets/jquery/move-cursor-to-end-of-textarea-or-input/
 jQuery.fn.putCursorAtEnd = function() {
 	return this.each(function() {
     	// If this function exists...

@@ -9,7 +9,7 @@ import java.util.List;
  * Created by tcliuyong on 2016/3/20.
  */
 public interface KnowledgeService {
-    void addKnowledge(Knowledge knowledge);
-    void updateKnowledge(Knowledge knowledge);
+    boolean addKnowledge(Knowledge knowledge);
+    boolean updateKnowledge(Knowledge knowledge);
     List<Knowledge> getKnowledgeByUser(Integer id);
 }

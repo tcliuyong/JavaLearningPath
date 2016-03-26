@@ -25,16 +25,22 @@ public class UserServiceImpl implements UserService {
         return usr;
     }
 
-    public void addUser(User user) {
-        userDao.addUser(user);
+    public boolean addUser(User user) {
+        if(userDao.addUser(user) == 1)
+            return true;
+       return false;
     }
 
-    public void updateUser(User user) {
-        userDao.updateUser(user);
+    public boolean updateUser(User user) {
+        if(userDao.updateUser(user) == 1)
+            return true;
+        return false;
     }
 
-    public void deleteUser(int id) {
-        userDao.deleteUser(id);
+    public boolean deleteUser(int id) {
+        if(userDao.deleteUser(id) == 1)
+            return true;
+        return false;
     }
 
     @Override

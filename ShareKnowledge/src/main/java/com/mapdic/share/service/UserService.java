@@ -11,8 +11,8 @@ import java.util.List;
 public interface UserService {
      List<User> getAllUser();
      User login(User user);
-     void addUser(User user);
-     void updateUser(User user);
-     void deleteUser(int id);
+     boolean addUser(User user);
+     boolean updateUser(User user);
+     boolean deleteUser(int id);
      User getUserById(@Param("id") Integer id);
 }

@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Repository
 public interface KnowledgeDao {
-    void addKnowledge(Knowledge knowledge);
-    void updateKnowledge(Knowledge knowledge);
+    int addKnowledge(Knowledge knowledge);
+    int updateKnowledge(Knowledge knowledge);
     List<Knowledge> getKnowledgeByUser(@Param("userId") Integer id);
 }

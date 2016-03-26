@@ -67,7 +67,7 @@ div#droplist { color: blue;display: inline }
 			<div class="topMenus dn">
 				<span class="arrowTop"></span>
 				<nav class="main_nav">
-						<a href="#" class="cd-signin" >个人中心</a>
+						<a href="#0" class="cd-signin" >个人中心</a>
 						<a href="#">帐号设置</a>
 				<!--<a href="#">搜索设置</a>-->
 						<a href="#">意见反馈</a>
@@ -113,7 +113,7 @@ div#droplist { color: blue;display: inline }
 				<!--</p>-->
 
 				<p class="fieldset">
-					<input class="full-width2" type="submit" value="登 录">
+					<input class="full-width2" id="login" type="submit" value="登 录">
 				</p>
 			</form>
 		</div>
@@ -134,10 +134,12 @@ div#droplist { color: blue;display: inline }
 					<label class="image-replace cd-password" for="signup-password">密码</label>
 					<input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="输入密码">
 				</p>
-
-
 				<p class="fieldset">
-					<input class="full-width2" type="submit" value="注册新用户">
+					<label class="image-replace cd-password" for="signup-password">确认密码</label>
+					<input class="full-width has-padding has-border" id="signup-confirm" type="text"  placeholder="输入密码">
+				</p>
+				<p class="fieldset">
+					<input class="full-width2"  id="register" type="submit" value="注册新用户">
 				</p>
 			</form>
 		</div>

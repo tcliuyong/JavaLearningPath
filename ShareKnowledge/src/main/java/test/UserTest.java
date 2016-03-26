@@ -46,7 +46,8 @@ public class UserTest {
 //        user.setIC("23090219999");
 //        user.setPhone("18345040200");
 //        user.setMail("tcliuyong@163.com");
-        userService.addUser(user);
+        System.out.println();
+        System.out.println(userService.addUser(user));
     }
     @Test
     public void updateUser(){
