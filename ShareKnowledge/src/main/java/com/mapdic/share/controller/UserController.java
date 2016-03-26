@@ -36,13 +36,11 @@ public class UserController {
         return modelAndView;
     }
     @ResponseBody
-    @RequestMapping(value ="/login", method = RequestMethod.POST)
-    @JsonView(User.WithoutPasswordView.class)
-    public User userLogin(@RequestBody User user, HttpServletResponse response, HttpServletRequest request){
+    @RequestMapping(value ="/login")
+    public User userLogin(@RequestBody User user,HttpServletResponse response,HttpServletRequest request){
         Preconditions.checkArgument(user != null, "用户为空");
         System.out.println(user.getPassWd());
         User usr = userServiceImpl.login(user);
-//        JSONObject jsonObject = new JSONObject();
         if (usr != null){
             DoCookie.addCookie(response, usr);
             return usr;

@@ -30,21 +30,17 @@
         </property>
     </bean>
     <!-- 支持上传文件 -->
-    <!-- Configure the multipart resolver -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- one of the properties available; the maximum file size in bytes -->
         <property name="maxUploadSize" value="1000"/>
     </bean>
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/test.do"/>
-            <!--<mvc:exclude-mapping path="/upload.do"/> 排除的目录-->
-            <!--注：不支持<mvc:mapping path="*.do" />-->
-            <bean class="com.mapdic.share.controller.LoginInteceptor"></bean>
-        </mvc:interceptor>
-    </mvc:interceptors>
-    <!-- 完成请求和注解POJO的映射 -->
-    <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>-->
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/test.do"/>-->
+            <!--&lt;!&ndash;<mvc:exclude-mapping path="/upload.do"/> 排除的目录&ndash;&gt;-->
+            <!--<bean class="com.mapdic.share.controller.LoginInteceptor"></bean>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
     <!--会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean-->
     <!--<mvc:annotation-driven/>-->
     <context:annotation-config/>

@@ -11,10 +11,8 @@ import java.io.Serializable;
  * Created by liuyong on 2016/3/9.
  */
 public class User implements Serializable {
-    public interface WithoutPasswordView {};
     private int id;
     private String userName;
-    @JsonView(WithoutPasswordView.class)
     private String passWd;
     private String IC;
     private String phone;
@@ -97,5 +95,8 @@ public class User implements Serializable {
                 ", mail='" + mail + '\'' +
                 ", level=" + level +
                 '}';
+    }
+
+    public User() {
     }
 }

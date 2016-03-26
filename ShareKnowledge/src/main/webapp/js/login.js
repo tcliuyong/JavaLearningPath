@@ -31,13 +31,13 @@ jQuery(document).ready(function($){
 		$.ajax({
 			type: "POST",
 			url: "/login.do",
-			contentType: 'application/json;charse=UTF-8',
+			contentType: 'application/json;charset=UTF-8',
 			data: user ,
 			datatype: 'json',
 			success: function (usr) {
-				alert("BX");
-				//$form_modal.removeClass("is-visible");
-				//$('.personal').html("Test");
+				//alert(usr['userName']);
+				$form_modal.removeClass("is-visible");
+				//document.getElementById("personal").innerHTML("TEst");
 			},
 			error: function () {
 			}
