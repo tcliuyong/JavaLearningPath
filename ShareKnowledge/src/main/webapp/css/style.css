@@ -179,7 +179,7 @@
   /* space left for the HIDE button */
   padding-right: 65px;
 }
-.cd-form input[type=submit] {
+.cd-form input[type=button] {
   padding: 16px 0;
   cursor: pointer;
   background: #2f889a;

@@ -67,12 +67,13 @@ div#droplist { color: blue;display: inline }
 			<div class="topMenus dn">
 				<span class="arrowTop"></span>
 				<nav class="main_nav">
-						<a href="#0" class="cd-signin" >个人中心</a>
+						<a class="cd-signin" >个人中心</a>
+				</nav>
 						<a href="#">帐号设置</a>
 				<!--<a href="#">搜索设置</a>-->
 						<a href="#">意见反馈</a>
 						<a href="#">安全退出</a>
-				</nav>
+
 			</div>
 		</nav>
 	</header>
@@ -91,12 +92,13 @@ div#droplist { color: blue;display: inline }
 <div class="cd-user-modal">
 	<div class="cd-user-modal-container">
 		<ul class="cd-switcher">
-			<li><a href="#0">用户登录</a></li>
-			<li><a href="#0">注册新用户</a></li>
+			<li><a>用户登录</a></li>
+			<li><a >注册新用户</a></li>
 		</ul>
 
 		<div id="cd-login"> <!-- 登录表单 -->
 			<form class="cd-form">
+				<div id="login_info" align="center" style="color: red;font-size: 12px"></div>
 				<p class="fieldset">
 					<label class="image-replace cd-username" for="signin-username">用户名</label>
 					<input class="full-width has-padding has-border" id="signin-username" type="text" placeholder="输入用户名">
@@ -113,13 +115,14 @@ div#droplist { color: blue;display: inline }
 				<!--</p>-->
 
 				<p class="fieldset">
-					<input class="full-width2" id="login" type="submit" value="登 录">
+					<input class="full-width2" id="login" type="button" value="登 录">
 				</p>
 			</form>
 		</div>
 
 		<div id="cd-signup"> <!-- 注册表单 -->
 			<form class="cd-form">
+				<div id="reg_info" align="center" style="color: red;font-size: 12px"></div>
 				<p class="fieldset">
 					<label class="image-replace cd-username" for="signup-username">用户名</label>
 					<input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="输入用户名">
@@ -132,14 +135,14 @@ div#droplist { color: blue;display: inline }
 
 				<p class="fieldset">
 					<label class="image-replace cd-password" for="signup-password">密码</label>
-					<input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="输入密码">
+					<input class="full-width has-padding has-border" id="signup-password" type="password"  placeholder="输入密码">
 				</p>
 				<p class="fieldset">
 					<label class="image-replace cd-password" for="signup-password">确认密码</label>
-					<input class="full-width has-padding has-border" id="signup-confirm" type="text"  placeholder="输入密码">
+					<input class="full-width has-padding has-border" id="signup-confirm" type="password"  placeholder="输入密码">
 				</p>
 				<p class="fieldset">
-					<input class="full-width2"  id="register" type="submit" value="注册新用户">
+					<input class="full-width2"  id="register" type="button" value="注册新用户">
 				</p>
 			</form>
 		</div>

@@ -52,4 +52,14 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public User getUserByUserName(String username) {
+        return userDao.getUserByUserName(username);
+    }
+
+    @Override
+    public User getUserByMail(String mail) {
+        return userDao.getUserByMail(mail);
+    }
+
 }

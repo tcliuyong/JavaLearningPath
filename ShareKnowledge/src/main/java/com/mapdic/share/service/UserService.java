@@ -14,5 +14,7 @@ public interface UserService {
      boolean addUser(User user);
      boolean updateUser(User user);
      boolean deleteUser(int id);
-     User getUserById(@Param("id") Integer id);
+     User getUserById(Integer id);
+     User getUserByUserName(String username);
+     User getUserByMail(String mail);
 }

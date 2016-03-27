@@ -9,6 +9,8 @@ jQuery(document).ready(function($){
 		$login=$('#login');
 		$me = $('#personal');
 		$register = $('#register');
+		$info = $('#login_info');
+		$reg = $('#reg_info');
 
 	//弹出层
 	$main_nav.on('click', function(event){
@@ -36,10 +38,16 @@ jQuery(document).ready(function($){
 				data: user,
 				datatype: 'json',
 				success: function (usr) {
-					$form_modal.removeClass("is-visible");
-					$me.html(usr['userName'])
+					if(usr != ""){
+						$form_modal.removeClass("is-visible");
+						$me.html(usr['userName']);
+					}
+					else {
+						$info.html("用户名或密码错误");
+					}
 				},
-				error: function () {
+				error: function (e) {
+					alert(e);
 				}
 			});
 		}
@@ -47,21 +55,37 @@ jQuery(document).ready(function($){
 //注册函数
 	$register.on('click',function(event){
 		if( $(event.target).is($register) ) {
+			var regx = $(":input#signup-email").val();
+			if( $(":input#signup-username").val() == ""){
+				$reg.html("用户名不能为空");
+				return ;
+			}
+			if($(":input#signup-password").val() != $(":input#signup-confirm").val() || $(":input#signup-password").val()== ""){
+				$reg.html("确认密码不一样或为空");
+				return ;
+			}
 			var jsonStr = {"userName": $(":input#signup-username").val(),
 				"passWd": $(":input#signup-password").val(),
-				"mail":$(":input#signup-email").val};
+				"mail":$(":input#signup-email").val()};
 			var user = JSON.stringify(jsonStr);
+
 			$.ajax({
 				type: "POST",
 				url: "/addUser.do",
-				data: user,
 				contentType: 'application/json;charset=UTF-8',
+				data: user,
 				datatype: 'text',
 				success: function (data) {
 					if(data == "OK"){
+						$reg.html("注册成功");
 						$form_modal.removeClass("is-visible");
-						alert("注册成功");
-					}else {
+					}else if(data == "UserName"){
+						$reg.html("用户名重复");
+						return ;
+					}else if(data == "Mail"){
+						$reg.html("邮箱有重复");
+						return ;
+					}else{
 						alert("注册失败");
 					}
 				},
@@ -70,7 +94,6 @@ jQuery(document).ready(function($){
 			});
 		}
 	});
-
 
 	$('.cd-user-modal').on('click', function(event){
 		if( $(event.target).is($form_modal) || $(event.target).is('.cd-close-form') ) {

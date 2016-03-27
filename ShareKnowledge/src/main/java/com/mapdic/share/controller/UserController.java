@@ -2,6 +2,8 @@ package com.mapdic.share.controller;
 
 import com.google.common.base.Preconditions;
 import com.mapdic.share.common.DoCookie;
+import com.mapdic.share.common.EnumCode;
+import com.mapdic.share.common.UserEnum;
 import com.mapdic.share.controller.dto.UserDTO;
 import com.mapdic.share.model.User;
 import com.mapdic.share.serviceimpl.UserServiceImpl;
@@ -49,12 +51,17 @@ public class UserController {
     }
     @ResponseBody
     @RequestMapping(value ="/addUser")
-    public String addUser(@RequestBody User user){
+    public String addUser(@RequestBody User user, HttpServletResponse response){
         Preconditions.checkArgument(user != null, "用户为空");
-        if(userServiceImpl.addUser(user))
-            return "OK";
-        return "FAIL";
-
+        if(userServiceImpl.getUserByUserName(user.getUserName()) != null){
+            return UserEnum.USERNAME.getName();
+        }else if(userServiceImpl.getUserByMail(user.getMail()) != null){
+            return UserEnum.MAIL.getName();
+        }else {
+            if(userServiceImpl.addUser(user))
+                return UserEnum.OK.getName();
+        }
+        return UserEnum.FAIL.getName();
     }
 
 }

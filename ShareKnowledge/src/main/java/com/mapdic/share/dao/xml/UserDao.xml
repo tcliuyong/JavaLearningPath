@@ -33,6 +33,21 @@
         FROM USER
         WHERE id = #{id}
     </select>
+
+    <select id="getUserByUserName" resultMap="UserMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="columns"/>
+        FROM USER
+        WHERE username = #{username}
+    </select>
+
+    <select id="getUserByMail" resultMap="UserMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="columns"/>
+        FROM USER
+        WHERE mail = #{mail}
+    </select>
+
     <insert id="addUser" parameterType="com.mapdic.share.model.User">
         INSERT INTO USER
         (username,passwd,ic,phone,qq,mail)
@@ -66,4 +81,5 @@
     <delete id="deleteUser" parameterType="java.lang.Integer">
         DELETE FROM USER WHERE id = #{id}
     </delete>
+
 </mapper>

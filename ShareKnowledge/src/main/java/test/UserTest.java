@@ -37,6 +37,7 @@ public class UserTest {
         user.setUserName("tcliuyong");
         user.setPassWd("ly125512240");
         System.out.println(userService.login(user).getIC());
+        System.out.println(userService.getUserByUserName("liuyong1"));
     }
     @Test
     public void addUser(){
