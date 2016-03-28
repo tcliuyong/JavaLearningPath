@@ -44,7 +44,7 @@
     <!--会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean-->
     <!--<mvc:annotation-driven/>-->
     <context:annotation-config/>
-    <context:component-scan base-package="com.mapdic.share.controller"/>
+    <context:component-scan base-package="com.mapdic.share"/>
     <!--<bean name="/message.do" class="com.spring.controller.MessageController"></bean>-->
     <mvc:annotation-driven>
         <mvc:message-converters>

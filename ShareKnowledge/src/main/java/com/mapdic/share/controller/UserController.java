@@ -3,9 +3,11 @@ package com.mapdic.share.controller;
 import com.google.common.base.Preconditions;
 import com.mapdic.share.common.DoCookie;
 import com.mapdic.share.common.EnumCode;
+import com.mapdic.share.common.RandomCode;
 import com.mapdic.share.common.UserEnum;
 import com.mapdic.share.controller.dto.UserDTO;
 import com.mapdic.share.model.User;
+import com.mapdic.share.serviceimpl.TokenServiceImol;
 import com.mapdic.share.serviceimpl.UserServiceImpl;
 import org.codehaus.jackson.map.annotate.JsonView;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,8 @@ import java.util.List;
 public class UserController {
     @Resource
     private UserServiceImpl userServiceImpl;
+    @Resource
+    TokenServiceImol tokenServiceImol;
     @RequestMapping(value = "/getAllUser", method = RequestMethod.GET)
     public ModelAndView getAllUser(HttpServletRequest request, PrintWriter out, HttpServletResponse response){
         List<User> users = userServiceImpl.getAllUser();
@@ -40,7 +44,7 @@ public class UserController {
     }
     @ResponseBody
     @RequestMapping(value ="/login")
-    public UserDTO userLogin(@RequestBody User user, HttpServletResponse response){
+    public UserDTO userLogin(@RequestBody User user, HttpServletResponse response, HttpServletRequest request){
         Preconditions.checkArgument(user != null, "用户为空");
         User usr = userServiceImpl.login(user);
         if (usr != null){
@@ -62,6 +66,13 @@ public class UserController {
                 return UserEnum.OK.getName();
         }
         return UserEnum.FAIL.getName();
+    }
+    @ResponseBody
+    @RequestMapping(value ="/getUser")
+    public User getUser(Integer id){
+        Preconditions.checkArgument(id != null, "id无效");
+        User user = userServiceImpl.getUserById(id);
+        return  user;
     }
 
 }

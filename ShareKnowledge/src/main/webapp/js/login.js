@@ -16,15 +16,19 @@ jQuery(document).ready(function($){
 	$main_nav.on('click', function(event){
 
 		if( $(event.target).is($main_nav) ) {
-			// on mobile open the submenu
 			$form_modal.addClass('is-visible');
 		} else {
-			//show modal layer
+
+			if($.cookie("_ui") != null){
+				alert($.session.get("UserId"));
+				window.location = "login.jsp";
+				return ;
+			}else {
 			$form_modal.addClass('is-visible');
 			//show the selected form
 			( $(event.target).is('.cd-signup') ) ? signup_selected() : login_selected();
+			}
 		}
-
 	});
 	//登入函数
 	$login.on('click',function(event){

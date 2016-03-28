@@ -9,6 +9,7 @@
 
 </script>
 <body>
+<%=request.getSession().getAttribute("UserId")%>
 <form action="/login.do" method="post">
     <label>用户名</label> <input type = "text" name="userName">
     <label>密码</label><input type = "password" name="passWd">

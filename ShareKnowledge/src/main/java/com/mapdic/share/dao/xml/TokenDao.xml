@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--必须与接口同名-->
+<mapper namespace="com.mapdic.share.dao.TokenDao">
+    <resultMap id="TokenMapper" type="com.mapdic.share.model.Token">
+        <result property="id" column="id"/>
+        <result column="keepalive" property="keepAlive"/>
+        <result column="time" property="time"/>
+    </resultMap>
+
+    <select id="getTokenByKeepAlive" resultMap="TokenMapper">
+      SELECT id, keepalive, time
+      FROM token
+      WHERE keepalive = #{token}
+    </select>
+        <insert id="addToken">
+            INSERT INTO token
+            (id, keepalive, time)
+            VALUES
+            ( #{id}, #{keepAlive}, #{time})
+        </insert>
+
+</mapper>

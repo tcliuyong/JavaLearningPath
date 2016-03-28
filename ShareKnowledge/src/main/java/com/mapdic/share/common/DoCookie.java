@@ -1,17 +1,33 @@
 package com.mapdic.share.common;
 
+import com.mapdic.share.model.Token;
 import com.mapdic.share.model.User;
+import com.mapdic.share.serviceimpl.TokenServiceImpl;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 /**
  * Created by liuyong on 2016/3/17.
  */
+@Component
 public class DoCookie {
+    @Resource
+    private static TokenServiceImpl tokenServiceImpl;
+    static final int idx= 5;
     public static void addCookie(HttpServletResponse response, User user){
-        Cookie cookie = new Cookie("username",user.getUserName());
+        String str = RandomCode.produceString(31);
+        String code = str.substring(0, idx) + user.getId() + str.substring(idx + 1, 31);
+        Cookie cookie = new Cookie("_ui",code);
         cookie.setPath("/");
-        cookie.setMaxAge(2000);
+        cookie.setMaxAge(3600 * 24);
+        Token token = new Token();
+        token.setKeepAlive(code);
+        tokenServiceImpl.addToken(token);
         response.addCookie(cookie);
     }
 }
