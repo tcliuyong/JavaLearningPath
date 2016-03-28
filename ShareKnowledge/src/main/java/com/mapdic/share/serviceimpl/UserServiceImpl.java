@@ -52,6 +52,15 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    public User getUserById(String token) {
+        int id = token.charAt(5);
+        User user = userDao.getUserById(id);
+        if(user != null){
+            return user;
+        }
+        return null;
+    }
+
     @Override
     public User getUserByUserName(String username) {
         return userDao.getUserByUserName(username);

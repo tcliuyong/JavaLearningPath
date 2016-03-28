@@ -1,11 +1,12 @@
 package com.mapdic.share.model;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by liuyong on 2016/3/28.
  */
-public class Token {
+public class Token implements Serializable {
     private int id;
     private String keepAlive;
     private Date time;

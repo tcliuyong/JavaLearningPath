@@ -67,12 +67,14 @@ public class UserTest {
     }
     @Test
     public void getUserById(){
-        User user =userDao.getUserById(200);
-        System.out.println();
-        if(user == null)
-            System.out.println("Fail");
-        else
-            System.out.println(user.toString());
+//        User user =userDao.getUserById(200);
+//        System.out.println();
+//        if(user == null)
+//            System.out.println("Fail");
+//        else
+//            System.out.println(user.toString());
+        String s= "123123112312311231231";
+        System.out.println(s.substring(0,5));
     }
 
 }

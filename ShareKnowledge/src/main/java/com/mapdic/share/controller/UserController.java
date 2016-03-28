@@ -7,7 +7,7 @@ import com.mapdic.share.common.RandomCode;
 import com.mapdic.share.common.UserEnum;
 import com.mapdic.share.controller.dto.UserDTO;
 import com.mapdic.share.model.User;
-import com.mapdic.share.serviceimpl.TokenServiceImol;
+import com.mapdic.share.serviceimpl.TokenServiceImpl;
 import com.mapdic.share.serviceimpl.UserServiceImpl;
 import org.codehaus.jackson.map.annotate.JsonView;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ public class UserController {
     @Resource
     private UserServiceImpl userServiceImpl;
     @Resource
-    TokenServiceImol tokenServiceImol;
+    TokenServiceImpl tokenServiceImpl;
     @RequestMapping(value = "/getAllUser", method = RequestMethod.GET)
     public ModelAndView getAllUser(HttpServletRequest request, PrintWriter out, HttpServletResponse response){
         List<User> users = userServiceImpl.getAllUser();
@@ -39,7 +39,8 @@ public class UserController {
         String s = request.getParameter("username");
         ModelAndView modelAndView = new ModelAndView("getAllUser");
         modelAndView.addObject("username",s);
-        DoCookie.addCookie(response, users.get(0));
+        DoCookie doCookie = new DoCookie();
+        doCookie.addCookie(response, users.get(0));
         return modelAndView;
     }
     @ResponseBody
@@ -48,7 +49,8 @@ public class UserController {
         Preconditions.checkArgument(user != null, "用户为空");
         User usr = userServiceImpl.login(user);
         if (usr != null){
-            DoCookie.addCookie(response, usr);
+            DoCookie doCookie = new DoCookie();
+            doCookie.addCookie(response, usr);
             return new UserDTO(usr.getId(), user.getUserName(), usr.getMail(),user.getLevel());
         }
         return null;
@@ -74,5 +76,11 @@ public class UserController {
         User user = userServiceImpl.getUserById(id);
         return  user;
     }
-
+    @ResponseBody
+    @RequestMapping(value ="/checkUser")
+    public User checkUser(String token){
+        System.out.println(token);
+        User user = userServiceImpl.getUserById(token);
+        return user;
+    }
 }

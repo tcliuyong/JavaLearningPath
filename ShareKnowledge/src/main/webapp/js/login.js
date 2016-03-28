@@ -18,15 +18,34 @@ jQuery(document).ready(function($){
 		if( $(event.target).is($main_nav) ) {
 			$form_modal.addClass('is-visible');
 		} else {
-
-			if($.cookie("_ui") != null){
-				alert($.session.get("UserId"));
-				window.location = "login.jsp";
+			if($.cookie("_ui") == null || $.cookie("_ui") == ""){
+				$form_modal.addClass('is-visible');
+				//show the selected form
+				( $(event.target).is('.cd-signup') ) ? signup_selected() : login_selected();
 				return ;
+
 			}else {
-			$form_modal.addClass('is-visible');
-			//show the selected form
-			( $(event.target).is('.cd-signup') ) ? signup_selected() : login_selected();
+				var ui = $.cookie("_ui");
+				$.ajax({
+					type: "POST",
+					url: "/checkUser.do",
+					contentType: 'application/json;charset=UTF-8',
+					data: ui,
+					datatype: 'json',
+					success: function (usr) {
+						if(usr != ""){
+							alert(usr['qq']);
+						}
+						else {
+							$form_modal.addClass('is-visible');
+
+						}
+						return ;
+					},
+					error: function (e) {
+						alert(e);
+					}
+				});
 			}
 		}
 	});
@@ -35,6 +54,7 @@ jQuery(document).ready(function($){
 		if( $(event.target).is($login) ) {
 			var jsonStr = {"userName": $(":input#signin-username").val(), "passWd": $(":input#signin-password").val()};
 			var user = JSON.stringify(jsonStr);
+			alert(user[0]);
 			$.ajax({
 				type: "POST",
 				url: "/login.do",
@@ -51,7 +71,7 @@ jQuery(document).ready(function($){
 					}
 				},
 				error: function (e) {
-					alert(e);
+					alert("错误");
 				}
 			});
 		}

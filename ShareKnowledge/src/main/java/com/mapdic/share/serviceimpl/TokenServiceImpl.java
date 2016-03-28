@@ -14,12 +14,9 @@ import javax.annotation.Resource;
 public class TokenServiceImpl implements TokenService {
     @Resource
     TokenDao tokenDao;
-    @Override
     public Token getTokenByKeepAlive(String token) {
         return tokenDao.getTokenByKeepAlive(token);
     }
-
-    @Override
     public void addToken(Token token) {
         tokenDao.addToken(token);
     }

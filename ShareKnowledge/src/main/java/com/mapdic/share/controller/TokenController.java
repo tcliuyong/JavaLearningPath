@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.mapdic.share.common.EnumCode;
 import com.mapdic.share.common.UserEnum;
 import com.mapdic.share.model.User;
-import com.mapdic.share.serviceimpl.TokenServiceImol;
+import com.mapdic.share.serviceimpl.TokenServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class TokenController {
     @Resource
-    TokenServiceImol tokenServiceImol;
+    TokenServiceImpl tokenServiceImpl;
     @ResponseBody
     @RequestMapping(value ="/getToken")
     public String getToken(@RequestBody String token){
-        if(tokenServiceImol.getTokenByKeepAlive(token) != null){
+        if(tokenServiceImpl.getTokenByKeepAlive(token) != null){
             return EnumCode.FAIL.getName();
         }
         return EnumCode.OK.getName();
