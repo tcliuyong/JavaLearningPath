@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TokenDao {
     Token getTokenByKeepAlive(@Param(value = "token") String token);
-    void addToken(Token token);
+    int addToken(Token token);
 }

@@ -32,6 +32,8 @@ public class UserController {
     private UserServiceImpl userServiceImpl;
     @Resource
     TokenServiceImpl tokenServiceImpl;
+    @Resource
+    DoCookie doCookie;
     @RequestMapping(value = "/getAllUser", method = RequestMethod.GET)
     public ModelAndView getAllUser(HttpServletRequest request, PrintWriter out, HttpServletResponse response){
         List<User> users = userServiceImpl.getAllUser();
@@ -49,7 +51,6 @@ public class UserController {
         Preconditions.checkArgument(user != null, "用户为空");
         User usr = userServiceImpl.login(user);
         if (usr != null){
-            DoCookie doCookie = new DoCookie();
             doCookie.addCookie(response, usr);
             return new UserDTO(usr.getId(), user.getUserName(), usr.getMail(),user.getLevel());
         }
@@ -78,9 +79,11 @@ public class UserController {
     }
     @ResponseBody
     @RequestMapping(value ="/checkUser")
-    public User checkUser(String token){
-        System.out.println(token);
+    public String checkUser(@RequestBody String token){
         User user = userServiceImpl.getUserById(token);
-        return user;
+        if(user != null){
+            return UserEnum.OK.getName();
+        }
+        return UserEnum.FAIL.getName();
     }
 }

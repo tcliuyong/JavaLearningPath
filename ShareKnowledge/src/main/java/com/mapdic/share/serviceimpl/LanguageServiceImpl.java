@@ -15,6 +15,7 @@ import java.util.List;
 public class LanguageServiceImpl implements LanguageService {
     @Resource
     LanguageDao languageDao;
+    @Override
     public List<Language> getLanguages() {
         return languageDao.getLanguages();
     }

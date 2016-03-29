@@ -5,6 +5,7 @@ import com.mapdic.share.dao.UserDao;
 import com.mapdic.share.model.Knowledge;
 import com.mapdic.share.model.User;
 import com.mapdic.share.service.KnowledgeService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by tcliuyong on 2016/3/20.
  */
+@Service
 public class KnowledgeServiceImpl implements KnowledgeService {
     @Resource
     KnowledgeDao knowledgeDao;

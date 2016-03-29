@@ -31,14 +31,13 @@ jQuery(document).ready(function($){
 					url: "/checkUser.do",
 					contentType: 'application/json;charset=UTF-8',
 					data: ui,
-					datatype: 'json',
-					success: function (usr) {
-						if(usr != ""){
-							alert(usr['qq']);
+					datatype: 'text',
+					success: function (data) {
+						if(data != "OK"){
+							window.location="login.jsp";
 						}
 						else {
 							$form_modal.addClass('is-visible');
-
 						}
 						return ;
 					},
@@ -54,7 +53,6 @@ jQuery(document).ready(function($){
 		if( $(event.target).is($login) ) {
 			var jsonStr = {"userName": $(":input#signin-username").val(), "passWd": $(":input#signin-password").val()};
 			var user = JSON.stringify(jsonStr);
-			alert(user[0]);
 			$.ajax({
 				type: "POST",
 				url: "/login.do",

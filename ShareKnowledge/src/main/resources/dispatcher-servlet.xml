@@ -9,6 +9,9 @@
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--<import resource="classpath:spring-component.xml"/>-->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.mapdic.share.controller"/>
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
             <value>/WEB-INF/</value>
@@ -43,8 +46,7 @@
     <!--</mvc:interceptors>-->
     <!--会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean-->
     <!--<mvc:annotation-driven/>-->
-    <context:annotation-config/>
-    <context:component-scan base-package="com.mapdic.share"/>
+
     <!--<bean name="/message.do" class="com.spring.controller.MessageController"></bean>-->
     <mvc:annotation-driven>
         <mvc:message-converters>

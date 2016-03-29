@@ -34,4 +34,13 @@ public class Token implements Serializable {
     public void setTime(Date time) {
         this.time = time;
     }
+
+    @Override
+    public String toString() {
+        return "Token{" +
+                "id=" + id +
+                ", keepAlive='" + keepAlive + '\'' +
+                ", time=" + time +
+                '}';
+    }
 }

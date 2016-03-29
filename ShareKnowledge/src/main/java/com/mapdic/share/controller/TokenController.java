@@ -23,7 +23,8 @@ public class TokenController {
     @ResponseBody
     @RequestMapping(value ="/getToken")
     public String getToken(@RequestBody String token){
-        if(tokenServiceImpl.getTokenByKeepAlive(token) != null){
+        System.out.println(tokenServiceImpl.getTokenByKeepAlive(token).toString());
+        if(tokenServiceImpl.getTokenByKeepAlive(token) == null){
             return EnumCode.FAIL.getName();
         }
         return EnumCode.OK.getName();

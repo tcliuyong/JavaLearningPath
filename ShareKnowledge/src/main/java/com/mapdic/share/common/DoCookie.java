@@ -1,10 +1,10 @@
 package com.mapdic.share.common;
 
+import com.mapdic.share.dao.TokenDao;
 import com.mapdic.share.model.Token;
 import com.mapdic.share.model.User;
 import com.mapdic.share.serviceimpl.TokenServiceImpl;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -17,7 +17,7 @@ import java.util.Date;
 @Component
 public class DoCookie {
     @Resource
-    TokenServiceImpl tokenServiceImpl;
+    TokenDao tokenDao;
     static final int idx= 5;
     public void addCookie(HttpServletResponse response, User user){
         String str = RandomCode.produceString(31);
@@ -28,7 +28,7 @@ public class DoCookie {
         Token token = new Token();
         token.setKeepAlive(code);
         token.setTime(new Date());
-        tokenServiceImpl.addToken(token);
+        tokenDao.addToken(token);
         response.addCookie(cookie);
     }
 }
