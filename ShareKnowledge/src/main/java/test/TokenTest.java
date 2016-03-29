@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -34,5 +35,9 @@ public class TokenTest {
         Token token =  tokenServiceImpl.getTokenByKeepAlive("2313123123123");
         System.out.println();
         System.out.printf(token.toString());
+    }
+    @Test
+    public void test(){
+        Date date = new Date();
     }
 }

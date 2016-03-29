@@ -53,7 +53,9 @@ public class UserServiceImpl implements UserService {
     }
 
     public User getUserById(String token) {
-        int id = token.charAt(5);
+        int id = (int)token.charAt(5);
+        System.out.println();
+        System.out.println(id);
         User user = userDao.getUserById(id);
         if(user != null){
             return user;

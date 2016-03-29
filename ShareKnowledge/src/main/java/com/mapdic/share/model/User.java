@@ -17,6 +17,7 @@ public class User implements Serializable {
     private String IC;
     private String phone;
     private String qq;
+    private String face;
     private String mail;
     private int level;
     private static final long serialVersionUID = 8033462647933739998L;
@@ -74,6 +75,15 @@ public class User implements Serializable {
     public void setMail(String mail) {
         this.mail = mail;
     }
+
+    public String getFace() {
+        return face;
+    }
+
+    public void setFace(String face) {
+        this.face = face;
+    }
+
 
     public int getLevel() {
         return level;
