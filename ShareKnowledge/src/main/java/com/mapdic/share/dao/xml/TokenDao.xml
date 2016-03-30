@@ -7,18 +7,23 @@
         <result property="id" column="id"/>
         <result column="keepalive" property="keepAlive"/>
         <result column="time" property="time"/>
-    </resultMap>
+        <result column="uid" property="uid"/>
 
+    </resultMap>
+    <sql id="columns">
+        id,username,face,qq,mail,level,uid ,keepalive, time
+    </sql>
     <select id="getTokenByKeepAlive" resultMap="TokenMapper">
-      SELECT id, keepalive, time
+      SELECT
+        id,uid ,keepalive, time
       FROM token
       WHERE keepalive = #{token}
     </select>
         <insert id="addToken">
             INSERT INTO token
-            (id, keepalive, time)
+            (id, keepalive, time,uid)
             VALUES
-            ( #{id}, #{keepAlive}, #{time})
+            ( #{id}, #{keepAlive}, #{time}, #{uid})
         </insert>
 
 </mapper>

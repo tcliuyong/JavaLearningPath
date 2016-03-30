@@ -6,6 +6,7 @@ import com.mapdic.share.common.EnumCode;
 import com.mapdic.share.common.RandomCode;
 import com.mapdic.share.common.UserEnum;
 import com.mapdic.share.controller.dto.UserDTO;
+import com.mapdic.share.model.Token;
 import com.mapdic.share.model.User;
 import com.mapdic.share.serviceimpl.TokenServiceImpl;
 import com.mapdic.share.serviceimpl.UserServiceImpl;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Date;
 
 /**
  * Created by liuyong on 2016/3/10.
@@ -79,11 +81,13 @@ public class UserController {
     }
     @ResponseBody
     @RequestMapping(value ="/checkUser")
-    public String checkUser(@RequestBody String token){
-        User user = userServiceImpl.getUserById(token);
-        if(user != null){
+    public String checkUser(@RequestBody String token, HttpServletResponse response){
+        Token ctoken = tokenServiceImpl.getTokenByKeepAlive(token);
+        Date date = new Date();
+        if(ctoken != null && ctoken.getTime().after(date)){
             return UserEnum.OK.getName();
         }
+        doCookie.clearCookie(response);
         return UserEnum.FAIL.getName();
     }
 }

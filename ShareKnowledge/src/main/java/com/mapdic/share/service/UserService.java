@@ -15,7 +15,6 @@ public interface UserService {
      boolean updateUser(User user);
      boolean deleteUser(int id);
      User getUserById(Integer id);
-     User getUserById(String token);
      User getUserByUserName(String username);
      User getUserByMail(String mail);
 }

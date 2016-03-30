@@ -20,5 +20,4 @@ public interface UserDao {
      User getUserById(@Param("id") Integer id);
      User getUserByUserName(@Param("username") String username);
      User getUserByMail(@Param("mail") String mail);
-     User getUserByToken(String token);
 }

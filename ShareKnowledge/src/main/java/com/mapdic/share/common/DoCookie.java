@@ -4,6 +4,7 @@ import com.mapdic.share.dao.TokenDao;
 import com.mapdic.share.model.Token;
 import com.mapdic.share.model.User;
 import com.mapdic.share.serviceimpl.TokenServiceImpl;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -20,15 +21,23 @@ public class DoCookie {
     TokenDao tokenDao;
     static final int idx= 5;
     public void addCookie(HttpServletResponse response, User user){
-        String str = RandomCode.produceString(31);
-        String code = str.substring(0, idx) + user.getId() + str.substring(idx + 1, 31);
+        String code = RandomCode.produceString(32);
+        DateTime dateTime = new DateTime();
+        dateTime = dateTime.plusDays(3);
         Cookie cookie = new Cookie("_ui",code);
         cookie.setPath("/");
         cookie.setMaxAge(3600 * 24);
         Token token = new Token();
         token.setKeepAlive(code);
-        token.setTime(new Date());
+        token.setUid(user.getId());
+        token.setTime(dateTime.toDate());
         tokenDao.addToken(token);
+        response.addCookie(cookie);
+    }
+    public void clearCookie(HttpServletResponse response){
+        Cookie cookie = new Cookie("_ui",null);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
         response.addCookie(cookie);
     }
 }

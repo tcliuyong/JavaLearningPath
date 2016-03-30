@@ -1,5 +1,7 @@
 package com.mapdic.share.model;
 
+import org.joda.time.DateTime;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,7 +12,7 @@ public class Token implements Serializable {
     private int id;
     private String keepAlive;
     private Date time;
-
+    private int  uid;
     public int getId() {
         return id;
     }
@@ -33,6 +35,14 @@ public class Token implements Serializable {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     @Override

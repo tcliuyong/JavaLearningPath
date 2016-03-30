@@ -1,5 +1,6 @@
 package com.mapdic.share.serviceimpl;
 
+import com.mapdic.share.dao.TokenDao;
 import com.mapdic.share.dao.UserDao;
 import com.mapdic.share.model.User;
 import com.mapdic.share.service.UserService;
@@ -16,6 +17,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Resource
     UserDao userDao;
+    @Resource
+    TokenDao tokenDao;
     public List<User> getAllUser() {
         return userDao.getAllUser();
     }
@@ -52,16 +55,6 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    public User getUserById(String token) {
-        int id = (int)token.charAt(5);
-        System.out.println();
-        System.out.println(id);
-        User user = userDao.getUserById(id);
-        if(user != null){
-            return user;
-        }
-        return null;
-    }
 
     @Override
     public User getUserByUserName(String username) {

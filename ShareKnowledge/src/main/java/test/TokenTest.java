@@ -26,8 +26,7 @@ public class TokenTest {
     public void addToken(){
         Token token = new Token();
         token.setKeepAlive("2313123123123");
-        token.setTime(new Date());
-        tokenServiceImpl.addToken(token);
+//        tokenServiceImpl.addToken(token);
 //        doCookie.addCookie();
     }
     @Test

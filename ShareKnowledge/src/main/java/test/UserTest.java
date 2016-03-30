@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Date;
 /**
  * Created by liuyong on 2016/3/9.
  */
@@ -67,7 +67,7 @@ public class UserTest {
     }
     @Test
     public void getUserById(){
-       User user = userService.getUserById("ZfhXb3S5eZhVdNgoyEV1yv4BnJ4x0BK");
+//       User user = userService.getUserById("ZfhXb3S5eZhVdNgoyEV1yv4BnJ4x0BK");
         //System.out.println(user);
     }
 

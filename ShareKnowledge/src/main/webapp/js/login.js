@@ -26,7 +26,6 @@ jQuery(document).ready(function($){
 
 			}else {
 				var ui = $.cookie("_ui");
-				alert(ui);
 				$.ajax({
 					type: "POST",
 					url: "/checkUser.do",
@@ -34,7 +33,6 @@ jQuery(document).ready(function($){
 					data: ui,
 					datatype: 'text',
 					success: function (data) {
-						alert(data);
 						if(data == "OK"){
 							window.location="user/index.html";
 						}
