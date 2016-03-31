@@ -2,6 +2,7 @@ package com.mapdic.share.serviceimpl;
 
 import com.mapdic.share.dao.TokenDao;
 import com.mapdic.share.dao.UserDao;
+import com.mapdic.share.model.Token;
 import com.mapdic.share.model.User;
 import com.mapdic.share.service.UserService;
 import org.apache.ibatis.annotations.Param;
@@ -64,6 +65,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByMail(String mail) {
         return userDao.getUserByMail(mail);
+    }
+
+    @Override
+    public User getUserByToken(String token) {
+        Token tokens =  tokenDao.getTokenByKeepAlive(token);
+        User usr = userDao.getUserById(tokens.getUid());
+        return usr;
     }
 
 }

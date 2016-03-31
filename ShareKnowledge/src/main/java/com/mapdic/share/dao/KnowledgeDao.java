@@ -14,4 +14,6 @@ public interface KnowledgeDao {
     int addKnowledge(Knowledge knowledge);
     int updateKnowledge(Knowledge knowledge);
     List<Knowledge> getKnowledgeByUser(@Param("userId") Integer id);
+    List<Knowledge> getTop5Knowledge(@Param("userId") Integer id);
+    int countKnowledge(@Param("userId") Integer id);
 }

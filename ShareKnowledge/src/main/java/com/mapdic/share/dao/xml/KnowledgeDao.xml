@@ -74,4 +74,18 @@
         FROM KNOWLEDGE
         WHERE userid = #{userId}
     </select>
+    
+    <select id="getTop5Knowledge" parameterType="java.lang.Integer" resultMap="KnowledgeMap">
+        SELECT
+        <include refid="columns"/>
+        FROM KNOWLEDGE
+        WHERE userid = #{userId}
+        ORDER BY date desc
+        LIMIT 0, 5
+    </select>
+    <select id="countKnowledge" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT count(*)
+         FROM  KNOWLEDGE
+         WHERE userid = #{userId}
+    </select>
 </mapper>

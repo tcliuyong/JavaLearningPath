@@ -27,7 +27,7 @@ div#droplist { color: blue;display: inline }
 					}else {
 						for(var i=0; i < data.length; i++){
 							// 设置模板
-							$("#droplist").setTemplateURL("template/index.html?date="+(+new Date()), null, {filter_data: true});
+							$("#droplist").setTemplateURL("template/index.html");
 							//   加载数据
 							$("#droplist").processTemplate(data);
 						}
@@ -35,6 +35,23 @@ div#droplist { color: blue;display: inline }
 				},
 				dataType: 'json'
 				});
+			var ui = $.cookie("_ui");
+			$.ajax({
+				type: 'post',
+				url: "/getUserByToken.do" ,
+				data: ui,
+				headers: {'Content-Type': 'application/json'},
+				success: function(data){
+					if(data == null){
+						alert("请重新登录");
+
+					}else{
+						$('#personal').html(data['userName']);
+					}
+					return;
+				},
+				dataType: 'json'
+			});
 		});
 	</script>
 </head>	
@@ -55,8 +72,8 @@ div#droplist { color: blue;display: inline }
 				<span>空气质量：83</span>
 				<span class="polutionLevel">良</span>
 			</span>
-			<div class="cityWeather">
-				
+			<div class="cityWeather"/>
+
 			</div>
 		</div>
 		<nav class="headNavs fr tr">
@@ -64,7 +81,7 @@ div#droplist { color: blue;display: inline }
 			<!--<a href="#"><span class="s-icon s-icon-msg"></span><span>消息</span></a>-->
 			<a><span class="s-icon s-icon-line"></span></a>
 			<a href="#"><span>设为首页</span></a>
-			<a href="javascript:;" class="uname"><span id="personal">我的</span><span class="user-arrow"></span></a>
+			<a href="javascript:;" class="uname"><span id="personal">个人</span><span class="user-arrow"></span></a>
 			<div class="topMenus dn">
 				<span class="arrowTop"></span>
 				<nav class="main_nav">

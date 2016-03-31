@@ -5,9 +5,12 @@ import com.mapdic.share.common.DoCookie;
 import com.mapdic.share.common.EnumCode;
 import com.mapdic.share.common.RandomCode;
 import com.mapdic.share.common.UserEnum;
+import com.mapdic.share.controller.dto.OverviewUserDTO;
 import com.mapdic.share.controller.dto.UserDTO;
+import com.mapdic.share.model.Knowledge;
 import com.mapdic.share.model.Token;
 import com.mapdic.share.model.User;
+import com.mapdic.share.serviceimpl.KnowledgeServiceImpl;
 import com.mapdic.share.serviceimpl.TokenServiceImpl;
 import com.mapdic.share.serviceimpl.UserServiceImpl;
 import org.codehaus.jackson.map.annotate.JsonView;
@@ -36,6 +39,8 @@ public class UserController {
     TokenServiceImpl tokenServiceImpl;
     @Resource
     DoCookie doCookie;
+    @Resource
+    KnowledgeServiceImpl knowledgeService;
     @RequestMapping(value = "/getAllUser", method = RequestMethod.GET)
     public ModelAndView getAllUser(HttpServletRequest request, PrintWriter out, HttpServletResponse response){
         List<User> users = userServiceImpl.getAllUser();
@@ -89,5 +94,28 @@ public class UserController {
         }
         doCookie.clearCookie(response);
         return UserEnum.FAIL.getName();
+    }
+
+    @ResponseBody
+    @RequestMapping(value ="/getUserByToken")
+    public User getUserByToken(@RequestBody String token, HttpServletResponse response){
+        System.out.println(token);
+        User user = userServiceImpl.getUserByToken(token);
+        return user;
+    }
+
+    @ResponseBody
+    @RequestMapping(value ="/getOverviewUser")
+    public OverviewUserDTO getOverviewUser(@RequestBody String token, HttpServletResponse response){
+        User usr = userServiceImpl.getUserByToken(token);
+        int uid = usr.getId();
+        OverviewUserDTO overviewUserDTO = new OverviewUserDTO();
+        User user = userServiceImpl.getUserById(usr.getId());
+        List<Knowledge> knowledges = knowledgeService.getTop5Knowledge(uid);
+        overviewUserDTO.setUserName(user.getUserName());
+        overviewUserDTO.setCountKnowledge(knowledgeService.countKnowledge(uid));
+        overviewUserDTO.setCountBookmark(0);
+        overviewUserDTO.setTop5KnowledgeList(knowledges);
+        return overviewUserDTO;
     }
 }

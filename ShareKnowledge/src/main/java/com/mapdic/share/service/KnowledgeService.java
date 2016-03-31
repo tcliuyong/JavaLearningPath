@@ -12,4 +12,6 @@ public interface KnowledgeService {
     boolean addKnowledge(Knowledge knowledge);
     boolean updateKnowledge(Knowledge knowledge);
     List<Knowledge> getKnowledgeByUser(Integer id);
+    List<Knowledge> getTop5Knowledge(Integer id);
+    int countKnowledge(Integer id);
 }

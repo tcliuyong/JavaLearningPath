@@ -17,4 +17,5 @@ public interface UserService {
      User getUserById(Integer id);
      User getUserByUserName(String username);
      User getUserByMail(String mail);
+     User getUserByToken(String token);
 }

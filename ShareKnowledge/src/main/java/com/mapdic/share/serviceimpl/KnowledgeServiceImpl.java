@@ -41,4 +41,14 @@ public class KnowledgeServiceImpl implements KnowledgeService {
             return knowledgeDao.getKnowledgeByUser(id);
         return null;
     }
+
+    @Override
+    public List<Knowledge> getTop5Knowledge(Integer id) {
+        return knowledgeDao.getTop5Knowledge(id);
+    }
+
+    @Override
+    public int countKnowledge(Integer id) {
+        return knowledgeDao.countKnowledge(id);
+    }
 }
