@@ -131,7 +131,7 @@
 
                     <div class="widget-header">
                         <i class="icon-th-list"></i>
-                        <h3>Table</h3>
+                        <h3>最近添加知识</h3>
                     </div> <!-- /widget-header -->
 
                     <div class="widget-content">
@@ -140,21 +140,22 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
-                                <th>Company</th>
+                                <th>标签</th>
+                                <th >内容概要</th>
+                                <th>试用系统</th>
+                                <th>时间</th>
                                 <th>&nbsp;</th>
                             </tr>
                             </thead>
 
                             <tbody>
+                            {#foreach $T.top5KnowledgeList as record}
                             <tr>
                                 <td>1</td>
-                                <td>Michael</td>
-                                <td>Jordan</td>
-                                <td>@mjordan</td>
-                                <td>Chicago Bulls</td>
+                                <td>{$T.record.tag}</td>
+                                <td>{$T.record.content}</td>
+                                <td>{$T.record.system}</td>
+                                <td>{$T.record.date}</td>
                                 <td class="action-td">
                                     <a href="javascript:;" class="btn btn-small btn-warning">
                                         <i class="icon-ok"></i>
@@ -164,111 +165,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Magic</td>
-                                <td>Johnson</td>
-                                <td>@mjohnson</td>
-                                <td>Los Angeles Lakers</td>
-                                <td class="action-td">
-                                    <a href="javascript:;" class="btn btn-small btn-warning">
-                                        <i class="icon-ok"></i>
-                                    </a>
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Charles</td>
-                                <td>Barkley</td>
-                                <td>@cbarkley</td>
-                                <td>Phoenix Suns</td>
-                                <td class="action-td">
-                                    <a href="javascript:;" class="btn btn-small btn-warning">
-                                        <i class="icon-ok"></i>
-                                    </a>
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Karl</td>
-                                <td>Malone</td>
-                                <td>@kmalone</td>
-                                <td>Utah Jazz</td>
-                                <td class="action-td">
-                                    <a href="javascript:;" class="btn btn-small btn-warning">
-                                        <i class="icon-ok"></i>
-                                    </a>
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>David</td>
-                                <td>Robinson</td>
-                                <td>@drobinson</td>
-                                <td>San Antonio Spurs</td>
-                                <td class="action-td">
-                                    <a href="javascript:;" class="btn btn-small btn-warning">
-                                        <i class="icon-ok"></i>
-                                    </a>
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Reggie</td>
-                                <td>Miller</td>
-                                <td>@rmiller</td>
-                                <td>Indiana Pacers</td>
-                                <td class="action-td">
-                                    <a href="javascript:;" class="btn btn-small btn-warning">
-                                        <i class="icon-ok"></i>
-                                    </a>
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Clyde</td>
-                                <td>Drexler</td>
-                                <td>@cdrexler</td>
-                                <td>Portland Trail Blazers</td>
-                                <td class="action-td">
-                                    <a href="javascript:;" class="btn btn-small btn-warning">
-                                        <i class="icon-ok"></i>
-                                    </a>
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Hakeem</td>
-                                <td>Olajuwon</td>
-                                <td>@holajuwon</td>
-                                <td>Houston Rockets</td>
-                                <td class="action-td">
-                                    <a href="javascript:;" class="btn btn-small btn-warning">
-                                        <i class="icon-ok"></i>
-                                    </a>
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            {#/for}
                             </tbody>
                         </table>
 

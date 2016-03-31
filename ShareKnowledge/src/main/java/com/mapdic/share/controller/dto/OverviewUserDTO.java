@@ -10,12 +10,21 @@ import java.util.List;
  * Created by liuyong on 2016/3/31.
  */
 public class OverviewUserDTO implements Serializable {
+    private int uid;
     private String userName;
     private int countKnowledge;
     private int countBookmark;
-    private List<Knowledge> top5KnowledgeList;
+    private List<KnowledgeDTO> top5KnowledgeList;
     public String getUserName() {
         return userName;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public void setUserName(String userName) {
@@ -38,11 +47,11 @@ public class OverviewUserDTO implements Serializable {
         this.countBookmark = countBookmark;
     }
 
-    public List<Knowledge> getTop5KnowledgeList() {
+    public List<KnowledgeDTO> getTop5KnowledgeList() {
         return top5KnowledgeList;
     }
 
-    public void setTop5KnowledgeList(List<Knowledge> top5KnowledgeList) {
+    public void setTop5KnowledgeList(List<KnowledgeDTO> top5KnowledgeList) {
         this.top5KnowledgeList = top5KnowledgeList;
     }
 }

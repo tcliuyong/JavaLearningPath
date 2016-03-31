@@ -86,6 +86,6 @@
     <select id="countKnowledge" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         SELECT count(*)
          FROM  KNOWLEDGE
-         WHERE userid = #{userId}
+         WHERE userid = #{userId} AND ischeck=1
     </select>
 </mapper>

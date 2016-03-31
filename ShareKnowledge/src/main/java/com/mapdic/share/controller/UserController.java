@@ -1,10 +1,8 @@
 package com.mapdic.share.controller;
 
 import com.google.common.base.Preconditions;
-import com.mapdic.share.common.DoCookie;
-import com.mapdic.share.common.EnumCode;
-import com.mapdic.share.common.RandomCode;
-import com.mapdic.share.common.UserEnum;
+import com.mapdic.share.common.*;
+import com.mapdic.share.controller.dto.KnowledgeDTO;
 import com.mapdic.share.controller.dto.OverviewUserDTO;
 import com.mapdic.share.controller.dto.UserDTO;
 import com.mapdic.share.model.Knowledge;
@@ -25,6 +23,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
@@ -99,7 +98,6 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value ="/getUserByToken")
     public User getUserByToken(@RequestBody String token, HttpServletResponse response){
-        System.out.println(token);
         User user = userServiceImpl.getUserByToken(token);
         return user;
     }
@@ -107,15 +105,26 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value ="/getOverviewUser")
     public OverviewUserDTO getOverviewUser(@RequestBody String token, HttpServletResponse response){
+        List<KnowledgeDTO> knowledgeDTOs = new ArrayList();
         User usr = userServiceImpl.getUserByToken(token);
         int uid = usr.getId();
         OverviewUserDTO overviewUserDTO = new OverviewUserDTO();
         User user = userServiceImpl.getUserById(usr.getId());
         List<Knowledge> knowledges = knowledgeService.getTop5Knowledge(uid);
+        overviewUserDTO.setUid(uid);
         overviewUserDTO.setUserName(user.getUserName());
         overviewUserDTO.setCountKnowledge(knowledgeService.countKnowledge(uid));
         overviewUserDTO.setCountBookmark(0);
-        overviewUserDTO.setTop5KnowledgeList(knowledges);
+        for(Knowledge knowledge : knowledges){
+            knowledgeDTOs.add(ModelToDTO.conKnowledgeToKnowledgeDTO(knowledge));
+        }
+        for(KnowledgeDTO knowledgeDTO : knowledgeDTOs){
+            if(knowledgeDTO.getContent().length() > 40){
+                knowledgeDTO.setContent(knowledgeDTO.getContent().substring(0, 40));
+            }
+        }
+
+        overviewUserDTO.setTop5KnowledgeList(knowledgeDTOs);
         return overviewUserDTO;
     }
 }
