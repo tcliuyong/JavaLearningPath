@@ -112,11 +112,10 @@
                                 <div class="tabbable">
                                     <ul class="nav nav-tabs">
                                         <li class="active">
-                                            <a href="#1" data-toggle="tab">个人信息</a>
+                                            <a href="#1" data-toggle="tab">知识添加</a>
                                         </li>
-                                        <li><a href="#2" data-toggle="tab">密码修改</a></li>
+                                        <li><a href="#2" data-toggle="tab">附加文件</a></li>
                                     </ul>
-
 
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="1">
@@ -124,43 +123,43 @@
                                             <fieldset>
                                                 <input type="text" id="id" value={$T.id} disabled="" style="display:none;" />
                                                 <div class="control-group">
-                                                    <label class="control-label" for="username">用户名</label>
+                                                    <label class="control-label" for="tag">标签</label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-medium disabled" id="username" name="userName" value={$T.userName} disabled="" />
-                                                        <p class="help-block" style="color: #942a25">用户名不能被改变</p>
+                                                        <input type="text" class="input-medium disabled" id="tag"   />
+
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="face">头像</label>
+                                                    <label class="control-label" for="program">编程语言</label>
                                                     <div class="controls">
-                                                        <input type="file" class="input-medium" id="face" name="face"  />
+                                                        <input type="text" class="input-medium" id="program"  />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="qq">QQ</label>
+                                                    <label class="control-label" for="system">系统参数</label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-medium" id="qq" name="qq" value={$T.qq} />
-                                                    </div> <!-- /controls -->
-                                                </div> <!-- /control-group -->
-
-
-                                                <div class="control-group">
-                                                    <label class="control-label" for="phone">电话</label>
-                                                    <div class="controls">
-                                                        <input type="text" class="input-medium" id="phone" name="phone" value={$T.phone} />
+                                                        <input type="text" class="input-medium" id="system"/>
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="email">电子邮箱</label>
+                                                    <label class="control-label" for="knowledgeContent">知识内容</label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-large" id="email" name="mail" value={$T.mail} />
+                                                        <input type="text" class="input-medium" id="knowledgeContent"  />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
-
+                                                <div class="control-group">
+                                                    <label class="control-label" for="isPublic">是否公开</label>
+                                                    <div class="controls">
+                                                        <select  id="isPublic" >
+                                                            <option value="1">是</option>
+                                                            <option value="0">否</option>
+                                                        </select>
+                                                    </div> <!-- /controls -->
+                                                </div> <!-- /control-group -->
                                                 <br />
 
                                                 <div class="form-actions">
