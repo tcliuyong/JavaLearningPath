@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--必须与接口同名-->
+<mapper namespace="com.mapdic.share.dao.ProverbDao">
+    <resultMap id="ProverbMap" type="com.mapdic.share.model.Proverbs">
+        <result property="id" column="id"/>
+        <result column="word" property="word"/>
+        <result column="date" property="time"/>
+    </resultMap>
+
+    <select id="getProverb" resultType="java.lang.String">
+      SELECT word FROM proverbs ORDER BY DATE
+    </select>
+    <insert id="addProverb">
+        INSERT INTO proverbs(word, date)
+        VALUES (
+        #{word}, #{date}
+            )
+    </insert>
+
+</mapper>

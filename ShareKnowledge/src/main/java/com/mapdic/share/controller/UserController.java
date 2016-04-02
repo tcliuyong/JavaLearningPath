@@ -9,19 +9,22 @@ import com.mapdic.share.model.Knowledge;
 import com.mapdic.share.model.Token;
 import com.mapdic.share.model.User;
 import com.mapdic.share.serviceimpl.KnowledgeServiceImpl;
+import com.mapdic.share.serviceimpl.ProverbServiceImpl;
 import com.mapdic.share.serviceimpl.TokenServiceImpl;
 import com.mapdic.share.serviceimpl.UserServiceImpl;
+import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.annotate.JsonView;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +43,11 @@ public class UserController {
     DoCookie doCookie;
     @Resource
     KnowledgeServiceImpl knowledgeService;
+    @Resource
+    ProverbServiceImpl proverbService;
+    static final String face = "../face/default.jpg" ;
+    static final String prefix = "../face/" ;
+    Logger logger = Logger.getLogger(UserController.class);
     @RequestMapping(value = "/getAllUser", method = RequestMethod.GET)
     public ModelAndView getAllUser(HttpServletRequest request, PrintWriter out, HttpServletResponse response){
         List<User> users = userServiceImpl.getAllUser();
@@ -97,9 +105,21 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value ="/getUserByToken")
-    public User getUserByToken(@RequestBody String token, HttpServletResponse response){
+    public UserDTO getUserByToken(@RequestBody String token, HttpServletResponse response){
         User user = userServiceImpl.getUserByToken(token);
-        return user;
+        UserDTO userDTO = new UserDTO(user.getId(), user.getUserName(), user.getMail(),user.getLevel());
+        userDTO.setPhone(user.getPhone());
+        userDTO.setQq(user.getQq());
+        if(user.getFace() == null){
+            userDTO.setFace(face);
+        }else {
+            userDTO.setFace(user.getFace());
+        }
+        if(user.getPhone() == null){
+            userDTO.setPhone("");
+        }
+        userDTO.setWord(proverbService.getProverb());
+        return userDTO;
     }
 
     @ResponseBody
@@ -115,6 +135,12 @@ public class UserController {
         overviewUserDTO.setUserName(user.getUserName());
         overviewUserDTO.setCountKnowledge(knowledgeService.countKnowledge(uid));
         overviewUserDTO.setCountBookmark(0);
+        overviewUserDTO.setWord(proverbService.getProverb());
+        if(user.getFace() == null){
+            overviewUserDTO.setFace(face);
+        }else{
+            overviewUserDTO.setFace(user.getFace());
+        }
         for(Knowledge knowledge : knowledges){
             knowledgeDTOs.add(ModelToDTO.conKnowledgeToKnowledgeDTO(knowledge));
         }
@@ -123,8 +149,39 @@ public class UserController {
                 knowledgeDTO.setContent(knowledgeDTO.getContent().substring(0, 40));
             }
         }
-
         overviewUserDTO.setTop5KnowledgeList(knowledgeDTOs);
         return overviewUserDTO;
     }
+    @ResponseBody
+    @RequestMapping(value ="/uploadUserFace")
+    public String uploadUserFace(@RequestParam("face") MultipartFile file, HttpServletRequest request, HttpServletResponse response, ModelMap map) {
+        String path = request.getSession().getServletContext().getRealPath("face");
+        String fileName = RenameUploadFile.rename(file.getOriginalFilename());
+        File targetFile = new File(path, fileName);
+        if (!targetFile.exists()) {
+            targetFile.mkdirs();
+        }
+        try {
+            file.transferTo(targetFile);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return UserEnum.FAIL.getName();
+        }
+
+        User user = new User();
+        user.setFace(prefix + fileName);
+        user.setId(Integer.parseInt(request.getParameter("id")));
+        userServiceImpl.updateUser(user);
+        return UserEnum.OK.getName();
+    }
+    @ResponseBody
+    @RequestMapping(value ="/updateUser")
+    public String updateUser(@RequestBody User user) {
+        if(user != null){
+            userServiceImpl.updateUser(user);
+            return UserEnum.OK.getName();
+        }
+        return UserEnum.FAIL.getName();
+    }
+
 }

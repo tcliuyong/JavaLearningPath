@@ -12,6 +12,8 @@ import java.util.List;
 public class OverviewUserDTO implements Serializable {
     private int uid;
     private String userName;
+    private String face;
+    private String word;
     private int countKnowledge;
     private int countBookmark;
     private List<KnowledgeDTO> top5KnowledgeList;
@@ -53,5 +55,21 @@ public class OverviewUserDTO implements Serializable {
 
     public void setTop5KnowledgeList(List<KnowledgeDTO> top5KnowledgeList) {
         this.top5KnowledgeList = top5KnowledgeList;
+    }
+
+    public String getFace() {
+        return face;
+    }
+
+    public void setFace(String face) {
+        this.face = face;
+    }
+
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
     }
 }

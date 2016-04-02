@@ -3,7 +3,9 @@ package com.mapdic.share.common;
 import com.ibm.icu.text.DateFormat;
 import com.ibm.icu.text.SimpleDateFormat;
 import com.mapdic.share.controller.dto.KnowledgeDTO;
+import com.mapdic.share.controller.dto.UserDTO;
 import com.mapdic.share.model.Knowledge;
+import com.mapdic.share.model.User;
 
 /**
  * Created by tcliuyong on 2016/3/31.
@@ -20,4 +22,5 @@ public class ModelToDTO {
         knowledgeDTO.setDate(date);
         return knowledgeDTO;
     }
+
 }

@@ -10,10 +10,12 @@ public class UserDTO implements Serializable {
     private String userName;
     private String passWd;
     private String IC;
+    private String face;
     private String phone;
     private String qq;
     private String mail;
     private int level;
+    private String word;
 
     public UserDTO(int id, String userName, String mail, int level) {
         this.id = id;
@@ -44,6 +46,14 @@ public class UserDTO implements Serializable {
 
     public void setPassWd(String passWd) {
         this.passWd = passWd;
+    }
+
+    public String getFace() {
+        return face;
+    }
+
+    public void setFace(String face) {
+        this.face = face;
     }
 
     public String getIC() {
@@ -84,5 +94,13 @@ public class UserDTO implements Serializable {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
     }
 }

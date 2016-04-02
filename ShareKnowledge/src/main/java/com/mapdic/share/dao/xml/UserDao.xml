@@ -14,7 +14,7 @@
         <result column="level" property="level"/>
     </resultMap>
     <sql id="columns">
-        id,username,face,qq,mail,level
+        id,username,face,phone,qq,mail
     </sql>
     <select id="getAllUser" resultMap="UserMap">
         SELECT
@@ -68,6 +68,9 @@
             </if>
             <if test="phone != null">
                 phone = #{phone},
+            </if>
+            <if test="face != null">
+                face = #{face},
             </if>
             <if test="qq != null">
                 qq = #{qq},
