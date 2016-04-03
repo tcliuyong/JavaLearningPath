@@ -15,6 +15,7 @@ public class Knowledge implements Serializable {
     private String system;
     private String filePath;
     private int isCheck;
+    private  String title;
     private int isForbidden;
     private Date date;
 
@@ -96,6 +97,14 @@ public class Knowledge implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override

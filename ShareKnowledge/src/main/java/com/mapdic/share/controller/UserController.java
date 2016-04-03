@@ -110,7 +110,7 @@ public class UserController {
         UserDTO userDTO = new UserDTO(user.getId(), user.getUserName(), user.getMail(),user.getLevel());
         userDTO.setPhone(user.getPhone());
         userDTO.setQq(user.getQq());
-        if(user.getFace() == null){
+        if(user.getFace() == null || user.getFace().equals("")){
             userDTO.setFace(face);
         }else {
             userDTO.setFace(user.getFace());
@@ -136,7 +136,7 @@ public class UserController {
         overviewUserDTO.setCountKnowledge(knowledgeService.countKnowledge(uid));
         overviewUserDTO.setCountBookmark(0);
         overviewUserDTO.setWord(proverbService.getProverb());
-        if(user.getFace() == null){
+        if(user.getFace() == null || user.getFace().equals("")){
             overviewUserDTO.setFace(face);
         }else{
             overviewUserDTO.setFace(user.getFace());

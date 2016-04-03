@@ -13,6 +13,7 @@
         <result column="ischeck" property="isCheck"/>
         <result column="isforbidden" property="isForbidden"/>
         <result column="date" property="date"/>
+        <result column="title" property="title"/>
         <association property="user" javaType="com.mapdic.share.model.User">
                 <id column="userid" property="id"/>
                 <result column="username" property="userName"/>
@@ -26,7 +27,7 @@
     </resultMap>
 
     <sql id="columns">
-        k_id,tag,content,category,userid,system,filepath,ischeck,isforbidden,date
+        k_id,tag,content,category,title,userid,system,filepath,ischeck,isforbidden,date
     </sql>
     <update id="updateKnowledge" parameterType="com.mapdic.share.model.Knowledge">
         UPDATE knowledge
@@ -39,6 +40,9 @@
             </if>
             <if test="category != null">
                 category = #{category},
+            </if>
+            <if test="title != null">
+                title = #{title},
             </if>
             <if test="system != null">
                 system = #{system},
@@ -61,11 +65,11 @@
         <insert id="addKnowledge" parameterType="com.mapdic.share.model.Knowledge">
             INSERT INTO KNOWLEDGE
             (
-              tag,content,category,userid,system,filepath,ischeck,isforbidden,date
+              tag,title,content,category,userid,system,filepath,ischeck,isforbidden,date
             )
             VALUES
             (
-              #{tag}, #{content}, #{category}, #{user.id}, #{system}, #{filePath},#{isCheck, jdbcType=TINYINT},#{isForbidden, jdbcType=TINYINT},#{date}
+              #{tag},#{title} ,#{content}, #{category}, #{user.id}, #{system}, #{filePath},#{isCheck, jdbcType=TINYINT},#{isForbidden, jdbcType=TINYINT},#{date}
             )
         </insert>
     <select id="getKnowledgeByUser" parameterType="java.lang.Integer" resultMap="KnowledgeMap">

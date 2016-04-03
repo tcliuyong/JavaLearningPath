@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <div class="navbar navbar-fixed-top">
 
     <div class="navbar-inner">
@@ -122,6 +123,15 @@
                                             <form id="edit-profile" class="form-horizontal" enctype ="multipart/form-data" method="post" />
                                             <fieldset>
                                                 <input type="text" id="id" value={$T.id} disabled="" style="display:none;" />
+
+                                                <div class="control-group">
+                                                    <label class="control-label" for="title">主题</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="input-medium disabled" id="title"   />
+
+                                                    </div> <!-- /controls -->
+                                                </div> <!-- /control-group -->
+
                                                 <div class="control-group">
                                                     <label class="control-label" for="tag">标签</label>
                                                     <div class="controls">
@@ -144,11 +154,12 @@
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
-
                                                 <div class="control-group">
-                                                    <label class="control-label" for="knowledgeContent">知识内容</label>
+                                                    <label class="control-label" for="content" >知识内容</label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-medium" id="knowledgeContent"  />
+                                                        <script type="text/html" id="myEditor" style="width:830px;height:300px;">
+                                                            <p>这里我可以写一些输入提示1</p>
+                                                        </script>
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
                                                 <div class="control-group">
@@ -196,13 +207,6 @@
 
                                 </div>
 
-
-
-
-
-
-
-
                             </div> <!-- /widget-content -->
 
                         </div> <!-- /widget -->
@@ -211,17 +215,7 @@
 
                 </div> <!-- /row -->
 
-
-
-
-
-
-
-
-
             </div> <!-- /span9 -->
-
-
         </div> <!-- /row -->
 
     </div> <!-- /container -->
@@ -236,3 +230,6 @@
     </div> <!-- /container -->
 
 </div> <!-- /footer -->
+<script type="text/javascript">
+    var um = UM.getEditor('myEditor');
+</script>
