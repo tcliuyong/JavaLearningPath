@@ -46,15 +46,17 @@
 			  }else{
 				  $("#userMenu").setTemplateURL("../template/userMenu.html");
 				  $("#userMenu").processTemplate("");
-				  $("#knowledgeTable").setTemplateURL("../template/knowledgeTable.html");
-				  $("#knowledgeTable").processTemplate(data);
 				  $("#face").setTemplateURL("../template/face.html");
 				  $("#face").processTemplate(data);
+				  $("#knowledgeTable").setTemplateURL("../template/knowledgeTable.html");
+				  $("#knowledgeTable").processTemplate(data);
+				  alert($(":input#id").val());
 			  }
 			  return ;
 		  },
 		  dataType: 'json'
 	  });
+
   </script>
 
 <body>
