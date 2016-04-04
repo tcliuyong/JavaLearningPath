@@ -84,6 +84,7 @@
         <include refid="columns"/>
         FROM KNOWLEDGE
         WHERE userid = #{userId}
+        AND ischeck=1
         ORDER BY date desc
         LIMIT 0, 5
     </select>
@@ -91,5 +92,14 @@
         SELECT count(*)
          FROM  KNOWLEDGE
          WHERE userid = #{userId} AND ischeck=1
+    </select>
+
+    <select id="getKnowledgeByPage" parameterType="java.lang.Integer" resultMap="KnowledgeMap">
+        SELECT
+        <include refid="columns"/>
+        FROM  KNOWLEDGE
+        WHERE userid = #{uid} AND ischeck=1
+        ORDER BY date DESC
+        limit #{start}, #{end}
     </select>
 </mapper>

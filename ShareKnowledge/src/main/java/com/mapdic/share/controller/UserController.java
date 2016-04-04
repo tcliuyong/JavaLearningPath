@@ -144,11 +144,6 @@ public class UserController {
         for(Knowledge knowledge : knowledges){
             knowledgeDTOs.add(ModelToDTO.conKnowledgeToKnowledgeDTO(knowledge));
         }
-        for(KnowledgeDTO knowledgeDTO : knowledgeDTOs){
-            if(knowledgeDTO.getContent().length() > 40){
-                knowledgeDTO.setContent(knowledgeDTO.getContent().substring(0, 40));
-            }
-        }
         overviewUserDTO.setTop5KnowledgeList(knowledgeDTOs);
         return overviewUserDTO;
     }

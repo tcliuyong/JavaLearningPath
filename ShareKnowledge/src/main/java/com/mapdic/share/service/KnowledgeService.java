@@ -14,4 +14,5 @@ public interface KnowledgeService {
     List<Knowledge> getKnowledgeByUser(Integer id);
     List<Knowledge> getTop5Knowledge(Integer id);
     int countKnowledge(Integer id);
+    List<Knowledge> getKnowledgeByPage(Integer id, Integer start, Integer end);
 }

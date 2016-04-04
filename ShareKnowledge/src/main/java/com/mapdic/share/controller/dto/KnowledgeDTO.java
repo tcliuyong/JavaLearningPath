@@ -2,17 +2,19 @@ package com.mapdic.share.controller.dto;
 
 import com.mapdic.share.model.User;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by tcliuyong on 2016/3/31.
  */
-public class KnowledgeDTO {
+public class KnowledgeDTO implements Serializable {
     private int k_id;
     private String tag;
     private String content;
     private String category;
     private User user;
+    private String title;
     private String system;
     private String filePath;
     private int isCheck;
@@ -99,19 +101,12 @@ public class KnowledgeDTO {
         this.date = date;
     }
 
-    @Override
-    public String toString() {
-        return "Knowledge{" +
-                "id=" + k_id +
-                ", tag='" + tag + '\'' +
-                ", content='" + content + '\'' +
-                ", category='" + category + '\'' +
-                ", userId=" + user.getId() +
-                ", system='" + system + '\'' +
-                ", filepath='" + filePath + '\'' +
-                ", isCheck=" + isCheck +
-                ", isForbidden=" + isForbidden +
-                ", date=" + date +
-                '}';
+    public String getTitle() {
+        return title;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
 }

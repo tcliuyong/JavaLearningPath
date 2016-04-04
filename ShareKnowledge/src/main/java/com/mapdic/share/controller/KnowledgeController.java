@@ -2,6 +2,9 @@ package com.mapdic.share.controller;
 
 import com.baidu.ueditor.um.Uploader;
 import com.mapdic.share.common.EnumCode;
+import com.mapdic.share.common.ModelToDTO;
+import com.mapdic.share.controller.dto.KnowledgeDTO;
+import com.mapdic.share.controller.dto.KnowledgeListDTO;
 import com.mapdic.share.model.Knowledge;
 import com.mapdic.share.model.User;
 import com.mapdic.share.serviceimpl.KnowledgeServiceImpl;
@@ -17,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,6 +57,18 @@ public class KnowledgeController {
         }else{
             response.getWriter().print("<script>"+ callback +"(" + result + ")</script>");
         }
+    }
+    @ResponseBody
+    @RequestMapping(value ="/getKnowledgeListByPage")
+    public List<KnowledgeDTO> getKnowledgeListByPage(@RequestBody KnowledgeListDTO knowledgeListDTO){
+        List<Knowledge> knowledges = knowledgeServiceImpl.getKnowledgeByPage(knowledgeListDTO.getUid(),
+                knowledgeListDTO.getPage(), knowledgeListDTO.getPagesize());
+
+        List<KnowledgeDTO> knowledgeDTOs =new ArrayList<>();
+        for(Knowledge knowledge : knowledges){
+            knowledgeDTOs.add(ModelToDTO.conKnowledgeToKnowledgeDTO(knowledge));
+        }
+        return knowledgeDTOs;
     }
 
 }

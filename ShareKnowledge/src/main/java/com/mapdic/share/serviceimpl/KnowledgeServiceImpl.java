@@ -51,4 +51,15 @@ public class KnowledgeServiceImpl implements KnowledgeService {
     public int countKnowledge(Integer id) {
         return knowledgeDao.countKnowledge(id);
     }
+
+    @Override
+    public List<Knowledge> getKnowledgeByPage(Integer id, Integer start, Integer end) {
+
+        if(start == 1){
+            start = start - 1;
+        }else {
+            start = (start - 1) * end;
+        }
+        return knowledgeDao.getKnowledgeByPage(id, start, end);
+    }
 }
