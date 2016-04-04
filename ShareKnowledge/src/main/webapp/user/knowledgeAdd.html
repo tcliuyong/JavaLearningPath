@@ -52,37 +52,24 @@
 	  </script>
 
 	<script>
-
 		function save(){
-			var jsonStr = {"id":$(":input#id").val(),"userName": $(":input#username").val(),
-			"mail" : $(":input#email").val(), "qq": $(":input#qq").val(), "phone":$(":input#phone").val()};
-			var user = JSON.stringify(jsonStr);
+			var arr = [];
+			arr.push(UM.getEditor('myEditor').getContent());
+			var jsonStr = {"user":{"id":$(":input#id").val()},"title": $(":input#title").val(),
+			"tag" : $(":input#tag").val(), "category": $(":input#program").val(),
+				"system":$(":input#system").val(),"content":arr.join("\n")};
+			var knowledge = JSON.stringify(jsonStr);
 			$.ajax({
 				type: 'post',
-				url: "/updateUser.do" ,
+				url: "/addKnowledge.do" ,
 				headers: {'Content-Type': 'application/json'},
-				data:user,
-				//fileElementId:'face',
+				data:knowledge,
 				success: function(data){
+					alert(data);
 					if(data != "OK"){
 						alert("更新失败，请稍后");
 						return;
 					}
-				},
-				dataType: 'text'
-			});
-			$.ajaxFileUpload({
-				type: 'post',
-				url: "/uploadUserFace.do?id="+$(":input#id").val() ,
-				fileElementId:'face',
-				success: function(data) {
-					if(data != "OK"){
-						alert("图片上传失败，请稍后重试");
-						return;
-					}else{
-						alert("修改成功");
-					}
-					return ;
 				},
 				dataType: 'text'
 			});
@@ -94,10 +81,6 @@
 <body>
 <!--style给定宽度可以影响编辑器的最终宽度-->
 <div id="knowledgeAdd" nowrap></div>
-
-
-
-
   </body>
 
 </html>
