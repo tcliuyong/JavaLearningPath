@@ -61,6 +61,7 @@ public class KnowledgeController {
     @ResponseBody
     @RequestMapping(value ="/getKnowledgeListByPage")
     public List<KnowledgeDTO> getKnowledgeListByPage(@RequestBody KnowledgeListDTO knowledgeListDTO){
+        System.out.println(knowledgeListDTO.toString());
         List<Knowledge> knowledges = knowledgeServiceImpl.getKnowledgeByPage(knowledgeListDTO.getUid(),
                 knowledgeListDTO.getPage(), knowledgeListDTO.getPagesize());
 
@@ -68,7 +69,20 @@ public class KnowledgeController {
         for(Knowledge knowledge : knowledges){
             knowledgeDTOs.add(ModelToDTO.conKnowledgeToKnowledgeDTO(knowledge));
         }
+        System.out.println(knowledgeDTOs.get(0).getK_id());
         return knowledgeDTOs;
+    }
+    @ResponseBody
+    @RequestMapping(value ="/getCountKnowledge")
+    public int getCountKnowledge(@RequestBody String uid){
+        int page = knowledgeServiceImpl.countKnowledge(Integer.parseInt(uid));
+
+        return page % 5==0 ? page/5:page/5 + 1;
+    }
+    @ResponseBody
+    @RequestMapping(value ="/delKnowledge")
+    public int delKnowledge(@RequestBody String uid){
+        return 0;
     }
 
 }

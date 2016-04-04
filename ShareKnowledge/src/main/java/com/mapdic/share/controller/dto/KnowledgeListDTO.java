@@ -37,4 +37,12 @@ public class KnowledgeListDTO implements Serializable {
         this.pagesize = pagesize;
     }
 
+    @Override
+    public String toString() {
+        return "KnowledgeListDTO{" +
+                "uid=" + uid +
+                ", page=" + page +
+                ", pagesize=" + pagesize +
+                '}';
+    }
 }

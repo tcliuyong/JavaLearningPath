@@ -37,7 +37,7 @@
 	  var ui = $.cookie("_ui");
 	  $.ajax({
 		  type: 'post',
-		  url: "/getOverviewUser.do" ,
+		  url: "/getUserByToken.do" ,
 		  data: ui,
 		  headers: {'Content-Type': 'application/json'},
 		  success: function(data){
@@ -48,20 +48,72 @@
 				  $("#userMenu").processTemplate("");
 				  $("#face").setTemplateURL("../template/face.html");
 				  $("#face").processTemplate(data);
-				  $("#knowledgeTable").setTemplateURL("../template/knowledgeTable.html");
-				  $("#knowledgeTable").processTemplate(data);
-				  alert($(":input#id").val());
+//				  $("#knowledgeTable").setTemplateURL("../template/knowledgeTable.html");
+//				  $("#knowledgeTable").processTemplate(data);
 			  }
 			  return ;
 		  },
 		  dataType: 'json'
 	  });
 
+	  var jsonStr = {"uid":"3","page": 1,"pagesize":5};
+	  var page = JSON.stringify(jsonStr);
+	  $.ajax({
+		  type: 'post',
+		  url: "/getKnowledgeListByPage.do" ,
+		  data: page,
+		  headers: {'Content-Type': 'application/json'},
+		  success: function(knowledgeList){
+			  if(knowledgeList == null){
+				  alert("请求失败");
+			  }else{
+				  $("#knowledgeTable").setTemplateURL("../template/knowledgeTable.html");
+				  $("#knowledgeTable").processTemplate(knowledgeList);
+			  }
+			  return ;
+		  },
+		  dataType: 'json'
+	  });
   </script>
+  <script>
+	  $.ajax({
+		  type: 'post',
+		  url: "/getCountKnowledge.do" ,
+		  data:"3",
+		  headers: {'Content-Type': 'application/json'},
+		  success: function(data){
+			  if(data != null){
+				  $(".tcdPageCode").createPage({
+					  pageCount : data,
+					  current : 1,
+					  backFn:function(p){
+						  var jsonStr = {"uid":"3","page": p,"pagesize":5};
+						  var page = JSON.stringify(jsonStr);
+						  $.ajax({
+							  type: 'post',
+							  url: "/getKnowledgeListByPage.do" ,
+							  data: page,
+							  headers: {'Content-Type': 'application/json'},
+							  success: function(knowledgeList){
+								  if(knowledgeList == null){
+									  alert("请求失败");
+								  }else{
+				 				 $("#knowledgeTable").setTemplateURL("../template/knowledgeTable.html");
+								 $("#knowledgeTable").processTemplate(knowledgeList);
+								  }
+								  return ;
+							  },
+							  dataType: 'json'
+						  });
 
+					  }
+				  });
+			  }
+		  },
+		  dataType: 'text'
+	  });
+  </script>
 <body>
-
-
 <div class="navbar navbar-fixed-top">
 
 	<div class="navbar-inner">
@@ -154,15 +206,8 @@
 
 						<div id="knowledgeTable" nowrap></div>
 						<div class="tcdPageCode"></div>
-						<script>
-							$(".tcdPageCode").createPage({
-								pageCount : 11,
-								current : 1,
-								backFn:function(p){
-									alert(p);
-								}
-							});
-						</script>
+
+
 
 					</div> <!-- /widget-content -->
 
@@ -183,8 +228,6 @@
 		<p>&copy; 2016 Go Ideate.</p>
 	</div> <!-- /container -->
 </div> <!-- /footer -->
-
-
 </body>
 
 </html>

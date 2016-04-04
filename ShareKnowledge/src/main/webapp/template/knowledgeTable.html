@@ -11,9 +11,9 @@
     </thead>
 
     <tbody>
-    {#foreach $T.top5KnowledgeList as record}
+    {#foreach $T as record}
     <tr>
-        <td>1</td>
+        <td>{$T.record.k_id}</td>
         <td>{$T.record.tag}</td>
         <td>{$T.record.title}</td>
         <td>{$T.record.system}</td>
@@ -22,7 +22,7 @@
             <a href="javascript:;" class="btn btn-small btn-warning">
                 <i class="icon-ok"></i>
             </a>
-            <a href="javascript:;" class="btn btn-small">
+            <a href="http://localhost:8080/del.do?k_id="+{$T.record.k_id} class="btn btn-small">
                 <i class="icon-remove"></i>
             </a>
         </td>
