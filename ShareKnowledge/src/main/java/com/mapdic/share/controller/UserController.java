@@ -4,14 +4,10 @@ import com.google.common.base.Preconditions;
 import com.mapdic.share.common.*;
 import com.mapdic.share.controller.dto.KnowledgeDTO;
 import com.mapdic.share.controller.dto.OverviewUserDTO;
+import com.mapdic.share.controller.dto.SelectListDTO;
 import com.mapdic.share.controller.dto.UserDTO;
-import com.mapdic.share.model.Knowledge;
-import com.mapdic.share.model.Token;
-import com.mapdic.share.model.User;
-import com.mapdic.share.serviceimpl.KnowledgeServiceImpl;
-import com.mapdic.share.serviceimpl.ProverbServiceImpl;
-import com.mapdic.share.serviceimpl.TokenServiceImpl;
-import com.mapdic.share.serviceimpl.UserServiceImpl;
+import com.mapdic.share.model.*;
+import com.mapdic.share.serviceimpl.*;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.annotate.JsonView;
 import org.springframework.stereotype.Controller;
@@ -45,6 +41,12 @@ public class UserController {
     KnowledgeServiceImpl knowledgeService;
     @Resource
     ProverbServiceImpl proverbService;
+
+    @Resource
+    LanguageServiceImpl languageService;
+    @Resource
+    CategoryServiceImpl categoryService;
+
     static final String face = "../face/default.jpg" ;
     static final String prefix = "../face/" ;
     Logger logger = Logger.getLogger(UserController.class);
@@ -169,6 +171,8 @@ public class UserController {
         userServiceImpl.updateUser(user);
         return UserEnum.OK.getName();
     }
+
+
     @ResponseBody
     @RequestMapping(value ="/updateUser")
     public String updateUser(@RequestBody User user) {
@@ -178,5 +182,12 @@ public class UserController {
         }
         return UserEnum.FAIL.getName();
     }
-
+    @ResponseBody
+    @RequestMapping(value ="/getSelectList")
+    public SelectListDTO getSelectList() {
+        List<Category> categories = categoryService.getCategory();
+        List<Language> languages = languageService.getLanguages();
+        SelectListDTO selectListDTO = new   SelectListDTO(categories, languages);
+       return  selectListDTO;
+    }
 }

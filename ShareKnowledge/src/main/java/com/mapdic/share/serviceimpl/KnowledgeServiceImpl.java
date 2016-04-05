@@ -62,4 +62,24 @@ public class KnowledgeServiceImpl implements KnowledgeService {
         }
         return knowledgeDao.getKnowledgeByPage(id, start, end);
     }
+
+    @Override
+    public boolean delKnowledge(Integer uid, Integer kid) {
+        if(knowledgeDao.delKnowledge(uid, kid) >0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Knowledge getKnowledgeByKid(Integer kid) {
+        if(kid != null)
+            return knowledgeDao.getKnowledgeByKid(kid);
+        return null;
+    }
+
+    @Override
+    public Knowledge getKnowledgeByUidKid(Integer kid, Integer uid) {
+        return knowledgeDao.getKnowledgeByUidKid(kid, uid);
+    }
 }

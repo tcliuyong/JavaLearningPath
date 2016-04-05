@@ -12,8 +12,11 @@ import java.util.List;
  */
 @Repository
 public interface KnowledgeDao {
+    int delKnowledge(@Param("uid") Integer uid, @Param("kid") Integer kid);
     int addKnowledge(Knowledge knowledge);
     int updateKnowledge(Knowledge knowledge);
+    Knowledge getKnowledgeByKid(@Param("kid") Integer kid);
+    Knowledge getKnowledgeByUidKid(@Param("kid") Integer kid, @Param("uid") Integer uid);
     List<Knowledge> getKnowledgeByUser(@Param("userId") Integer id);
     List<Knowledge> getTop5Knowledge(@Param("userId") Integer id);
     int countKnowledge(@Param("userId") Integer id);

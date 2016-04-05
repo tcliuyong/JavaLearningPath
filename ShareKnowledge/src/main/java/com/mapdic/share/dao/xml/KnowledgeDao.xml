@@ -7,6 +7,7 @@
         <result property="k_id" column="k_id"/>
         <result column="tag" property="tag"/>
         <result column="content" property="content"/>
+        <result column="language" property="language"/>
         <result column="category" property="category"/>
         <result column="system" property="system"/>
         <result column="filepath" property="filePath"/>
@@ -27,7 +28,7 @@
     </resultMap>
 
     <sql id="columns">
-        k_id,tag,content,category,title,userid,system,filepath,ischeck,isforbidden,date
+        k_id,tag,content,language,category,title,userid,system,filepath,ischeck,isforbidden,date
     </sql>
     <update id="updateKnowledge" parameterType="com.mapdic.share.model.Knowledge">
         UPDATE knowledge
@@ -37,6 +38,9 @@
             </if>
             <if test="content != null">
                 content = #{content},
+            </if>
+            <if test="language != null">
+                language = #{language},
             </if>
             <if test="category != null">
                 category = #{category},
@@ -65,11 +69,11 @@
         <insert id="addKnowledge" parameterType="com.mapdic.share.model.Knowledge">
             INSERT INTO KNOWLEDGE
             (
-              tag,title,content,category,userid,system,filepath,ischeck,isforbidden,date
+              tag,title,content,language,category,userid,system,filepath,ischeck,isforbidden,date
             )
             VALUES
             (
-              #{tag},#{title} ,#{content}, #{category}, #{user.id}, #{system}, #{filePath},#{isCheck, jdbcType=TINYINT},#{isForbidden, jdbcType=TINYINT},#{date}
+              #{tag},#{title} ,#{content}, #{language}, #{category}, #{user.id}, #{system}, #{filePath},#{isCheck, jdbcType=TINYINT},#{isForbidden, jdbcType=TINYINT},#{date}
             )
         </insert>
     <select id="getKnowledgeByUser" parameterType="java.lang.Integer" resultMap="KnowledgeMap">
@@ -102,4 +106,21 @@
         ORDER BY date DESC
         limit #{start}, #{end}
     </select>
+    <select id="getKnowledgeByKid" parameterType="java.lang.Integer" resultMap="KnowledgeMap">
+        SELECT
+        <include refid="columns"/>
+        FROM  KNOWLEDGE
+        WHERE k_id = #{kid} AND ischeck=1
+    </select>
+    <select id="getKnowledgeByUidKid"  resultMap="KnowledgeMap">
+        SELECT
+        <include refid="columns"/>
+        FROM  KNOWLEDGE
+        WHERE k_id = #{kid} AND ischeck=1 AND userid=#{uid}
+    </select>
+    <delete id="delKnowledge">
+        DELETE FROM
+         KNOWLEDGE
+        WHERE userid=#{uid} AND k_id = #{kid}
+    </delete>
 </mapper>

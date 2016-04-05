@@ -12,5 +12,9 @@
         SELECT *
         FROM language
     </select>
-
+    <select id="getLanguagesById" resultType="java.lang.String">
+        SELECT name
+        FROM language
+        WHERE id={#id}
+    </select>
 </mapper>

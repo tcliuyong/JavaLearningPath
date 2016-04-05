@@ -1,24 +1,22 @@
 package com.mapdic.share.controller;
 
-import com.baidu.ueditor.um.Uploader;
 import com.mapdic.share.common.EnumCode;
 import com.mapdic.share.common.ModelToDTO;
-import com.mapdic.share.controller.dto.KnowledgeDTO;
-import com.mapdic.share.controller.dto.KnowledgeListDTO;
+import com.mapdic.share.common.UserEnum;
+import com.mapdic.share.controller.dto.*;
 import com.mapdic.share.model.Knowledge;
+import com.mapdic.share.model.Token;
 import com.mapdic.share.model.User;
 import com.mapdic.share.serviceimpl.KnowledgeServiceImpl;
-import com.sun.deploy.net.HttpResponse;
-import org.springframework.http.HttpRequest;
+import com.mapdic.share.serviceimpl.TokenServiceImpl;
+import com.mapdic.share.serviceimpl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,6 +29,10 @@ import java.util.List;
 public class KnowledgeController {
     @Resource
     KnowledgeServiceImpl knowledgeServiceImpl;
+    @Resource
+    private UserServiceImpl userServiceImpl;
+    @Resource
+    TokenServiceImpl tokenServiceImpl;
     @ResponseBody
     @RequestMapping(value ="/addKnowledge")
     public String addKnowledge(@RequestBody Knowledge knowledge, HttpServletResponse response){
@@ -41,27 +43,9 @@ public class KnowledgeController {
         }
         return EnumCode.FAIL.getName();
     }
-    @RequestMapping(value ="/imageUp")
-    public void  imageUp(@RequestParam HttpServletRequest request, @RequestParam HttpServletResponse response) throws Exception {
-        Uploader up = new Uploader(request);
-        up.setSavePath("upload");
-        String[] fileType = {".gif" , ".png" , ".jpg" , ".jpeg" , ".bmp"};
-        up.setAllowFiles(fileType);
-        up.setMaxSize(10000); //单位KB
-        up.upload();
-        String callback = request.getParameter("callback");
-        String result = "{\"name\":\""+ up.getFileName() +"\", \"originalName\": \""+ up.getOriginalName() +"\", \"size\": "+ up.getSize() +", \"state\": \""+ up.getState() +"\", \"type\": \""+ up.getType() +"\", \"url\": \""+ up.getUrl() +"\"}";
-        result = result.replaceAll( "\\\\", "\\\\" );
-        if( callback == null ){
-            response.getWriter().print( result );
-        }else{
-            response.getWriter().print("<script>"+ callback +"(" + result + ")</script>");
-        }
-    }
     @ResponseBody
     @RequestMapping(value ="/getKnowledgeListByPage")
     public List<KnowledgeDTO> getKnowledgeListByPage(@RequestBody KnowledgeListDTO knowledgeListDTO){
-        System.out.println(knowledgeListDTO.toString());
         List<Knowledge> knowledges = knowledgeServiceImpl.getKnowledgeByPage(knowledgeListDTO.getUid(),
                 knowledgeListDTO.getPage(), knowledgeListDTO.getPagesize());
 
@@ -69,20 +53,50 @@ public class KnowledgeController {
         for(Knowledge knowledge : knowledges){
             knowledgeDTOs.add(ModelToDTO.conKnowledgeToKnowledgeDTO(knowledge));
         }
-        System.out.println(knowledgeDTOs.get(0).getK_id());
         return knowledgeDTOs;
     }
     @ResponseBody
     @RequestMapping(value ="/getCountKnowledge")
     public int getCountKnowledge(@RequestBody String uid){
         int page = knowledgeServiceImpl.countKnowledge(Integer.parseInt(uid));
-
         return page % 5==0 ? page/5:page/5 + 1;
     }
     @ResponseBody
     @RequestMapping(value ="/delKnowledge")
-    public int delKnowledge(@RequestBody String uid){
-        return 0;
+    public String delKnowledge(@RequestBody DelKnoDTO delKnoDTO){
+        System.out.println(delKnoDTO.toString());
+       Token ctoken = tokenServiceImpl.getTokenByKeepAlive(delKnoDTO.getCookie());
+        Date date = new Date();
+        if(ctoken != null && ctoken.getTime().after(date)){
+            if (knowledgeServiceImpl.delKnowledge(ctoken.getUid(), delKnoDTO.getK_id()))
+            return UserEnum.OK.getName();
+        }
+        return UserEnum.FAIL.getName();
     }
+    @ResponseBody
+    @RequestMapping(value ="/updateKnowledge")
+    public String updateKnowledge(@RequestBody Knowledge knowledge){
+        if(knowledge != null){
+            knowledge.setDate(new Date());
+            knowledge.setIsCheck(1);
+            knowledgeServiceImpl.updateKnowledge(knowledge);
 
+            return EnumCode.OK.getName();
+        }
+        return EnumCode.FAIL.getName();
+    }
+    @ResponseBody
+    @RequestMapping(value ="/getKnowledgeByUidKid")
+    public KnoUserDTO getKnowledgeByUidKid(@RequestBody CookieKid cookieKid){
+        KnoUserDTO knoUserDTO = new KnoUserDTO();
+        int uid = tokenServiceImpl.getTokenByKeepAlive(cookieKid.getToken()).getUid();
+        User user = userServiceImpl.getUserById(uid);
+        knoUserDTO.setId(uid);
+        knoUserDTO.setFace(user.getFace());
+        Knowledge knowledge = knowledgeServiceImpl.getKnowledgeByUidKid(cookieKid.getKid(), uid);
+        knoUserDTO.setKnowledge(knowledge);
+        knoUserDTO.setLevel(user.getLevel());
+        knoUserDTO.setUserName(user.getUserName());
+        return knoUserDTO;
+    }
 }

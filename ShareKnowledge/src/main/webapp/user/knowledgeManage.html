@@ -48,71 +48,31 @@
 				  $("#userMenu").processTemplate("");
 				  $("#face").setTemplateURL("../template/face.html");
 				  $("#face").processTemplate(data);
-//				  $("#knowledgeTable").setTemplateURL("../template/knowledgeTable.html");
-//				  $("#knowledgeTable").processTemplate(data);
-			  }
-			  return ;
-		  },
-		  dataType: 'json'
-	  });
-
-	  var jsonStr = {"uid":"3","page": 1,"pagesize":5};
-	  var page = JSON.stringify(jsonStr);
-	  $.ajax({
-		  type: 'post',
-		  url: "/getKnowledgeListByPage.do" ,
-		  data: page,
-		  headers: {'Content-Type': 'application/json'},
-		  success: function(knowledgeList){
-			  if(knowledgeList == null){
-				  alert("请求失败");
-			  }else{
-				  $("#knowledgeTable").setTemplateURL("../template/knowledgeTable.html");
-				  $("#knowledgeTable").processTemplate(knowledgeList);
-			  }
-			  return ;
-		  },
-		  dataType: 'json'
-	  });
-  </script>
-  <script>
-	  $.ajax({
-		  type: 'post',
-		  url: "/getCountKnowledge.do" ,
-		  data:"3",
-		  headers: {'Content-Type': 'application/json'},
-		  success: function(data){
-			  if(data != null){
-				  $(".tcdPageCode").createPage({
-					  pageCount : data,
-					  current : 1,
-					  backFn:function(p){
-						  var jsonStr = {"uid":"3","page": p,"pagesize":5};
-						  var page = JSON.stringify(jsonStr);
-						  $.ajax({
-							  type: 'post',
-							  url: "/getKnowledgeListByPage.do" ,
-							  data: page,
-							  headers: {'Content-Type': 'application/json'},
-							  success: function(knowledgeList){
-								  if(knowledgeList == null){
-									  alert("请求失败");
-								  }else{
-				 				 $("#knowledgeTable").setTemplateURL("../template/knowledgeTable.html");
-								 $("#knowledgeTable").processTemplate(knowledgeList);
-								  }
-								  return ;
-							  },
-							  dataType: 'json'
-						  });
-
-					  }
+				  var jsonStr = {"uid":data["id"],"page": 1,"pagesize":5};
+				  var page = JSON.stringify(jsonStr);
+				  $.ajax({
+					  type: 'post',
+					  url: "/getKnowledgeListByPage.do" ,
+					  data: page,
+					  headers: {'Content-Type': 'application/json'},
+					  success: function(knowledgeList){
+						  if(knowledgeList == null){
+							  alert("请求失败");
+						  }else{
+							  $("#knowledgeTable").setTemplateURL("../template/knowledgeTable.html");
+							  $("#knowledgeTable").processTemplate(knowledgeList);
+						  }
+						  return ;
+					  },
+					  dataType: 'json'
 				  });
 			  }
+			  return ;
 		  },
-		  dataType: 'text'
+		  dataType: 'json'
 	  });
   </script>
+
 <body>
 <div class="navbar navbar-fixed-top">
 
@@ -228,6 +188,65 @@
 		<p>&copy; 2016 Go Ideate.</p>
 	</div> <!-- /container -->
 </div> <!-- /footer -->
+<script>
+	$.ajax({
+		type: 'post',
+		url: "/getCountKnowledge.do" ,
+		data:"2",
+		headers: {'Content-Type': 'application/json'},
+		success: function(data){
+			if(data != null){
+				$(".tcdPageCode").createPage({
+					pageCount : data,
+					current : 1,
+					backFn:function(p){
+						var jsonStr = {"uid":$(":input#user_id").val(),"page": p,"pagesize":5};
+						var page = JSON.stringify(jsonStr);
+						$.ajax({
+							type: 'post',
+							url: "/getKnowledgeListByPage.do" ,
+							data: page,
+							headers: {'Content-Type': 'application/json'},
+							success: function(knowledgeList){
+								if(knowledgeList == null){
+									alert("请求失败");
+								}else{
+									$("#knowledgeTable").setTemplateURL("../template/knowledgeTable.html");
+									$("#knowledgeTable").processTemplate(knowledgeList);
+								}
+								return ;
+							},
+							dataType: 'json'
+						});
+					}
+				});
+			}
+		},
+		dataType: 'text'
+	});
+</script>
+<script>
+	function removeKno(kid){
+		var jsonStr = {"cookie":$.cookie("_ui"),"k_id": Number(kid)};
+		var DelKnoDTO = JSON.stringify(jsonStr);
+		$.ajax({
+			type: 'post',
+			url: "/delKnowledge.do" ,
+			data: DelKnoDTO,
+			headers: {'Content-Type': 'application/json'},
+			success: function(res){
+				if(res == "FAIL"){
+					alert("请求失败");
+				}else{
+					alert("删除成功");
+					window.location="http://localhost:8080/user/knowledgeManage.html";
+				}
+				return ;
+			},
+			dataType: 'text'
+		});
+	}
+</script>
 </body>
 
 </html>

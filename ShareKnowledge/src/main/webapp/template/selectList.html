@@ -1,0 +1,29 @@
+
+<div class="control-group">
+    <label class="control-label" for="category">类别</label>
+    <div class="controls">
+        <select name="category" id = "category" class="btn cp">
+
+            {#foreach $T.categoryList as record}
+            <option value={$T.record.id}>
+                <td>{$T.record.category}</td>
+            </option>
+            {#/for}
+        </select>
+    </div> <!-- /controls -->
+</div> <!-- /control-group -->
+
+<div class="control-group">
+    <label class="control-label" for="language">编程语言</label>
+    <div class="controls">
+        <select name="language" id = "language" class="btn cp">
+
+            {#foreach $T.languageList as record}
+            <option value={$T.record.id}>
+                <td>{$T.record.name}</td>
+            </option>
+            {#/for}
+        </select>
+
+    </div> <!-- /controls -->
+</div> <!-- /control-group -->

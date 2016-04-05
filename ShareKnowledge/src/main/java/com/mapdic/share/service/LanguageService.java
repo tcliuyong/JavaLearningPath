@@ -1,6 +1,7 @@
 package com.mapdic.share.service;
 
 import com.mapdic.share.model.Language;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,4 +11,5 @@ import java.util.List;
 
 public interface LanguageService {
     List<Language> getLanguages();
+    String getLanguagesById(@Param("id")Integer id);
 }

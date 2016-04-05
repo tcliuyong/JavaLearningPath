@@ -3,6 +3,7 @@ package com.mapdic.share.serviceimpl;
 import com.mapdic.share.dao.LanguageDao;
 import com.mapdic.share.model.Language;
 import com.mapdic.share.service.LanguageService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,5 +19,10 @@ public class LanguageServiceImpl implements LanguageService {
     @Override
     public List<Language> getLanguages() {
         return languageDao.getLanguages();
+    }
+
+    @Override
+    public String getLanguagesById(Integer id) {
+        return languageDao.getLanguagesById(id);
     }
 }

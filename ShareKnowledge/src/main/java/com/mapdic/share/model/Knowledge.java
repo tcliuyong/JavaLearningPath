@@ -10,7 +10,8 @@ public class Knowledge implements Serializable {
     private int k_id;
     private String tag;
     private String content;
-    private String category;
+    private int language;
+    private int category;
     private User user;
     private String system;
     private String filePath;
@@ -39,15 +40,23 @@ public class Knowledge implements Serializable {
         return content;
     }
 
+    public int getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(int language) {
+        this.language = language;
+    }
+
     public void setContent(String content) {
         this.content = content;
     }
 
-    public String getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 

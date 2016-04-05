@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--必须与接口同名-->
+<mapper namespace="com.mapdic.share.dao.CategoryDao">
+    <resultMap id="CategoryMap" type="com.mapdic.share.model.Category">
+        <result property="id" column="id"/>
+        <result column="category" property="category"/>
+    </resultMap>
+
+    <select id="getCategory" resultMap="CategoryMap">
+        SELECT *
+        FROM Category
+    </select>
+    <select id="getCategoryById" resultType="java.lang.String">
+        SELECT name
+        FROM Category
+        WHERE id={#id}
+    </select>
+</mapper>

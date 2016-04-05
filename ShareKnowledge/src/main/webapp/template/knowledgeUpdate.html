@@ -122,12 +122,12 @@
                                         <div class="tab-pane active" id="1">
                                             <form id="edit-profile" class="form-horizontal" enctype ="multipart/form-data" method="post" />
                                             <fieldset>
-                                                <input type="text" id="id" value={$T.id} disabled="" style="display:none;" />
-
+                                                <input type="text" id="id" value={$T.knowledge.id} disabled="" style="display:none;" />
+                                                <input type="text" id="kid" value={$T.knowledge.k_id} disabled="" style="display:none;" />
                                                 <div class="control-group">
                                                     <label class="control-label" for="title">主题</label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-medium disabled" id="title" name="title"  />
+                                                        <input type="text" class="input-medium disabled" id="title" name="title" value={$T.knowledge.title}  />
 
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
@@ -135,7 +135,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="tag">标签</label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-medium disabled" id="tag"   />
+                                                        <input type="text" class="input-medium disabled" id="tag" value="{$T.knowledge.tag}"   />
 
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
@@ -144,7 +144,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="system">系统参数</label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-medium" id="system"/>
+                                                        <input type="text" class="input-medium" id="system" value="{$T.knowledge.system}" />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
@@ -152,7 +152,7 @@
                                                     <label class="control-label" for="content" >知识内容</label>
                                                     <div class="controls">
                                                         <script type="text/html" id="myEditor" style="width:830px;height:300px;">
-                                                            <p>这里我可以写一些输入提示1</p>
+                                                          <div id="editor"></div>
                                                         </script>
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->

@@ -27,7 +27,7 @@ public class KnowLedgeTest {
         user.setId(1);
         knowledge.setTag("java、C++");
         knowledge.setContent("<b>Test</b>");
-        knowledge.setCategory("Java");
+        knowledge.setCategory(0);
         knowledge.setUser(user);
         knowledge.setSystem("Windows7");
         knowledge.setIsCheck(1);
@@ -43,7 +43,7 @@ public class KnowLedgeTest {
         knowledge.setK_id(2);
         knowledge.setTag("C++");
         knowledge.setContent("<b>Test</b>");
-        knowledge.setCategory("Java");
+        knowledge.setCategory(1);
         knowledge.setUser(user);
         knowledge.setSystem("Windows8");
         knowledge.setIsCheck(1);
@@ -56,6 +56,5 @@ public class KnowLedgeTest {
         List<Knowledge> knowledges = knowledgeDao.getKnowledgeByUser(2);
         System.out.println();
         System.out.println(knowledges.get(0).getContent());
-
     }
 }
