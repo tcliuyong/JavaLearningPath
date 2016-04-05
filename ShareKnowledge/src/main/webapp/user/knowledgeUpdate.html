@@ -49,8 +49,7 @@
 					  $("#knowledgeUpdate").processTemplate(data);
 					  $("#userMenu").setTemplateURL("../template/userMenu.html");
 					  $("#userMenu").processTemplate("");
-					  $("#category  option:selected").val((data["knowledge"]["category"]));
-					  $("#language").val(data["knowledge"]["language"]);
+
 					  $("#editor").html(data["knowledge"]["content"]);
 					  $.ajax({
 						  type: 'post',
@@ -62,7 +61,8 @@
 							  $("#selectList").setTemplateURL("../template/selectList.html");
 							  //   加载数据
 							  $("#selectList").processTemplate(datalist);
-
+							  $("#category").val((data["knowledge"]["category"]));
+							  $("#language").val(data["knowledge"]["language"]);
 							  return ;
 						  },
 						  dataType: 'json'
