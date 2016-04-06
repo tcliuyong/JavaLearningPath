@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <title>User Account - Bootstrap Admin</title>
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
@@ -54,8 +53,7 @@
 
 	<script>
 		function save(){
-			alert($(":input#bid").val());
-			var jsonStr = {"id":$(":input#bid").val(),"user":{"id":$(":input#id").val()},
+			var jsonStr = {"id":$(":input#bid").val(),"user":{"id":$(":input#uid").val()},
 				"bookmark": $(":input#bookmark").val(),
 				"description" : $(":input#description").val()};
 			var bookmark = JSON.stringify(jsonStr);

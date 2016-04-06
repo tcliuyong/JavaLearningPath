@@ -60,7 +60,7 @@
 								  pageCount : pagecount,
 								  current : 1,
 								  backFn:function(p){
-									  var jsonStr = {"uid":$(":input#user_id").val(),"page": p,"pagesize":5};
+									  var jsonStr = {"uid":$(":input#user_id").val(),"page": p,"pagesize":10};
 									  var page = JSON.stringify(jsonStr);
 									  $.ajax({
 										  type: 'post',

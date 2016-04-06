@@ -52,7 +52,7 @@
                 time = #{date},
             </if>
         </set>
-        <where>uid = #{user.id}</where>
+        <where>uid = #{user.id} AND id=#{id}</where>
     </update>
      <insert id="addBookMark"  >
          INSERT INTO bookmark(id,bookmark,uid,description,time)

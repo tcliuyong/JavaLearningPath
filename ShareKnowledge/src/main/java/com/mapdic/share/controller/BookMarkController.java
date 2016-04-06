@@ -57,6 +57,7 @@ public class BookMarkController {
         User user = userService.getUserById(uid);
         BookMark bookMark = bookMarkService.getBookMarkById(cookieKid.getKid(), uid);
         bookMarkDTO.setId(bookMark.getId());
+        bookMarkDTO.setUser(bookMark.getUser());
         bookMarkDTO.setBookmark(bookMark.getBookmark());
         if(user.getFace() == null || user.getFace().equals("")){
             bookMarkDTO.setFace(face);

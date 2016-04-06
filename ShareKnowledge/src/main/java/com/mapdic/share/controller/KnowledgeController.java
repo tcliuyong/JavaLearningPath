@@ -37,6 +37,7 @@ public class KnowledgeController {
     public String addKnowledge(@RequestBody Knowledge knowledge, HttpServletResponse response){
         if(knowledge != null){
             knowledge.setDate(new Date());
+            knowledge.setIsCheck(1);
             knowledgeServiceImpl.addKnowledge(knowledge);
             return EnumCode.OK.getName();
         }
