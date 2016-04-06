@@ -13,7 +13,6 @@ import com.mapdic.share.serviceimpl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -45,9 +44,9 @@ public class KnowledgeController {
     }
     @ResponseBody
     @RequestMapping(value ="/getKnowledgeListByPage")
-    public List<KnowledgeDTO> getKnowledgeListByPage(@RequestBody KnowledgeListDTO knowledgeListDTO){
-        List<Knowledge> knowledges = knowledgeServiceImpl.getKnowledgeByPage(knowledgeListDTO.getUid(),
-                knowledgeListDTO.getPage(), knowledgeListDTO.getPagesize());
+    public List<KnowledgeDTO> getKnowledgeListByPage(@RequestBody PageDTO pageDTO){
+        List<Knowledge> knowledges = knowledgeServiceImpl.getKnowledgeByPage(pageDTO.getUid(),
+                pageDTO.getPage(), pageDTO.getPagesize());
 
         List<KnowledgeDTO> knowledgeDTOs =new ArrayList<>();
         for(Knowledge knowledge : knowledges){
@@ -58,13 +57,14 @@ public class KnowledgeController {
     @ResponseBody
     @RequestMapping(value ="/getCountKnowledge")
     public int getCountKnowledge(@RequestBody String uid){
+        System.out.println(uid);
+        uid = uid.replace("=","");
         int page = knowledgeServiceImpl.countKnowledge(Integer.parseInt(uid));
-        return page % 5==0 ? page/5:page/5 + 1;
+        return page % 10==0 ? page/10:page/10 + 1;
     }
     @ResponseBody
     @RequestMapping(value ="/delKnowledge")
     public String delKnowledge(@RequestBody DelKnoDTO delKnoDTO){
-        System.out.println(delKnoDTO.toString());
        Token ctoken = tokenServiceImpl.getTokenByKeepAlive(delKnoDTO.getCookie());
         Date date = new Date();
         if(ctoken != null && ctoken.getTime().after(date)){

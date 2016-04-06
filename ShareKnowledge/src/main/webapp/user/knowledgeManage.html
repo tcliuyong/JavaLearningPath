@@ -48,8 +48,42 @@
 				  $("#userMenu").processTemplate("");
 				  $("#face").setTemplateURL("../template/face.html");
 				  $("#face").processTemplate(data);
-				  var jsonStr = {"uid":data["id"],"page": 1,"pagesize":5};
+				  var jsonStr = {"uid":data["id"],"page": 1,"pagesize":10};
 				  var page = JSON.stringify(jsonStr);
+				  $.ajax({
+					  type: 'post',
+					  url: "/getCountKnowledge.do" ,
+					  data: data["id"].toString(),
+					  success: function(pagecount){
+						  if(pagecount != null){
+							  $(".tcdPageCode").createPage({
+								  pageCount : pagecount,
+								  current : 1,
+								  backFn:function(p){
+									  var jsonStr = {"uid":$(":input#user_id").val(),"page": p,"pagesize":5};
+									  var page = JSON.stringify(jsonStr);
+									  $.ajax({
+										  type: 'post',
+										  url: "/getKnowledgeListByPage.do" ,
+										  data: page,
+										  headers: {'Content-Type': 'application/json'},
+										  success: function(knowledgeList){
+											  if(knowledgeList == null){
+												  alert("请求失败");
+											  }else{
+												  $("#knowledgeTable").setTemplateURL("../template/knowledgeTable.html");
+												  $("#knowledgeTable").processTemplate(knowledgeList);
+											  }
+											  return ;
+										  },
+										  dataType: 'json'
+									  });
+								  }
+							  });
+						  }
+					  },
+					  dataType: 'text'
+				  });
 				  $.ajax({
 					  type: 'post',
 					  url: "/getKnowledgeListByPage.do" ,
@@ -139,7 +173,6 @@
 					<div id="face" nowrap></div>
 
 
-
 				</div> <!-- /account-container -->
 
 				<div id="userMenu" nowrap></div>
@@ -188,43 +221,7 @@
 		<p>&copy; 2016 Go Ideate.</p>
 	</div> <!-- /container -->
 </div> <!-- /footer -->
-<script>
-	$.ajax({
-		type: 'post',
-		url: "/getCountKnowledge.do" ,
-		data:"2",
-		headers: {'Content-Type': 'application/json'},
-		success: function(data){
-			if(data != null){
-				$(".tcdPageCode").createPage({
-					pageCount : data,
-					current : 1,
-					backFn:function(p){
-						var jsonStr = {"uid":$(":input#user_id").val(),"page": p,"pagesize":5};
-						var page = JSON.stringify(jsonStr);
-						$.ajax({
-							type: 'post',
-							url: "/getKnowledgeListByPage.do" ,
-							data: page,
-							headers: {'Content-Type': 'application/json'},
-							success: function(knowledgeList){
-								if(knowledgeList == null){
-									alert("请求失败");
-								}else{
-									$("#knowledgeTable").setTemplateURL("../template/knowledgeTable.html");
-									$("#knowledgeTable").processTemplate(knowledgeList);
-								}
-								return ;
-							},
-							dataType: 'json'
-						});
-					}
-				});
-			}
-		},
-		dataType: 'text'
-	});
-</script>
+
 <script>
 	function removeKno(kid){
 		var jsonStr = {"cookie":$.cookie("_ui"),"k_id": Number(kid)};
@@ -248,5 +245,4 @@
 	}
 </script>
 </body>
-
 </html>

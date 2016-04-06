@@ -115,82 +115,34 @@
                                         <li class="active">
                                             <a href="#1" data-toggle="tab">知识添加</a>
                                         </li>
-                                        <li><a href="#2" data-toggle="tab">附加文件</a></li>
                                     </ul>
 
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="1">
-                                            <form id="edit-profile" class="form-horizontal" enctype ="multipart/form-data" method="post" />
+                                            <form id="edit-profile" class="form-horizontal"method="post" />
                                             <fieldset>
-                                                <input type="text" id="id" value={$T.knowledge.id} disabled="" style="display:none;" />
-                                                <input type="text" id="kid" value={$T.knowledge.k_id} disabled="" style="display:none;" />
+                                                <input type="text" id="id" value={$T.id} disabled="" style="display:none;" />
+
                                                 <div class="control-group">
-                                                    <label class="control-label" for="title">主题</label>
+                                                    <label class="control-label" for="bookmark">书签网址</label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-medium disabled" id="title" name="title" value={$T.knowledge.title}  />
+                                                        <input type="text" class="input-medium disabled" id="bookmark" name="bookmark"  />
 
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="tag">标签</label>
+                                                    <label class="control-label" for="description">书签描述</label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-medium disabled" id="tag" value="{$T.knowledge.tag}"   />
-
+                                                        <textarea  id="description" ></textarea>
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
-                                                <div id="selectList" nowrap></div>
 
-                                                <div class="control-group">
-                                                    <label class="control-label" for="system">系统参数</label>
-                                                    <div class="controls">
-                                                        <input type="text" class="input-medium" id="system" value="{$T.knowledge.system}" />
-                                                    </div>
-                                                </div> <!-- /control-group -->
-
-                                                <div class="control-group">
-                                                    <label class="control-label" for="content" >知识内容</label>
-                                                    <div class="controls" id="conContent">
-                                                        <script type='text/html' id='myEditor' style='width:830px;height:300px;'>
-                                                         </script>
-                                                    </div> <!-- /controls -->
-                                                </div> <!-- /control-group -->
-                                                <div class="control-group">
-                                                    <label class="control-label" for="isPublic">是否公开</label>
-                                                    <div class="controls">
-                                                        <select  id="isPublic" >
-                                                            <option value="1">是</option>
-                                                            <option value="0">否</option>
-                                                        </select>
-                                                    </div> <!-- /controls -->
-                                                </div> <!-- /control-group -->
                                                 <br />
 
                                                 <div class="form-actions">
                                                     <button  id="btnSave" onclick="save()" class="btn btn-primary">保存</button>
                                                 </div> <!-- /form-actions -->
-                                            </fieldset>
-                                            </form>
-                                        </div>
-                                        <div class="tab-pane" id="2">
-                                            <form id="edit-profile2" class="form-horizontal" />
-                                            <fieldset>
-
-                                                <div class="control-group">
-                                                <label class="control-label" for="password1">密码</label>
-                                                <div class="controls">
-                                                    <input type="password" class="input-large" id="password1" value="" />
-                                                </div>
-                                            </div>
-                                                <div class="control-group">
-                                                    <label class="control-label" for="password2">密码确认</label>
-                                                    <div class="controls">
-                                                        <input type="password" class="input-large" id="password2" value="" />
-                                                    </div>
-                                                </div>
-                                                <div class="form-actions">
-                                                    <button class="btn btn-primary" onclick="changePassword()">确定</button>
-                                                </div>
                                             </fieldset>
                                             </form>
                                         </div>
@@ -223,6 +175,3 @@
     </div> <!-- /container -->
 
 </div> <!-- /footer -->
-<script type="text/javascript">
-    var um = UM.getEditor('myEditor');
-</script>

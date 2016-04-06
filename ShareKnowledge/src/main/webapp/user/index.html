@@ -52,7 +52,30 @@
 		dataType: 'json'
 	});
 </script>
+  <script>
+	  function removeKno(kid){
+		  var jsonStr = {"cookie":$.cookie("_ui"),"k_id": Number(kid)};
+		  var DelKnoDTO = JSON.stringify(jsonStr);
+		  $.ajax({
+			  type: 'post',
+			  url: "/delKnowledge.do" ,
+			  data: DelKnoDTO,
+			  headers: {'Content-Type': 'application/json'},
+			  success: function(res){
+				  if(res == "FAIL"){
+					  alert("请求失败");
+				  }else{
+					  alert("删除成功");
+					  window.location="http://localhost:8080/user/knowledgeManage.html";
+				  }
+				  return ;
+			  },
+			  dataType: 'text'
+		  });
+	  }
+  </script>
 <body>
 <div id="userIndex" nowrap></div>
+
 </body>
 </html>

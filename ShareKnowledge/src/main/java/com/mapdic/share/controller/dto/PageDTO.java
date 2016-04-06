@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by liuyong on 2016/4/4.
  */
-public class KnowledgeListDTO implements Serializable {
+public class PageDTO implements Serializable {
     private int uid;
     private int page;
     private int pagesize;
@@ -37,12 +37,4 @@ public class KnowledgeListDTO implements Serializable {
         this.pagesize = pagesize;
     }
 
-    @Override
-    public String toString() {
-        return "KnowledgeListDTO{" +
-                "uid=" + uid +
-                ", page=" + page +
-                ", pagesize=" + pagesize +
-                '}';
-    }
 }

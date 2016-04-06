@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--必须与接口同名-->
+<mapper namespace="com.mapdic.share.dao.BookMarkDao">
+    <resultMap id="BookMarkMap" type="com.mapdic.share.model.BookMark">
+        <result property="id" column="id"/>
+        <result column="bookmark" property="bookmark"/>
+        <result column="description" property="description"/>
+        <result column="time" property="date"/>
+        <association property="user" javaType="com.mapdic.share.model.User">
+            <id column="uid" property="id"/>
+            <result column="username" property="userName"/>
+            <result column="level" property="level"/>
+        </association>
+    </resultMap>
+    <sql id="columns">
+        id,bookmark, uid,description,time
+    </sql>
+    <select id="getBookMarkById" parameterType="java.lang.Integer" resultMap="BookMarkMap">
+        SELECT
+        <include refid="columns"/>
+        FROM bookmark
+        WHERE id=#{bid} AND uid=#{uid}
+
+    </select>
+    <select id="countBookMark" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM bookmark
+        WHERE uid=#{userId}
+    </select>
+    <select id="getBookMarkByPage" resultMap="BookMarkMap" >
+        SELECT
+        <include refid="columns"/>
+        FROM bookmark
+        WHERE uid = #{uid}
+        ORDER by TIME DESC
+        limit #{start}, #{end}
+    </select>
+
+
+    <update id="updateBookMark" >
+        UPDATE bookmark
+        <set>
+            <if test="bookmark != null">
+                bookmark = #{bookmark},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="date != null">
+                time = #{date},
+            </if>
+        </set>
+        <where>uid = #{user.id}</where>
+    </update>
+     <insert id="addBookMark"  >
+         INSERT INTO bookmark(id,bookmark,uid,description,time)
+         VALUES
+          (
+          #{id}, #{bookmark}, #{user.id}, #{description}, #{date}
+          )
+        </insert>
+    <delete id="delBookMarkById">
+         DELETE FROM
+         bookmark
+        WHERE uid=#{uid} AND id = #{bid}
+    </delete>
+
+</mapper>

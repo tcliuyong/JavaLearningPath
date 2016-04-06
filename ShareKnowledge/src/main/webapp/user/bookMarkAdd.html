@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>User Account - Bootstrap Admin</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" />
+    <link href="../css/font-awesome.css" rel="stylesheet" />
+    <link href="../css/adminia.css" rel="stylesheet" />
+    <link href="../css/adminia-responsive.css" rel="stylesheet" />
+    <link href="../css/pages/plans.css" rel="stylesheet" />
+	<script src="../js/jquery-1.8.3.min.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script src="../js/jquery-jtemplates.js"></script>
+	<script src="../js/jquerycookie.js"></script>
+	<script src="../js/check.js"></script>
+	<script src="../js/ajaxfileupload.js"></script>
+	<link href="../umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	<script>
+		  var ui = $.cookie("_ui");
+		  $.ajax({
+			  type: 'post',
+			  url: "/getUserByToken.do" ,
+			  data: ui,
+			  headers: {'Content-Type': 'application/json'},
+			  success: function(data){
+				  if(data == null){
+					  alert("请求失败");
+				  }else{
+					  // 设置模板
+					  $("#bookMarkAdd").setTemplateURL("../template/bookMarkAdd.html");
+					  //   加载数据
+					  $("#bookMarkAdd").processTemplate(data);
+					  $("#userMenu").setTemplateURL("../template/userMenu.html");
+					  $("#userMenu").processTemplate("");
+				  }
+				  return ;
+			  },
+			  dataType: 'json'
+		  });
+
+	  </script>
+
+	<script>
+		function save(){
+			var jsonStr = {"user":{"id":$(":input#id").val()},"bookmark": $(":input#bookmark").val(),
+			"description" : $(":input#description").val()};
+			var bookmark = JSON.stringify(jsonStr);
+			$.ajax({
+				type: 'post',
+				url: "/addBookMark.do" ,
+				headers: {'Content-Type': 'application/json'},
+				data:bookmark,
+				success: function(data){
+					if(data != "OK"){
+						alert("更新失败，请稍后");
+
+					}else {
+						alert("添加成功");
+						window.location="http://localhost:8080/user/booMark.html";
+					}
+					return;
+				},
+				dataType: 'text'
+			});
+		}
+	</script>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+
+<body>
+<!--style给定宽度可以影响编辑器的最终宽度-->
+<div id="bookMarkAdd" nowrap></div>
+  </body>
+
+</html>
