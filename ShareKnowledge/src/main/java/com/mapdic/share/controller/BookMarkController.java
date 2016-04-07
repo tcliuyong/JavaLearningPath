@@ -103,7 +103,6 @@ public class BookMarkController {
     @ResponseBody
     @RequestMapping(value ="/updateBookMark")
     public String updateBookMark(@RequestBody BookMark bookMark){
-        System.out.println(bookMark.toString());
         if(bookMark != null){
             bookMark.setDate(new Date());
             bookMarkService.updateBookMark(bookMark);

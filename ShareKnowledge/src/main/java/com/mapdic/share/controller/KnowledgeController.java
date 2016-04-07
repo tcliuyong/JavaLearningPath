@@ -1,8 +1,6 @@
 package com.mapdic.share.controller;
 
-import com.mapdic.share.common.EnumCode;
-import com.mapdic.share.common.ModelToDTO;
-import com.mapdic.share.common.UserEnum;
+import com.mapdic.share.common.*;
 import com.mapdic.share.controller.dto.*;
 import com.mapdic.share.model.Knowledge;
 import com.mapdic.share.model.Token;
@@ -10,16 +8,19 @@ import com.mapdic.share.model.User;
 import com.mapdic.share.serviceimpl.KnowledgeServiceImpl;
 import com.mapdic.share.serviceimpl.TokenServiceImpl;
 import com.mapdic.share.serviceimpl.UserServiceImpl;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.io.File;
+import java.util.*;
 
 /**
  * Created by liuyong on 2016/3/31.
@@ -32,16 +33,49 @@ public class KnowledgeController {
     private UserServiceImpl userServiceImpl;
     @Resource
     TokenServiceImpl tokenServiceImpl;
+    Logger logger = Logger.getLogger(KnowledgeController.class);
+    static final String prefix = "../uploadFile/" ;
+    static final int MAXSIZE = 3096;
     @ResponseBody
     @RequestMapping(value ="/addKnowledge")
-    public String addKnowledge(@RequestBody Knowledge knowledge, HttpServletResponse response){
+    public int addKnowledge(@RequestBody Knowledge knowledge){
         if(knowledge != null){
             knowledge.setDate(new Date());
             knowledge.setIsCheck(1);
+            System.out.println(knowledge.toString());
             knowledgeServiceImpl.addKnowledge(knowledge);
-            return EnumCode.OK.getName();
+            if(knowledge.getK_id() > 0)
+                return knowledge.getK_id();
         }
-        return EnumCode.FAIL.getName();
+        return EnumCode.FAIL.getId();
+    }
+    @ResponseBody
+    @RequestMapping(value ="/uploadFile")
+    public String uploadUserFace(@RequestParam("uploadFile") MultipartFile file, HttpServletRequest request, HttpServletResponse response, ModelMap map) {
+        String path = request.getSession().getServletContext().getRealPath("uploadFile");
+        String fileName = RenameUploadFile.rename(file.getOriginalFilename());
+        long fileSize = file.getSize()/1024;
+        if(fileSize > MAXSIZE || CheckSuffix.checkFileSuffix(file.getOriginalFilename()) ==false){
+            return EnumCode.EXCEPTION.getName();
+        }
+
+        File targetFile = new File(path, fileName);
+        if (!targetFile.exists()) {
+            targetFile.mkdirs();
+        }
+        try {
+            file.transferTo(targetFile);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return UserEnum.FAIL.getName();
+        }
+        Knowledge knowledge  = new Knowledge();
+
+        knowledge.setK_id(Integer.parseInt(request.getParameter("id")));
+        knowledge.setFilePath(prefix + fileName);
+        System.out.println(knowledge.toString());
+        knowledgeServiceImpl.updateKnowledge(knowledge);
+        return UserEnum.OK.getName();
     }
     @ResponseBody
     @RequestMapping(value ="/getKnowledgeListByPage")
@@ -58,7 +92,6 @@ public class KnowledgeController {
     @ResponseBody
     @RequestMapping(value ="/getCountKnowledge")
     public int getCountKnowledge(@RequestBody String uid){
-        System.out.println(uid);
         uid = uid.replace("=","");
         int page = knowledgeServiceImpl.countKnowledge(Integer.parseInt(uid));
         return page % 10==0 ? page/10:page/10 + 1;
@@ -100,4 +133,5 @@ public class KnowledgeController {
         knoUserDTO.setUserName(user.getUserName());
         return knoUserDTO;
     }
+
 }

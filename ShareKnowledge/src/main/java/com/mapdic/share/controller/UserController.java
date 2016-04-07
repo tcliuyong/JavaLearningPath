@@ -164,7 +164,6 @@ public class UserController {
             logger.error(e.getMessage());
             return UserEnum.FAIL.getName();
         }
-
         User user = new User();
         user.setFace(prefix + fileName);
         user.setId(Integer.parseInt(request.getParameter("id")));

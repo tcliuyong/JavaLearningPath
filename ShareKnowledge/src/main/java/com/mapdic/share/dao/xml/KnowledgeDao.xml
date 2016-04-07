@@ -39,11 +39,11 @@
             <if test="content != null">
                 content = #{content},
             </if>
-            <if test="language != null">
-                language = #{language},
+            <if test="language != 0">
+                language = #{language, jdbcType=TINYINT},
             </if>
-            <if test="category != null">
-                category = #{category},
+            <if test="category != 0">
+                category = #{category, jdbcType=TINYINT},
             </if>
             <if test="title != null">
                 title = #{title},
@@ -54,10 +54,10 @@
             <if test="filePath != null">
                 filepath = #{filePath},
             </if>
-            <if test="isCheck != null">
+            <if test="isCheck != 0">
                 ischeck = #{isCheck, jdbcType=TINYINT},
             </if>
-            <if test="isForbidden != null">
+            <if test="isForbidden != 0">
                 isforbidden = #{isForbidden, jdbcType=TINYINT},
             </if>
             <if test="date != null">
@@ -66,14 +66,14 @@
         </set>
         <where>k_id = #{k_id}</where>
     </update>
-        <insert id="addKnowledge" parameterType="com.mapdic.share.model.Knowledge">
+        <insert id="addKnowledge" useGeneratedKeys="true" keyProperty="k_id" parameterType="com.mapdic.share.model.Knowledge">
             INSERT INTO KNOWLEDGE
             (
               tag,title,content,language,category,userid,system,filepath,ischeck,isforbidden,date
             )
             VALUES
             (
-              #{tag},#{title} ,#{content}, #{language}, #{category}, #{user.id}, #{system}, #{filePath},#{isCheck, jdbcType=TINYINT},#{isForbidden, jdbcType=TINYINT},#{date}
+              #{tag},#{title} ,#{content}, #{language, jdbcType=TINYINT}, #{category, jdbcType=TINYINT}, #{user.id}, #{system}, #{filePath},#{isCheck, jdbcType=TINYINT},#{isForbidden, jdbcType=TINYINT},#{date}
             )
         </insert>
     <select id="getKnowledgeByUser" parameterType="java.lang.Integer" resultMap="KnowledgeMap">

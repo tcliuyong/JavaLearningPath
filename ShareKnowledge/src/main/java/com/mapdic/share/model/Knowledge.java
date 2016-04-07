@@ -119,14 +119,16 @@ public class Knowledge implements Serializable {
     @Override
     public String toString() {
         return "Knowledge{" +
-                "id=" + k_id +
+                "k_id=" + k_id +
                 ", tag='" + tag + '\'' +
                 ", content='" + content + '\'' +
-                ", category='" + category + '\'' +
-                ", userId=" + user.getId() +
+                ", language=" + language +
+                ", category=" + category +
+                ", user=" + user +
                 ", system='" + system + '\'' +
-                ", filepath='" + filePath + '\'' +
+                ", filePath='" + filePath + '\'' +
                 ", isCheck=" + isCheck +
+                ", title='" + title + '\'' +
                 ", isForbidden=" + isForbidden +
                 ", date=" + date +
                 '}';

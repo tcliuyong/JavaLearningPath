@@ -20,10 +20,9 @@ public class KnowledgeServiceImpl implements KnowledgeService {
     @Resource
     UserDao userDao;
     @Override
-    public boolean addKnowledge(Knowledge knowledge) {
-        if(knowledgeDao.addKnowledge(knowledge) == 1)
-            return true;
-        return false;
+    public int addKnowledge(Knowledge knowledge) {
+        return knowledgeDao.addKnowledge(knowledge);
+
     }
 
     @Override

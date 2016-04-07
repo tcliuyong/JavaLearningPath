@@ -115,7 +115,6 @@
                                         <li class="active">
                                             <a href="#1" data-toggle="tab">知识添加</a>
                                         </li>
-                                        <li><a href="#2" data-toggle="tab">附加文件</a></li>
                                     </ul>
 
                                     <div class="tab-content">
@@ -151,41 +150,20 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="content" >知识内容</label>
                                                     <div class="controls">
-                                                        <script type="text/html" id="myEditor" style="width:830px;height:300px;">
-
-                                                        </script>
+                                                        <script type="text/html" id="myEditor" style="width:830px;height:300px;"></script>
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
                                                 <div class="control-group">
-                                                    <label class="control-label" for="isPublic">是否公开</label>
+                                                    <label class="control-label" for="uploadFile">上传文件</label>
                                                     <div class="controls">
-                                                        <select  id="isPublic" >
-                                                            <option value="1">是</option>
-                                                            <option value="0">否</option>
-                                                        </select>
-                                                    </div> <!-- /controls -->
+                                                        <input type="file" class="input-large" id="uploadFile" name="uploadFile" />
+                                                    </div>
                                                 </div> <!-- /control-group -->
                                                 <br />
 
                                                 <div class="form-actions">
                                                     <button  id="btnSave" onclick="save()" class="btn btn-primary">保存</button>
                                                 </div> <!-- /form-actions -->
-                                            </fieldset>
-                                            </form>
-                                        </div>
-                                        <div class="tab-pane" id="2">
-                                            <form id="edit-profile2" class="form-horizontal" />
-                                            <fieldset>
-
-                                                <div class="control-group">
-                                                <label class="control-label" for="uploadFile">文件</label>
-                                                <div class="controls">
-                                                    <input type="file" class="input-large" id="uploadFile" />
-                                                </div>
-                                            </div>
-                                                <div class="form-actions">
-                                                    <button class="btn btn-primary" onclick="changePassword()">确定</button>
-                                                </div>
                                             </fieldset>
                                             </form>
                                         </div>

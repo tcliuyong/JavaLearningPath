@@ -10,7 +10,6 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" />
     
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet" />
     <link href="../css/font-awesome.css" rel="stylesheet" />
     
     <link href="../css/adminia.css" rel="stylesheet" />
@@ -54,6 +53,13 @@
 	  </script>
 	  <script>
 		  function changePassword(){
+			  if($(":input#password1").val() == "" || $(":input#password2").val() == ""){
+				  alert("密码不能为空");
+				  return;
+			  }
+			  if($(":input#password1").val() != $(":input#password1").val()){
+				  alert("两次密码不一样");
+			  }
 			  var jsonStr = {"id":$(":input#id").val(),"passWd": $(":input#password2").val()};
 			  var user = JSON.stringify(jsonStr);
 			  $.ajax({
