@@ -83,10 +83,12 @@
 		function save(){
 			var arr = [];
 			arr.push(UM.getEditor('myEditor').getContent());
+			var arrtext = [];
+			arrtext.push(UM.getEditor('myEditor').getContentTxt());
 			var jsonStr = {"k_id": $(":input#kid").val(),"user":{"id":Number($(":input#id").val())},"title": $(":input#title").val(),
 			"tag" : $(":input#tag").val(), "category": $("#category  option:selected").val(),
 				"language": $("#language  option:selected").val(),
-				"system":$(":input#system").val(),"content":arr.join("\n"),"ischeck":1};
+				"system":$(":input#system").val(),"content":arr.join("\n"),"orcontent":arrtext.join("\n"),"ischeck":1};
 			var knowledge = JSON.stringify(jsonStr);
 			$.ajax({
 				type: 'post',
@@ -98,25 +100,29 @@
 						alert("更新失败，请稍后");
 					}
 					else {
-						$.ajaxFileUpload({
-							type: 'post',
-							url: "/uploadFile.do?id="+$(":input#kid").val() ,
-							secureuri:true,
-							fileElementId:'uploadFile',
-							success: function(data) {
-								if(data == "OK"){
-									alert("添加成功");
-									window.location="knowledgeManage.html";
-								}else if(data == "EXCEPTION"){
-									alert("图片超过限制或后缀名不允许");
-								}else {
-									alert("上传失败");
-								}
-								return;
-							},
-							dataType: 'text'
-						});
+						if($("#uploadFile").val() != ""){
+							$.ajaxFileUpload({
+								type: 'post',
+								url: "/uploadFile.do?id="+$(":input#kid").val() ,
+								secureuri:true,
+								fileElementId:'uploadFile',
+								success: function(data) {
+									if(data == "OK"){
+										alert("添加成功");
+										window.location="knowledgeManage.html";
+									}else if(data == "EXCEPTION"){
+										alert("图片超过限制或后缀名不允许");
+									}else {
+										alert("上传失败");
+									}
+									return;
+								},
+								dataType: 'text'
+							});
+						}
 					}
+					alert("更新成功");
+					window.location="knowledgeManage.html";
 					return;
 				},
 				dataType: 'text'

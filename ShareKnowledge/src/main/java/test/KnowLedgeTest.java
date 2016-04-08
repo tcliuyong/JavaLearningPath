@@ -57,4 +57,7 @@ public class KnowLedgeTest {
         System.out.println();
         System.out.println(knowledges.get(0).getContent());
     }
+    @Test
+    public void getKnowledgeNotIn(){
+    }
 }

@@ -21,4 +21,6 @@ public interface KnowledgeDao {
     List<Knowledge> getTop5Knowledge(@Param("userId") Integer id);
     int countKnowledge(@Param("userId") Integer id);
     List<Knowledge> getKnowledgeByPage(@Param("uid") Integer id, @Param("start") Integer start, @Param("end") Integer end);
+    List<Knowledge> getKnowledgeByUserCategory(@Param("cid") Integer cid, @Param("start") Integer start, @Param("end") Integer end);
+    int countKnowledgeByCid(@Param("cid") Integer category);
 }

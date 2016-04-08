@@ -10,6 +10,7 @@ public class Knowledge implements Serializable {
     private int k_id;
     private String tag;
     private String content;
+    private String orcontent;
     private int language;
     private int category;
     private User user;
@@ -50,6 +51,14 @@ public class Knowledge implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getOrcontent() {
+        return orcontent;
+    }
+
+    public void setOrcontent(String orcontent) {
+        this.orcontent = orcontent;
     }
 
     public int getCategory() {

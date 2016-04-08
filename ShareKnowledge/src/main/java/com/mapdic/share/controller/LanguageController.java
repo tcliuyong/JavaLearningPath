@@ -22,7 +22,6 @@ import java.util.Map;
 public class LanguageController {
     @Resource
     private LanguageServiceImpl languageService;
-
     @ResponseBody
     @RequestMapping(value = "/getLanguages")
     public List<Language> getLanguages(){

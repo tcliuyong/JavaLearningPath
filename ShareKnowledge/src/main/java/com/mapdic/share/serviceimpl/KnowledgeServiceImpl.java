@@ -81,4 +81,21 @@ public class KnowledgeServiceImpl implements KnowledgeService {
     public Knowledge getKnowledgeByUidKid(Integer kid, Integer uid) {
         return knowledgeDao.getKnowledgeByUidKid(kid, uid);
     }
+
+    @Override
+    public List<Knowledge> getKnowledgeByUserCategory(Integer cid, Integer start, Integer end) {
+        if(start == 1){
+            start = start - 1;
+        }else {
+            start = (start - 1) * end;
+        }
+        List<Knowledge> knowledges = knowledgeDao.getKnowledgeByUserCategory(cid, start, end);
+        return knowledges;
+    }
+
+    @Override
+    public int countKnowledgeByCid(Integer category) {
+        return knowledgeDao.countKnowledgeByCid(category);
+    }
+
 }

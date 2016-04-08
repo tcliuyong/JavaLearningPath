@@ -1,0 +1,10 @@
+<select name="category" id = "category" class="btn cp">
+    <option value=0>
+        全部种类
+    </option>
+    {#foreach $T as record}
+    <option value={$T.record.id}>
+        {$T.record.category}
+    </option>
+    {#/for}
+</select>

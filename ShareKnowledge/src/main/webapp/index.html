@@ -18,7 +18,7 @@ div#droplist { color: blue;display: inline }
 		$(document).ready(function(){
 			$.ajax({
 				type: 'post',
-				url: "/getLanguages.do" ,
+				url: "/getCategory.do" ,
 				data: {},
 				headers: {'Content-Type': 'application/json'},
 				success: function(data){
@@ -27,7 +27,7 @@ div#droplist { color: blue;display: inline }
 					}else {
 						for(var i=0; i < data.length; i++){
 							// 设置模板
-							$("#droplist").setTemplateURL("template/index.html");
+							$("#droplist").setTemplateURL("template/list.html");
 							//   加载数据
 							$("#droplist").processTemplate(data);
 						}
@@ -47,6 +47,8 @@ div#droplist { color: blue;display: inline }
 
 					}else{
 						$('#personal').html(data['userName']);
+						$('#ud').val(ui);
+
 					}
 					return;
 				},
@@ -73,7 +75,6 @@ div#droplist { color: blue;display: inline }
 				<span class="polutionLevel">良</span>
 			</span>
 			<div class="cityWeather"/>
-
 			</div>
 		</div>
 		<nav class="headNavs fr tr">
@@ -95,13 +96,13 @@ div#droplist { color: blue;display: inline }
 			</div>
 		</nav>
 	</header>
-	<div class="content tc">
+	<div id = "hideContent" class="content tc">
 		<p class="logo"><img width="270" height="129" src="images/logo.png" alt="logo" /></p>
 		<div class="searchBox">
-			<form action="">
-				<input type="text" class="searchIpt f14" name="wd" maxlength="100" autocomplete="off"/>
+			<form action="/search.do" method="get">
+				<input type="text" class="searchIpt f14" name="keyword" maxlength="100" autocomplete="off"/>
 				<div id="droplist" nowrap></div>
-				<input type="submit" class="btn cp" value="map一下" />
+				<input type="submit" class="btn cp" onclick="search()" value="map一下" />
 			</form>
 		</div>
 	</div>

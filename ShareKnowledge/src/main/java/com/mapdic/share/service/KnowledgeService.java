@@ -18,4 +18,6 @@ public interface KnowledgeService {
     boolean delKnowledge(Integer uid, Integer kid);
     Knowledge getKnowledgeByKid(Integer kid);
     Knowledge getKnowledgeByUidKid(Integer kid, Integer uid);
+    List<Knowledge> getKnowledgeByUserCategory(Integer cid, Integer start, Integer end);
+    int countKnowledgeByCid(Integer cid);
 }
