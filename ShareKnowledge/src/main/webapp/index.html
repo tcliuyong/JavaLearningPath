@@ -100,8 +100,10 @@ div#droplist { color: blue;display: inline }
 		<p class="logo"><img width="270" height="129" src="images/logo.png" alt="logo" /></p>
 		<div class="searchBox">
 			<form action="/search.do" method="get">
+				<input type="text" name="page" value="1"  style="display:none;"/>
+				<input type="text" name="pagesize"  value="10" style="display:none;" />
 				<input type="text" class="searchIpt f14" name="keyword" maxlength="100" autocomplete="off"/>
-				<div id="droplist" nowrap></div>
+				<div id="droplist" nowrap style="height: 24px;" ></div>
 				<input type="submit" class="btn cp" onclick="search()" value="map一下" />
 			</form>
 		</div>

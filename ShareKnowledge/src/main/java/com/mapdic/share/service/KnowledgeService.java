@@ -20,4 +20,5 @@ public interface KnowledgeService {
     Knowledge getKnowledgeByUidKid(Integer kid, Integer uid);
     List<Knowledge> getKnowledgeByUserCategory(Integer cid, Integer start, Integer end);
     int countKnowledgeByCid(Integer cid);
+    List<Knowledge> getKnowledgeByCategory(Integer cid);
 }

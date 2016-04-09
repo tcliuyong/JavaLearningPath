@@ -29,7 +29,7 @@
     </resultMap>
 
     <sql id="columns">
-        k_id,tag,content,language,category,title,userid,system,filepath,ischeck,isforbidden,date
+        k_id,tag,content,orcontent,language,category,title,userid,system,filepath,ischeck,isforbidden,date
     </sql>
     <update id="updateKnowledge" parameterType="com.mapdic.share.model.Knowledge">
         UPDATE knowledge
@@ -137,6 +137,16 @@
         ischeck=1
         ORDER BY date DESC
         limit #{start}, #{end}
+    </select>
+    <select id="getKnowledgeByCategory" parameterType="java.lang.Integer" resultMap="KnowledgeMap">
+        SELECT
+        <include refid="columns"/>
+        FROM  KNOWLEDGE
+        WHERE
+        <if test="cid != 0">
+            category = #{cid} AND
+        </if>
+        ischeck=1
     </select>
 
     <select id="getKnowledgeByKid" parameterType="java.lang.Integer" resultMap="KnowledgeMap">

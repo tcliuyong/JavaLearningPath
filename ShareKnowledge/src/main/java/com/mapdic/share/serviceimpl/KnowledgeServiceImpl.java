@@ -98,4 +98,10 @@ public class KnowledgeServiceImpl implements KnowledgeService {
         return knowledgeDao.countKnowledgeByCid(category);
     }
 
+    @Override
+    public List<Knowledge> getKnowledgeByCategory(Integer cid) {
+
+        return knowledgeDao.getKnowledgeByCategory(cid);
+    }
+
 }
