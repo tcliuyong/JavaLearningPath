@@ -53,7 +53,6 @@ public class UserController {
     @RequestMapping(value = "/getAllUser", method = RequestMethod.GET)
     public ModelAndView getAllUser(HttpServletRequest request, PrintWriter out, HttpServletResponse response){
         List<User> users = userServiceImpl.getAllUser();
-        System.out.println(request.getParameter("username"));
         String s = request.getParameter("username");
         ModelAndView modelAndView = new ModelAndView("getAllUser");
         modelAndView.addObject("username",s);

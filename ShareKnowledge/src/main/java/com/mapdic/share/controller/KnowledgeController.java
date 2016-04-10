@@ -42,7 +42,6 @@ public class KnowledgeController {
         if(knowledge != null){
             knowledge.setDate(new Date());
             knowledge.setIsCheck(1);
-            System.out.println(knowledge.toString());
             knowledgeServiceImpl.addKnowledge(knowledge);
             if(knowledge.getK_id() > 0)
                 return knowledge.getK_id();
@@ -73,7 +72,6 @@ public class KnowledgeController {
 
         knowledge.setK_id(Integer.parseInt(request.getParameter("id")));
         knowledge.setFilePath(prefix + fileName);
-        System.out.println(knowledge.toString());
         knowledgeServiceImpl.updateKnowledge(knowledge);
         return UserEnum.OK.getName();
     }

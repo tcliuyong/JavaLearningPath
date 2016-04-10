@@ -35,7 +35,5 @@ public class RandomCode {
         String source = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         return doProduce(maxLength, source);
     }
-    public static void main(String[] args) {
-        System.out.println(produceString(15));
-    }
+
 }
