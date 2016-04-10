@@ -46,6 +46,7 @@ public class LYKWA {
         Iterator it = sortMap(map).entrySet().iterator();
         while(it.hasNext()){
             Map.Entry<Knowledge, Integer> entry = (Map.Entry<Knowledge, Integer>) it.next();
+            System.out.println(entry.getKey().toString() +" " + entry.getValue());
             if(entry.getValue() != 0){
                 knowledges.add(entry.getKey());
             }

@@ -53,12 +53,18 @@ public class Search {
         if(end >= count){
             end = count;
         }
-
         List<KnowledgeSearchDTO> knowledgeSearchDTOs = ModelToDTO.conKnowledgeToKnowledgeSearchDTO(resKnowledge.subList(start, end));
         modelAndView.addObject("knowList", knowledgeSearchDTOs);
         modelAndView.addObject("page", count % pagesize==0?count / pagesize:count / pagesize + 1);
         modelAndView.addObject("keyword", keyword);
-//
+        return modelAndView;
+    }
+    @ResponseBody
+    @RequestMapping(value ="/getKnowledge")
+    public ModelAndView getKnowledge(int kid) {
+        ModelAndView modelAndView = new ModelAndView("knowledge");
+        Knowledge knowledge = knowledgeService.getKnowledgeByKid(kid);
+        modelAndView.addObject("knowledge", knowledge);
         return modelAndView;
     }
 }

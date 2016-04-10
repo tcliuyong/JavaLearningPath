@@ -29,15 +29,15 @@
         <div class="search-from2" style="position:relative"nowrap>
             <form id="form_search" action="/search.do" method="get">
                 <div class="search-text-con2" style="position: relative; width: 500px;"nowrap>
-                    <input type="text" name="page"  id="page" style="display:none;"/>
-                    <input type="text" name="pagesize" id="pagesize"  style="display:none;" />
-                    <input type="text" name="category"  id="category"  style="display:none;" />
+                    <input type="text" name="page"  id="page" value="1" style="display:none;"/>
+                    <input type="text" name="pagesize" id="pagesize" value="10" style="display:none;" />
+                    <input type="text" name="category"  id="category"  value="0" style="display:none;" />
                     <input type="text"   name="keyword" id="keyword" value="${keyword}" style="height: 24px;font-size:20px;">
 
                 </div>
                 <%--<div id="droplist" nowrap></div>--%>
                 <div class="search-btn-con2">
-                    <input type="Submit" value="Map一下" onclick="searching()" class="search-btn2">
+                    <input type="button" value="Map一下" onclick="searching()" class="search-btn2">
                 </div>
             </form>
 
@@ -53,12 +53,17 @@
     <div class="search-list-con">
 <c:forEach items="${knowList}" var="tmp">
         <dl class="search-list">
-            <dt><a href="http://blog.csdn.net/u012489614/article/details/16878661" target="_blank">${tmp.title}</a></dt>
+            <dt><a href=getKnowledge.do?kid=${tmp.k_id} target="_blank">${tmp.title}</a></dt>
             <dd class="author-time">标签：${tmp.tag} &nbsp;&nbsp; &nbsp;&nbsp; 适用系统：${tmp.system}</dd>
             <dd class="author-time">编程语言：${tmp.language}&nbsp;&nbsp; &nbsp;&nbsp; 所属类别：${tmp.category} </dd>
 
-            <dd class="search-detail">${tmp.orcontent}</dd>
-
+            <c:choose>
+                <c:when test="${fn:length(tmp.orcontent) > 150}">
+                    <dd class="search-detail">
+                        <c:out value="${fn:substring(tmp.orcontent, 0, 150)}..." />
+                    </dd>
+                </c:when>
+            </c:choose>
         </dl>
     <hr>
 </c:forEach>
@@ -91,7 +96,10 @@ ${current}
 <script>
    function searching(){
         if($("#keyword").val() == ""){
-            return;
+            window.location="http://localhost:8080/";
+            return false;
+        }else {
+            $("#form_search").submit();
         }
     }
 </script>

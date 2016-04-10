@@ -11,7 +11,11 @@ jQuery(document).ready(function($){
 		$register = $('#register');
 		$info = $('#login_info');
 		$reg = $('#reg_info');
-
+		$loginout = $('.loginout');
+	$loginout.click(function(){
+		$.cookie('_ui', null);
+		window.location.reload();
+	});
 	//弹出层
 	$main_nav.on('click', function(event){
 
@@ -142,10 +146,11 @@ jQuery(document).ready(function($){
 	}
 
 	function signup_selected(){
-		$form_login.removeClass('is-selected');
-		$form_signup.addClass('is-selected');
-		$tab_login.removeClass('selected');
-		$tab_signup.addClass('selected');
+		$info.html("还没有开放注册");
+		//$form_login.removeClass('is-selected');
+		//$form_signup.addClass('is-selected');
+		//$tab_login.removeClass('selected');
+		//$tab_signup.addClass('selected');
 	}
 
 });
