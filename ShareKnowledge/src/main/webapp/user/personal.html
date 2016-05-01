@@ -29,6 +29,15 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 	  <script>
+		  $(function(){
+
+			  $('$main-nav').click(function(){
+				  $('$main-nav li').addClass('qhbg');
+			  })
+
+		  })
+	  </script>
+	  <script>
 		  var ui = $.cookie("_ui");
 		  $.ajax({
 			  type: 'post',

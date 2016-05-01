@@ -35,7 +35,7 @@ public class KnowledgeController {
     TokenServiceImpl tokenServiceImpl;
     Logger logger = Logger.getLogger(KnowledgeController.class);
     static final String prefix = "../uploadFile/" ;
-    static final int MAXSIZE = 3096;
+    static final long MAXSIZE = 309600L;
     @ResponseBody
     @RequestMapping(value ="/addKnowledge")
     public int addKnowledge(@RequestBody Knowledge knowledge){
@@ -54,10 +54,9 @@ public class KnowledgeController {
         String path = request.getSession().getServletContext().getRealPath("uploadFile");
         String fileName = RenameUploadFile.rename(file.getOriginalFilename());
         long fileSize = file.getSize()/1024;
-        if(fileSize > MAXSIZE || CheckSuffix.checkFileSuffix(file.getOriginalFilename()) ==false){
+        if(fileSize > MAXSIZE ||CheckSuffix.checkFileSuffix(file.getOriginalFilename()) ==false){
             return EnumCode.EXCEPTION.getName();
         }
-
         File targetFile = new File(path, fileName);
         if (!targetFile.exists()) {
             targetFile.mkdirs();

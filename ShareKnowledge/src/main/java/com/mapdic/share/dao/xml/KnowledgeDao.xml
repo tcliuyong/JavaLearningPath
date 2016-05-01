@@ -147,6 +147,7 @@
             category = #{cid} AND
         </if>
         ischeck=1
+        ORDER BY title DESC
     </select>
 
     <select id="getKnowledgeByKid" parameterType="java.lang.Integer" resultMap="KnowledgeMap">

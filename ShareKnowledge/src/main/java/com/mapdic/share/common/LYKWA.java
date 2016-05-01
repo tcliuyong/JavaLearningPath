@@ -18,6 +18,10 @@ public class LYKWA {
             @Override
             public int compare(Map.Entry<Knowledge, Integer> arg0,
                                Map.Entry<Knowledge, Integer> arg1) {
+                if(arg1.getValue() == arg0.getValue())
+                   return arg1.getKey().getOrcontent().length() - arg0.getKey().getOrcontent().length()==0?
+                           arg1.getKey().getContent().length() - arg0.getKey().getContent().length():
+                           arg1.getKey().getOrcontent().length() - arg0.getKey().getOrcontent().length();
                 return arg1.getValue() - arg0.getValue();
             }
         });
@@ -27,7 +31,7 @@ public class LYKWA {
         }
         return newMap;
     }
-    public List<Knowledge> lyKeywordAlgorithm(String[] keywords,  List<Knowledge> knowledgeList){
+    public LinkedList<Knowledge> lyKeywordAlgorithm(String[] keywords,  List<Knowledge> knowledgeList){
         LinkedList<Knowledge> knowledges = new LinkedList<>();
         Map<Knowledge,Integer> map = new HashMap<>();
         for(Knowledge knowledge : knowledgeList){

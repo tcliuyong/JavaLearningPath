@@ -36,7 +36,7 @@
     <!-- 支持上传文件 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- one of the properties available; the maximum file size in bytes -->
-        <property name="maxUploadSize" value="1024000"/>
+        <property name="maxUploadSize" value="102400000"/>
     </bean>
     <!--<mvc:interceptors>-->
         <!--<mvc:interceptor>-->

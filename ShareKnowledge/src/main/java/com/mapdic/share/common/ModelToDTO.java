@@ -11,6 +11,7 @@ import com.mapdic.share.model.Knowledge;
 import com.mapdic.share.model.User;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -41,8 +42,8 @@ public class ModelToDTO {
         bookMarkDTO.setDate(date);
         return bookMarkDTO;
     }
-    public static List<KnowledgeSearchDTO> conKnowledgeToKnowledgeSearchDTO(List<Knowledge> knowledges){
-        List<KnowledgeSearchDTO> knowledgeSearchDTOs = new ArrayList<>();
+    public static LinkedList<KnowledgeSearchDTO> conKnowledgeToKnowledgeSearchDTO(List<Knowledge> knowledges){
+        LinkedList<KnowledgeSearchDTO> knowledgeSearchDTOs = new LinkedList<>();
 
         for(Knowledge knowledge : knowledges){
             KnowledgeSearchDTO knowledgeSearchDTO = new KnowledgeSearchDTO();

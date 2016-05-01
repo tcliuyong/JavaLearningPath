@@ -32,12 +32,13 @@
                     <input type="text" name="page"  id="page" value="1" style="display:none;"/>
                     <input type="text" name="pagesize" id="pagesize" value="10" style="display:none;" />
                     <input type="text" name="category"  id="category"  value="0" style="display:none;" />
-                    <input type="text"   name="keyword" id="keyword" value="${keyword}" style="height: 24px;font-size:20px;">
+                    <input type="text"   name="keyword" id="keyword" value="${keyword}" style="height: 24px;font-size:20px;" placeholder="关键字空格分开"> &nbsp;
 
                 </div>
                 <%--<div id="droplist" nowrap></div>--%>
                 <div class="search-btn-con2">
-                    <input type="button" value="Map一下" onclick="searching()" class="search-btn2">
+                    <input type="button" value="Map一下"  onclick="searching()" class="search-btn2" style="height: 33px;padding-bottom: 10px;border-left-width: 100px;margin-left: 15px;width: 108px;
+">
                 </div>
             </form>
 
@@ -63,15 +64,24 @@
                         <c:out value="${fn:substring(tmp.orcontent, 0, 150)}..." />
                     </dd>
                 </c:when>
+                <c:when test="${fn:length(tmp.orcontent) <= 150}">
+                    <dd class="search-detail">
+                        <c:out value="${tmp.orcontent}" />
+                    </dd>
+                </c:when>
             </c:choose>
         </dl>
     <hr>
 </c:forEach>
+        <c:choose>
+            <c:when test="${fn:length(knowList) == 0}">
+                <div>
+                    <p class="pointout" style="padding-left: 200px;">抱歉，没有找到相关结果。</p>
+                </div>
+            </c:when>
+        </c:choose>
         <div class="tcdPageCode"></div>
-    </div>
 
-    <div style="display:none">
-        <p class="pointout">抱歉，没有找到相关结果。</p>
     </div>
 
     <div style="height:96px;"> </div>
@@ -96,7 +106,7 @@ ${current}
 <script>
    function searching(){
         if($("#keyword").val() == ""){
-            window.location="http://localhost:8080/";
+            window.location="/";
             return false;
         }else {
             $("#form_search").submit();

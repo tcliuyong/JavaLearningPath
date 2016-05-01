@@ -20,6 +20,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -45,7 +46,8 @@ public class Search {
         String[] arr =  keyword.split("s+");
         knowledges = knowledgeService.getKnowledgeByCategory(category);
         LYKWA lywa = new LYKWA();
-        List<Knowledge> resKnowledge = lywa.lyKeywordAlgorithm(arr, knowledges);
+        LinkedList<Knowledge> resKnowledge = lywa.lyKeywordAlgorithm(arr, knowledges);
+
         modelAndView.addObject("current",page);
         int start = (page == 1?page - 1 :(page - 1) * pagesize);
         int end = start + pagesize;
@@ -53,7 +55,7 @@ public class Search {
         if(end >= count){
             end = count;
         }
-        List<KnowledgeSearchDTO> knowledgeSearchDTOs = ModelToDTO.conKnowledgeToKnowledgeSearchDTO(resKnowledge.subList(start, end));
+        LinkedList<KnowledgeSearchDTO> knowledgeSearchDTOs = ModelToDTO.conKnowledgeToKnowledgeSearchDTO(resKnowledge.subList(start, end));
         modelAndView.addObject("knowList", knowledgeSearchDTOs);
         modelAndView.addObject("page", count % pagesize==0?count / pagesize:count / pagesize + 1);
         modelAndView.addObject("keyword", keyword);

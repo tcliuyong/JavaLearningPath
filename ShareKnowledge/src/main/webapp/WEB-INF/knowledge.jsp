@@ -29,9 +29,9 @@
 <body>
 
 <div class="main-container">
-    <div class="search-list-con">
-        <img src="../images/scroll.jpg" style="width: 850px;height: 140px;">
-    </div>
+    <%--<div class="search-list-con">--%>
+        <%--<img src="../images/scroll.jpg" style="width: 850px;height: 140px;">--%>
+    <%--</div>--%>
     <br>
     <h2> 知识题目： ${knowledge.title}</h2>
     <br>
@@ -40,7 +40,11 @@
     <div class="search-list-con">
         ${knowledge.content}
     </div>
-
+<c:choose>
+    <c:when test="${knowledge.filePath ne null}">
+            <a href=${knowledge.filePath} ><img id="edFile" style="width: 50px;height: 50px;" src="../images/zip.png"></a>
+    </c:when>
+    </c:choose>
     <div style="height:96px;"> </div>
 
 </div>

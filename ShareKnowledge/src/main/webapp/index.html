@@ -97,12 +97,12 @@ div#droplist { color: blue;display: inline }
 		</nav>
 	</header>
 	<div id = "hideContent" class="content tc">
-		<p class="logo"><img width="270" height="129" src="images/logo.png" alt="logo" /></p>
+		<p class="logo"><img width="250" height="120" src="images/logo.png" alt="logo" /></p>
 		<div class="searchBox">
 			<form action="/search.do" method="get">
 				<input type="text" name="page" value="1"  style="display:none;"/>
 				<input type="text" name="pagesize"  value="10" style="display:none;" />
-				<input type="text" class="searchIpt f14" name="keyword" maxlength="100" autocomplete="off"/>
+				<input type="text" class="searchIpt f14" name="keyword" maxlength="50" autocomplete="off" placeholder="关键字空格分开"/>
 				<div id="droplist" nowrap style="height: 24px;" ></div>
 				<input type="submit" class="btn cp" onclick="search()" value="map一下" />
 			</form>
@@ -180,7 +180,7 @@ div#droplist { color: blue;display: inline }
 	
 	//搜索框自动补全; 
 	$('.searchIpt').AutoComplete({
-		'data': ['About Me', '审美网', 'abcdefg', 'One', 'Two', 'Three', 'Four', 'Five', 'Six','smwell.com', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'],
+		'data': ['Java','c++','python', 'perl', 'ruby',  'lua', '内存', 'IO', '读写', '遍历','数据库','mysql','hadoop'],
 		'itemHeight': 24,
 		'width': 529
 	}).AutoComplete('show');
