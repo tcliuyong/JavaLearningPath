@@ -46,7 +46,7 @@ a:focus{outline: none;}
 .pt15{padding-top: 15px;}
 /* ----------------------------------------------- */
 
-.skinBg{width:100%;height:98%;position:absolute;left:0;top:0;z-index:-10;background-position:center 0;background-size:cover;background-attachment:fixed;background-repeat:no-repeat;}
+.skinBg{width:100%;height:100%;position:absolute;left:0;top:0;z-index:-10;background-position:center 0;background-size:cover;background-attachment:fixed;background-repeat:no-repeat;}
 #header{padding:14px 14px 0;overflow:hidden;}
 #header span{color:#fff;text-shadow:0 0 3px #333;float: left;line-height:20px;}
 .weatherIcon{width:18px;height:18px;display:inline-block;vertical-align:middle;margin-right:5px;}
