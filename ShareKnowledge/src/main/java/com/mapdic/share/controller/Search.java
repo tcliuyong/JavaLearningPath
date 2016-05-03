@@ -43,7 +43,7 @@ public class Search {
     public ModelAndView checkUser(String keyword, int category, int page, int pagesize) {
         ModelAndView modelAndView = new ModelAndView("getKnowledge");
         List<Knowledge> knowledges = new ArrayList();
-        String[] arr =  keyword.split("s+");
+        String[] arr =  keyword.split("\\s+");
         knowledges = knowledgeService.getKnowledgeByCategory(category);
         LYKWA lywa = new LYKWA();
         LinkedList<Knowledge> resKnowledge = lywa.lyKeywordAlgorithm(arr, knowledges);

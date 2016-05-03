@@ -32,7 +32,7 @@
                     <input type="text" name="page"  id="page" value="1" style="display:none;"/>
                     <input type="text" name="pagesize" id="pagesize" value="10" style="display:none;" />
                     <input type="text" name="category"  id="category"  value="0" style="display:none;" />
-                    <input type="text"   name="keyword" id="keyword" value="${keyword}" style="height: 24px;font-size:20px;" placeholder="关键字空格分开"> &nbsp;
+                    <input type="text" maxlength="50"  name="keyword" id="keyword" value="${keyword}" style="height: 24px;width:500px;font-size:20px;" placeholder="关键字空格分开"> &nbsp;
 
                 </div>
                 <%--<div id="droplist" nowrap></div>--%>

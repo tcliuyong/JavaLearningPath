@@ -110,7 +110,7 @@
 								fileElementId:'uploadFile',
 								success: function(data) {
 									if(data == "OK"){
-										alert("更新成功");
+										alert("文件更新成功");
 										window.location="knowledgeManage.html";
 									}else if(data == "EXCEPTION"){
 										alert("图片超过限制或后缀名不允许");
@@ -123,8 +123,8 @@
 							});
 						}
 					}
-
-					//window.location="knowledgeManage.html";
+					alert("更新成功");
+					window.location="knowledgeManage.html";
 
 				},
 				dataType: 'text'

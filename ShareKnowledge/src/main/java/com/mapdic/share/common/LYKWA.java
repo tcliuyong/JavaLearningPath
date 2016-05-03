@@ -39,10 +39,11 @@ public class LYKWA {
         }
         for(String str : keywords){
             for(Knowledge knowledge : knowledgeList){
-                if(knowledge.getTitle().contains(str.toLowerCase())){
+                if(knowledge.getTitle().toLowerCase().contains(str.toLowerCase())){
                     map.put(knowledge, map.get(knowledge) +  2);
                 }
-                if(knowledge.getTag().contains(str)){
+
+                if(knowledge.getTag().toLowerCase().contains(str.toLowerCase())){
                     map.put(knowledge, map.get(knowledge) +  1);
                 }
             }
@@ -50,6 +51,7 @@ public class LYKWA {
         Iterator it = sortMap(map).entrySet().iterator();
         while(it.hasNext()){
             Map.Entry<Knowledge, Integer> entry = (Map.Entry<Knowledge, Integer>) it.next();
+            //System.out.println(entry.getKey().toString() + " " + entry.getValue());
             if(entry.getValue() != 0){
                 knowledges.add(entry.getKey());
             }
