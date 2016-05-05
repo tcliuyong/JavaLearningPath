@@ -63,7 +63,7 @@ div#droplist { color: blue;display: inline }
 	<header id="header">
 		<div class="weather fl">
 			<span class="cityW">
-				<span>合肥：</span>
+				<span>哈尔滨：</span>
 				<span>
 					<span class="weatherIcon wI1"></span>
 					<span>23 ~ 31℃</span>
@@ -99,12 +99,12 @@ div#droplist { color: blue;display: inline }
 	<div id = "hideContent" class="content tc">
 		<p class="logo"><img width="250" height="120" src="images/logo.png" alt="logo" /></p>
 		<div class="searchBox">
-			<form action="/search.do" method="get">
+			<form action="/search.do" method="get" id="searchForm">
 				<input type="text" name="page" value="1"  style="display:none;"/>
 				<input type="text" name="pagesize"  value="10" style="display:none;" />
-				<input type="text" class="searchIpt f14" name="keyword" maxlength="50" autocomplete="off" placeholder="关键字空格分开"/>
+				<input type="text" class="searchIpt f14" name="keyword" id="keyword" maxlength="50" autocomplete="off" placeholder="关键字空格分开"/>
 				<div id="droplist" nowrap style="height: 24px;" ></div>
-				<input type="submit" class="btn cp" onclick="search()" value="map一下" />
+				<input type="button" class="btn cp" onclick="search()" value="map一下" />
 			</form>
 		</div>
 	</div>
@@ -171,6 +171,15 @@ div#droplist { color: blue;display: inline }
 		<a href="#0" class="cd-close-form">关闭</a>
 	</div>
 </div>
+<script>
+	function  search(){
+		if($("#keyword").val() == "" || $("#keyword").val() == null){
+			window.location=".";
+		}else {
+			$("#searchForm").submit();
+		}
+	}
+</script>
 <script>
 	$('.uname,.topMenus').hover(function(){
 		$('.topMenus').stop(true,true).fadeIn(200);

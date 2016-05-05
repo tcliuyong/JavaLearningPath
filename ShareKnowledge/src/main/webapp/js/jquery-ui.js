@@ -6924,7 +6924,6 @@ $.widget( "ui.autocomplete", {
 
 	search: function( value, event ) {
 		value = value != null ? value : this._value();
-
 		// always save the actual value, not the one passed as an argument
 		this.term = this._value();
 

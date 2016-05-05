@@ -41,7 +41,8 @@ public class UserController {
     KnowledgeServiceImpl knowledgeService;
     @Resource
     ProverbServiceImpl proverbService;
-
+    @Resource
+    BookMarkServiceImpl bookMarkService;
     @Resource
     LanguageServiceImpl languageService;
     @Resource
@@ -135,7 +136,7 @@ public class UserController {
         overviewUserDTO.setUid(uid);
         overviewUserDTO.setUserName(user.getUserName());
         overviewUserDTO.setCountKnowledge(knowledgeService.countKnowledge(uid));
-        overviewUserDTO.setCountBookmark(0);
+        overviewUserDTO.setCountBookmark(bookMarkService.countBookMark(uid));
         overviewUserDTO.setWord(proverbService.getProverb());
         if(user.getFace() == null || user.getFace().equals("")){
             overviewUserDTO.setFace(face);
