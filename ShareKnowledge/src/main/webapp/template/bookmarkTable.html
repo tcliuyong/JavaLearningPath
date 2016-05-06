@@ -14,7 +14,7 @@
     {#foreach $T as record}
     <tr>
         <td>{$T.record.id}</td>
-        <td>{$T.record.bookmark}</td>
+        <td><a href={$T.record.bookmark} rget="_blank">{$T.record.bookmark}</a></td>
         <td>{$T.record.description}</td>
         <td>{$T.record.date}</td>
         <td class="action-td">
