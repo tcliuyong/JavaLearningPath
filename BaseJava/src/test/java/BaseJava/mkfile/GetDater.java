@@ -7,9 +7,6 @@ import org.apache.log4j.Logger;
 
 
 /**
- * Created by lyong.liu on 2015/10/31.
- */
-/**
  * Implement the interface from GetData
  */
 public class GetDater {
