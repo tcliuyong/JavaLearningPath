@@ -25,7 +25,7 @@ public class ModelToDTO {
         knowledgeDTO.setK_id(knowledge.getK_id());
         knowledgeDTO.setTag(knowledge.getTag());
         knowledgeDTO.setSystem(knowledge.getSystem());
-        knowledgeDTO.setContent(knowledge.getContent());
+        //knowledgeDTO.setContent(knowledge.getContent());
         knowledgeDTO.setTitle(knowledge.getTitle());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = simpleDateFormat.format(knowledge.getDate());

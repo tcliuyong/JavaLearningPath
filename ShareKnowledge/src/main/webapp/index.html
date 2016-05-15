@@ -56,6 +56,16 @@ div#droplist { color: blue;display: inline }
 			});
 		});
 	</script>
+	<script>
+		$(function(){
+			document.onkeydown = function(e){
+				var ev = document.all ? window.event : e;
+				if($("#keyword").val() != "" && $("#keyword").val() != null && ev.keyCode==13) {
+					$("#searchForm").submit();
+				}
+			}
+		});
+	</script>
 </head>	
 <body oncontextmenu='return true' ondragstart='return false'>
 <div id="wrapper">
