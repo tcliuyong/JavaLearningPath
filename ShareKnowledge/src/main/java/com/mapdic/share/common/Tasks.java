@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Tasks {
 
-    @Scheduled(cron="0 30 22  * * ? ")   //每5秒执行一次
+    @Scheduled(cron="0 30 22  * * ? ")
     public void myTest(){
         String shellPath =  Tasks.class.getResource("/").getPath()+"backup.sh";
         ExecuteExCommand.exeShell("sh " +shellPath);
