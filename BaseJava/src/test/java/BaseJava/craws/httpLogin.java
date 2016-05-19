@@ -10,7 +10,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-import javac.craws.httpRequest;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,12 +19,7 @@ public class httpLogin {
      
 
     public static void main(String[] args) throws IOException {     
-    	/**
-         * ʹ��Joup������¼������Ȼ��POST���Ͳ���ʵ�ֵ�¼
-         * 
-         * @throws UnsupportedEncodingException
-         * @throws IOException
-         */
+
     	String LOGIN_URL="http://passport.cnblogs.com/login.aspx?ReturnUrl=http%3A%2F%2Fhome.cnblogs.com%2F";
             CookieHandler.setDefault(new CookieManager());
             // ��ȡ��¼ҳ��
