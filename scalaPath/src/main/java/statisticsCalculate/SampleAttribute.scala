@@ -49,9 +49,7 @@ class SampleAttribute {
   }
   //计算方差
   def calVariance():Double = {
-    val mean = calMean()
     var variance = 0.0
-    val n = arr.length
     if(mean == Nil) return -0.999
     for(i <- 0 until(n)){
       variance += (arr(i) - mean) * (arr(i) - mean)
@@ -63,7 +61,6 @@ class SampleAttribute {
   def calCV():Double = {
     var cv = 0.0
     var variance= calVariance()
-    var mean= calMean()
     cv = scala.math.sqrt(variance) / mean
     cv
   }
