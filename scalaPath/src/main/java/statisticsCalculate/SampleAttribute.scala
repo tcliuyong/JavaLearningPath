@@ -31,6 +31,22 @@ class SampleAttribute {
     moment1Sum / n
   }
 
+  //计算中位数
+  def calMedian():Double={
+    var arrbuff = new ArrayBuffer[Double]()
+    arrbuff = arr.sorted
+    var media = 0.0
+    var mid = n / 2
+
+    if(n == 1) media = arrbuff(0)
+    else if(n % 2 == 0 ){
+      media = arrbuff(mid) + arrbuff(mid - 1)
+      media = media / 2
+    }else{
+      media = arrbuff(mid)
+    }
+    media
+  }
   //计算方差
   def calVariance():Double = {
     val mean = calMean()

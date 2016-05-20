@@ -9,9 +9,12 @@ import scala.collection.mutable.ArrayBuffer
 object Main {
   def main(args: Array[String]) {
     var arr = ArrayBuffer[Double]()
-    arr += 1.0
+    arr += 6.0
     arr += 2.0
     arr += 3.0
+    arr += 5.0
+    arr += 3.0
+    arr += 7.0
     var arr1 = ArrayBuffer[Double]()
     arr1 += 4.0
     arr1 += 3.0
@@ -27,10 +30,10 @@ object Main {
     val centerMonment3 = sampleAttribute.calCenterMoment3()
     val centerMonment4 = sampleAttribute.calCenterMoment4()
     val kurtosis = sampleAttribute.calKurtosis()
-    val loadData = new LoadData("D:\\person.txt", System.lineSeparator())
-    var mulVariableFeature = new MulVariableFeature(arr, arr1).calCorrelationCoefficient()
-
-
+    //val loadData = new LoadData("D:\\person.txt", System.lineSeparator())
+    //var mulVariableFeature = new MulVariableFeature(arr, arr1).calCorrelationCoefficient()
+    var median = sampleAttribute.calMedian();
+    println("meaia:" + median)
     println(mean)
     println(variance)
     println(cv)
@@ -41,7 +44,7 @@ object Main {
     println(centerMonment3)
     println(centerMonment4)
     println(kurtosis)
-    println(mulVariableFeature)
-    println(mulVariableFeature)
+    //println(mulVariableFeature)
+    //println(mulVariableFeature)
   }
 }
