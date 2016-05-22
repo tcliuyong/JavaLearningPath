@@ -5,6 +5,7 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd
     http://www.springframework.org/schema/beans
@@ -17,12 +18,17 @@
     http://www.springframework.org/schema/websocket/spring-websocket.xsd
     http://www.springframework.org/schema/task
     http://www.springframework.org/schema/task/spring-task-3.2.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+
    ">
 
     <context:component-scan base-package="com.mapdic.share"/>
     <context:property-placeholder location="classpath:mysql.jdbc.properties"/>
     <!--定时器开关-->
     <task:annotation-driven />
+
+    <!--<bean id="userService" class="com.mapdic.share.controller.Search" />-->
     <!--<bean id="myTaskXml" class="com.mapdic.share.common.Tasks"></bean>-->
     <!--<task:scheduled-tasks>-->
         <!--&lt;!&ndash;-->
@@ -54,6 +60,7 @@
         <!--<property name="mapperInterface" value="com.mapdic.share.dao.UserDao"></property>-->
         <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>-->
     <!--</bean>-->
+
     <!--事务管理器-->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>

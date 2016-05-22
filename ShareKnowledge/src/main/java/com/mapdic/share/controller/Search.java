@@ -1,5 +1,6 @@
 package com.mapdic.share.controller;
 
+import com.mapdic.share.annotation.SystemControllerLog;
 import com.mapdic.share.common.DoCookie;
 import com.mapdic.share.common.LYKWA;
 import com.mapdic.share.common.ModelToDTO;
@@ -7,7 +8,9 @@ import com.mapdic.share.common.UserEnum;
 import com.mapdic.share.controller.dto.KnowledgeSearchDTO;
 import com.mapdic.share.controller.dto.TokenKeyword;
 import com.mapdic.share.model.Knowledge;
+import com.mapdic.share.model.SearchLog;
 import com.mapdic.share.model.Token;
+import com.mapdic.share.service.SearchLogService;
 import com.mapdic.share.serviceimpl.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,9 +42,12 @@ public class Search {
     @Resource
     KnowledgeServiceImpl knowledgeService;
 
+    @Resource
+    SearchLogServiceImpl searchLogService;
     @ModelAttribute
     @RequestMapping(value ="/search")
-    public ModelAndView checkUser(String keyword, int category, int page, int pagesize) {
+    @SystemControllerLog(description = "检索内容")
+    public ModelAndView search(String keyword, int category, int page, int pagesize,HttpServletRequest httpServletRequest) {
         ModelAndView modelAndView = new ModelAndView("getKnowledge");
         List<Knowledge> knowledges = new ArrayList();
         String[] arr =  keyword.split("\\s+");
