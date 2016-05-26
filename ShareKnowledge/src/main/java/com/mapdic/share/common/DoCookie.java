@@ -25,7 +25,7 @@ public class DoCookie {
         DateTime dateTime = new DateTime();
         dateTime = dateTime.plusDays(3);
         Cookie cookie = new Cookie("_ui",code);
-        cookie.setHttpOnly(true);
+//        cookie.setHttpOnly(true);
         cookie.setPath("/");
         cookie.setMaxAge(3600 * 24);
         Token token = new Token();
