@@ -13,12 +13,13 @@ object Main {
     arr += 2.0
     arr += 3.0
     arr += 5.0
-    arr += 3.0
+//    arr += 3.0
     arr += 7.0
-    var arr1 = ArrayBuffer[Double]()
-    arr1 += 4.0
-    arr1 += 3.0
-    arr1 += 2.0
+//    arr += 7.0
+//    var arr1 = ArrayBuffer[Double]()
+//    arr1 += 4.0
+//    arr1 += 3.0
+//    arr1 += 2.0
     val sampleAttribute = new SampleAttribute(arr)
     var mean = sampleAttribute.calMean()
     val variance = sampleAttribute.calVariance()
@@ -30,6 +31,8 @@ object Main {
     val centerMonment3 = sampleAttribute.calCenterMoment3()
     val centerMonment4 = sampleAttribute.calCenterMoment4()
     val kurtosis = sampleAttribute.calKurtosis()
+    var modes = sampleAttribute.calMode()
+
     //val loadData = new LoadData("D:\\person.txt", System.lineSeparator())
     //var mulVariableFeature = new MulVariableFeature(arr, arr1).calCorrelationCoefficient()
     var median = sampleAttribute.calMedian();
@@ -46,5 +49,7 @@ object Main {
     println(kurtosis)
     //println(mulVariableFeature)
     //println(mulVariableFeature)
+    println(modes)
+    println(sampleAttribute.mode)
   }
 }

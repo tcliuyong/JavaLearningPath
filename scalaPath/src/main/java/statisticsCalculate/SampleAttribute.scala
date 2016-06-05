@@ -9,7 +9,10 @@ class SampleAttribute {
   var moment3Sum = 0.0 //三阶原点矩和
   var moment4Sum = 0.0//四阶原点矩和
   var n = 0
+  var frequencys:Map[Double,Int] = Map()
   var arr = new ArrayBuffer[Double]()
+  var modes = new ArrayBuffer[Double]()
+  var mode = 0 //众数的出现的最大次数
   var mean = 0.0 //均值
   var mean2 = 0.0 //均值的二次方
   //用简单的方法计算n阶矩
@@ -17,14 +20,35 @@ class SampleAttribute {
     this
     this.n = arr.length
     this.arr = arr
+    var max = -65535
     for(i <- 0 until(n)){
       this.moment1Sum += arr(i)
       this.moment2Sum += scala.math.pow(arr(i), 2.0)
       this.moment3Sum += scala.math.pow(arr(i), 3.0)
       this.moment4Sum += scala.math.pow(arr(i), 4.0)
+      if(!frequencys.contains(arr(i))){
+        frequencys += (arr(i) -> 1)
+      }else{
+        var mode = frequencys.apply(arr(i)) + 1
+        frequencys += (arr(i) -> mode)
+        if(max < mode )
+          max = mode
+      }
     }
     mean = this.moment1Sum / n
     mean2 = scala.math.pow(mean, 2.0)
+    this.mode = max
+  }
+  //计算众数
+  def calMode():ArrayBuffer[Double]={
+    //当没有重复出现的时候 就没有众数
+    if(this.mode == 1) return modes
+    frequencys.keys.foreach(
+      i => if(frequencys.apply(i) == this.mode){
+        modes += i
+      }
+    )
+    modes
   }
   //计算数据均值
   def calMean():Double={
