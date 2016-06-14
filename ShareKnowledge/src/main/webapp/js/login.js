@@ -146,11 +146,11 @@ jQuery(document).ready(function($){
 	}
 
 	function signup_selected(){
-		$info.html("还没有开放注册");
-		//$form_login.removeClass('is-selected');
-		//$form_signup.addClass('is-selected');
-		//$tab_login.removeClass('selected');
-		//$tab_signup.addClass('selected');
+		//$info.html("还没有开放注册");
+		$form_login.removeClass('is-selected');
+		$form_signup.addClass('is-selected');
+		$tab_login.removeClass('selected');
+		$tab_signup.addClass('selected');
 	}
 
 });
