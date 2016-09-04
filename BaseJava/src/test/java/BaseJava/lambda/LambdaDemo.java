@@ -15,7 +15,7 @@ public class LambdaDemo {
                 "Andy Murray","Tomas Berdych",
                 "Juan Martin Del Potro"};
         List<String> players =  Arrays.asList(atp);
-        players.forEach((player) -> System.out.print(player + "; "));
+//        players.forEach((player) -> System.out.print(player + "; "));
 
     }
 }
